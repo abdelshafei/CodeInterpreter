@@ -2,6 +2,7 @@
 #define TOKEN_H
 #include <string>
 #include <any>
+#include <iostream>
 #include "TokenType.hpp"
 
 using namespace std;
