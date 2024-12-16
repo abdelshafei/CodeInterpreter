@@ -2,8 +2,9 @@
 
 Scanner::Scanner(const string& src) : src(src) 
 {
-    while(!isAtEnd()) 
+    while(!isAtEnd()) {
         scanToken(); 
+    }
 
     addToken(END_OF_FILE);
 }
