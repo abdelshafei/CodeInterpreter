@@ -8,7 +8,7 @@ Scanner::Scanner(const string& src) : src(src)
             addToken(END_OF_FILE);
     }
 
-    cout << tokens.size() << emdl;
+    cout << tokens.size() << endl;
 }
 
 bool Scanner::isAtEnd() { return current >= src.size(); }
