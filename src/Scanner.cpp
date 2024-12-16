@@ -18,7 +18,7 @@ void Scanner::addToken(TokenType type) {
 
 void Scanner::addToken(TokenType type, any literal) {
     string text;
-    if(isAtEnd()) {
+    if(type == END_OF_FILE) {
         cout << current << endl;
         text = " ";
     } else {
