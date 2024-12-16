@@ -3,11 +3,10 @@
 Scanner::Scanner(const string& src) : src(src) 
 {
     while(!isAtEnd()) {
-        cout << current << endl;
         scanToken(); 
+        if(isAtEnd) 
+            addToken(END_OF_FILE);
     }
-
-    addToken(END_OF_FILE);
 }
 
 bool Scanner::isAtEnd() { return current >= src.size(); }
