@@ -10,6 +10,8 @@ Token::Token(TokenType type, const string& lexeme, const any& literal, int lineN
     : type(type), lexeme(lexeme), literal(literal), lineNo(lineNo) {}
 
 const string& Token::convertTokenTypeToStr(TokenType type) const {
+    cout << "token is: " << TokenTypeNames[type] << endl;
+    cout << "token number: " << type << endl;
     return TokenTypeNames[type];
 }
 
