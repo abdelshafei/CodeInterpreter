@@ -33,7 +33,12 @@ const string TokenTypeNames[] = {
   "BANG", "BANG_EQUAL", "EQUAL", "EQUAL_EQUAL", "GREATER", "GREATER_EQUAL",
   "LESS", "LESS_EQUAL",
 
-  
+  "IDENTIFIER", "STRING", "NNUMBER",
+
+  "AND", "CLASS", "ELSE", "FALSE", "FUN", "FOR", "IF", "NIL", "OR",
+  "PRINT", "RETURN", "SUPER", "THIS", "VAR", "WHILE",
+
+  "EOF"
 };
 
 #endif

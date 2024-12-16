@@ -3,7 +3,9 @@
 Scanner::Scanner(const string& src) : src(src) 
 {
     while(!isAtEnd()) 
-        scanToken();   
+        scanToken(); 
+
+    addToken(END_OF_FILE);
 }
 
 bool Scanner::isAtEnd() { return current >= src.size(); }
@@ -14,7 +16,12 @@ void Scanner::addToken(TokenType type) {
 }
 
 void Scanner::addToken(TokenType type, any literal) {
-    string text = src.substr(start, current);
+    string text;
+    if(isAtEnd) {
+        text = " ";
+    } else {
+        text = src.substr(start, current);
+    }
     tokens.push_back(new Token(type, text, literal, line));
 }
 
