@@ -73,7 +73,7 @@ void Scanner::scanToken() {
       case '>': if(src.size() != current && src.at(current) == '=') addToken(GREATER_EQUAL);
                 else                                                addToken(GREATER);
                 break;
-      case '/': if(src.size() != current && src.at(current) == '/') current = getNewLineIndex() - 1;
+      case '/': if(src.size() != current && src.at(current) == '/') current = getNewLineIndex();
                 else                                                addToken(SLASH); 
                 break;
       default:  cerr << "[line " << line << "]"
