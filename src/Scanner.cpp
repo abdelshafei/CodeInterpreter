@@ -20,15 +20,6 @@ void Scanner::addToken(TokenType type, any literal) {
     string text;
     if(type == END_OF_FILE) {
         text = "";
-    } else if(type == ERR) {
-        text = src.at(current-1);
-
-        cerr << "[line " << line << "]"
-            << " Error: Unexpected character: "
-            << text
-            << endl;
-
-        return;
     } else {
         text = src.at(current-1);
     }
@@ -49,7 +40,10 @@ void Scanner::scanToken() {
       case ';': addToken(SEMICOLON); break;
       case '*': addToken(STAR); break; 
       case '/': addToken(SLASH); break;
-      default: addToken(ERR); break;
+      default:  cerr << "[line " << line << "]"
+                << " Error: Unexpected character: "
+                << c
+                << endl; break;
     }
 }
 

@@ -6,9 +6,6 @@ using namespace std;
 
 enum TokenType {
 
-  //Error
-  ERR,
-
   // Single-character tokens.
   LEFT_PAREN, RIGHT_PAREN, LEFT_BRACE, RIGHT_BRACE,
   COMMA, DOT, MINUS, PLUS, SEMICOLON, SLASH, STAR,
@@ -31,7 +28,6 @@ enum TokenType {
 };
 
 const string TokenTypeNames[] = {
-  "ERROR",
 
   "LEFT_PAREN", "RIGHT_PAREN", "LEFT_BRACE", "RIGHT_BRACE",
   "COMMA", "DOT", "MINUS", "PLUS", "SEMICOLON", "SLASH", "STAR",

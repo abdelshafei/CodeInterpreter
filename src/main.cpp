@@ -36,7 +36,7 @@ int main(int argc, char *argv[]) {
         }
         
     } else {
-        std::cerr << "Unknown command: " << command << std::endl;
+        cerr << "Unknown command: " << command << endl;
         return 1;
     }
 
