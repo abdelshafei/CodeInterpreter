@@ -22,7 +22,8 @@ void Scanner::addToken(TokenType type, any literal) {
     if(type == END_OF_FILE) {
         text = "";
     } else if(type == EQUAL_EQUAL || type == BANG_EQUAL || type == LESS_EQUAL || type == GREATER_EQUAL) {
-        text = src.at(current-1) + src.at(current);
+        text = src.at(current-1);
+        text += src.at(current);
         ++current;
     } else {
         text = src.at(current-1);
