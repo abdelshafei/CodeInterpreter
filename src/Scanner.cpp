@@ -41,6 +41,18 @@ void Scanner::scanToken() {
       case ';': addToken(SEMICOLON); break;
       case '*': addToken(STAR); break; 
       case '/': addToken(SLASH); break;
+      case '=': if(src.at(current) == '=') addToken(EQUAL_EQUAL);
+                else                       addToken(EQUAL);
+                break;
+      case '!': if(src.at(current) == '=') addToken(BANG_EQUAL);
+                else                       addToken(BANG);
+                break;
+      case '<': if(src.at(current) == '=') addToken(LESS_EQUAL);
+                else                       addToken(LESS);
+                break;
+      case '>': if(src.at(current) == '=') addToken(GREATER_EQUAL);
+                else                       addToken(GREATER);
+                break;
       default:  cerr << "[line " << line << "]"
                 << " Error: Unexpected character: "
                 << c
