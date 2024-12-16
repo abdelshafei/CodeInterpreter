@@ -25,8 +25,9 @@ void Scanner::addToken(TokenType type, any literal) {
 
         cout << "[Line " << line << "]"
             << " Error: Unexpected character: "
-            << text;
-            
+            << text
+            << endl;
+
         return;
     } else {
         text = src.at(current-1);
