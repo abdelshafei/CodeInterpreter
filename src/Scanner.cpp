@@ -20,11 +20,11 @@ void Scanner::addToken(TokenType type, any literal) {
     string text;
     if(type == END_OF_FILE) {
         text = " ";
-        cout << type << endl;
     } else {
         text = src.substr(start, current);
     }
 
+    cout << type << endl;
     tokens.push_back(new Token(type, text, literal, line));
 }
 
