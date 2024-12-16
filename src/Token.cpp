@@ -19,7 +19,5 @@ const string Token::toString() const {
         << lexeme
         << (status == 0 ? demangledName.get() : mangledName);
 
-    cout << oss.str() << endl;
-
     return oss.str();
 }

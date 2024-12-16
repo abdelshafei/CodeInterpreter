@@ -32,7 +32,8 @@ void Scanner::scanToken() {
 }
 
 void Scanner::print() {
-    for(Token* token : tokens) {
-        cout << token->toString() << endl;
-    }
+    cout << tokens.size() << endl;
+    // for(Token* token : tokens) {
+    //     cout << token->toString() << endl;
+    // }
 }
