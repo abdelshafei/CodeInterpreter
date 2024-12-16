@@ -35,7 +35,7 @@ int Scanner::getNewLineIndex() {
     int index = current;
 
     for(int i = current; i < src.size(); i++) {
-        if(src.at(i) == '\n') {
+        if(src.at(i) == '\n' || src.at(i) == '\0') {
             index = i;
             break;
         }
