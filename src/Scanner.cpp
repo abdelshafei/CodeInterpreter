@@ -19,7 +19,7 @@ void Scanner::addToken(TokenType type) {
 void Scanner::addToken(TokenType type, any literal) {
     string text;
     if(type == END_OF_FILE) {
-        text = " ";
+        text = "";
     } else {
         text = src.substr(start, current);
     }
