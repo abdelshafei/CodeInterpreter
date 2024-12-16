@@ -10,8 +10,6 @@ Token::Token(TokenType type, const string& lexeme, const any& literal, int lineN
     : type(type), lexeme(lexeme), literal(literal), lineNo(lineNo) {}
 
 const string& Token::convertTokenTypeToStr(TokenType type) const {
-    cout << "token is: " << TokenTypeNames[type] << endl;
-    cout << "token number: " << type << endl;
     return TokenTypeNames[type];
 }
 
@@ -23,7 +21,6 @@ const string Token::toString() const {
     std::unique_ptr<char, void(*)(void*)> demangledName(
         abi::__cxa_demangle(mangledName, nullptr, nullptr, &status), std::free);
 
-    cout << convertTokenTypeToStr(type) << endl;
     oss << convertTokenTypeToStr(type) << " "
         << lexeme << " "
         << (status == 0 ? "null" : mangledName);
