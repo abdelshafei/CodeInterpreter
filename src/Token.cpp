@@ -1,4 +1,5 @@
 #include "Token.hpp"
+#include <map>
 #include <sstream>
 #include <typeinfo>
 #include <cxxabi.h> // For demangling
@@ -15,7 +16,9 @@ const string Token::toString() const {
     std::unique_ptr<char, void(*)(void*)> demangledName(
         abi::__cxa_demangle(mangledName, nullptr, nullptr, &status), std::free);
 
-    oss << type << " "
+    map<TokenType, string_view> types;
+
+    oss << types[type] << " "
         << lexeme << " "
         << (status == 0 ? "null" : mangledName);
 
