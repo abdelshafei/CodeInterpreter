@@ -44,7 +44,6 @@ void Scanner::scanToken() {
       case '+': addToken(PLUS); break;
       case ';': addToken(SEMICOLON); break;
       case '*': addToken(STAR); break; 
-      case '/': addToken(SLASH); break;
       case '=': if(src.size() != current && src.at(current) == '=') addToken(EQUAL_EQUAL);
                 else                                                addToken(EQUAL);
                 break;
@@ -56,6 +55,9 @@ void Scanner::scanToken() {
                 break;
       case '>': if(src.size() != current && src.at(current) == '=') addToken(GREATER_EQUAL);
                 else                                                addToken(GREATER);
+                break;
+      case '/': if(src.size() != current && src.at(current) == '/') current = src.size(); // when implementing new lines we need to find where the /n is at and set the current to the index of n.
+                else                                                addToken(SLASH); 
                 break;
       default:  cerr << "[line " << line << "]"
                 << " Error: Unexpected character: "
