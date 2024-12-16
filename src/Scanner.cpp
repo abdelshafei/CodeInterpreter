@@ -31,11 +31,11 @@ void Scanner::addToken(TokenType type, any literal) {
     tokens.push_back(new Token(type, text, literal, line));
 }
 
-int Scanner::getNewLineIndex() {
+int Scanner::skipCommentIndex() {
     int index = current;
 
     for(int i = current; i < src.size(); i++) {
-        if(src.at(i) == '\n' || src.at(i) == '\0') {
+        if(src.at(i) == '\n' || src.at(i) == src.size()-1) {
             index = i;
             break;
         }
@@ -73,7 +73,7 @@ void Scanner::scanToken() {
       case '>': if(src.size() != current && src.at(current) == '=') addToken(GREATER_EQUAL);
                 else                                                addToken(GREATER);
                 break;
-      case '/': if(src.size() != current && src.at(current) == '/') current = getNewLineIndex();
+      case '/': if(src.size() != current && src.at(current) == '/') current = skipCommentIndex();
                 else                                                addToken(SLASH); 
                 break;
       default:  cerr << "[line " << line << "]"

@@ -15,7 +15,7 @@ class Scanner {
         void scanToken();
         void print();
         bool getErrStatus();
-        int getNewLineIndex();
+        int skipCommentIndex();
 
     private:
         string src;
