@@ -1,13 +1,13 @@
 #include "Token.hpp"
 #include <sstream>
 #include <typeinfo>
-#include <cxxabi.h>
+#include <cxxabi.h> // For demangling
 #include <memory> 
 
 Token::Token(TokenType type, const string& lexeme, const any& literal, int lineNo) 
     : type(type), lexeme(lexeme), literal(literal), lineNo(lineNo) {}
 
-const string& Token::toString() const {
+const string Token::toString() const {
     ostringstream oss;
     
     int status;

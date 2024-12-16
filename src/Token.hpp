@@ -9,7 +9,7 @@ using namespace std;
 class Token {
     public:
         Token(TokenType type, const string& lexeme, const any& literal, int lineNo);
-        const string& toString() const;
+        const string toString() const;
     
     private:
         TokenType type;
