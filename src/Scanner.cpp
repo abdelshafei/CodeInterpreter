@@ -28,7 +28,7 @@ void Scanner::addToken(TokenType type, any literal) {
             << text
             << endl;
 
-        exit(65);
+        return;
     } else {
         text = src.at(current-1);
     }
