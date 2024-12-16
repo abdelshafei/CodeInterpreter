@@ -7,8 +7,6 @@ Scanner::Scanner(const string& src) : src(src)
         if(isAtEnd()) 
             addToken(END_OF_FILE);
     }
-
-    cout << tokens.size() << endl;
 }
 
 bool Scanner::isAtEnd() { return current >= src.size(); }
@@ -22,6 +20,7 @@ void Scanner::addToken(TokenType type, any literal) {
     string text;
     if(type == END_OF_FILE) {
         text = " ";
+        cout << type << endl;
     } else {
         text = src.substr(start, current);
     }
