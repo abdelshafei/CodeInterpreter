@@ -3,6 +3,7 @@
 Scanner::Scanner(const string& src) : src(src) 
 {
     while(!isAtEnd()) {
+        cout << current << endl;
         scanToken(); 
     }
 
@@ -10,10 +11,7 @@ Scanner::Scanner(const string& src) : src(src)
 }
 
 bool Scanner::isAtEnd() { return current >= src.size(); }
-const char Scanner::advance() { 
-    src.at(current);
-    current++;
-}
+const char Scanner::advance() { return src.at(current++); }
 
 void Scanner::addToken(TokenType type) {
     addToken(type, nullptr);
