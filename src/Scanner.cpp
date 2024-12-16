@@ -35,7 +35,7 @@ int Scanner::skipCommentIndex() {
     int index = current;
 
     for(int i = current; i < src.size(); i++) {
-        if(src.at(i) == '\n' || src.at(i) == src.size()-1) {
+        if(src.at(i) == '\n' || i == src.size()-1) {
             index = i;
             break;
         }
