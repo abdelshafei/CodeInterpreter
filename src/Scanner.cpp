@@ -17,7 +17,7 @@ void Scanner::addToken(TokenType type) {
 
 void Scanner::addToken(TokenType type, any literal) {
     string text;
-    if(isAtEnd) {
+    if(isAtEnd()) {
         text = " ";
     } else {
         text = src.substr(start, current);
