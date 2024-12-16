@@ -21,8 +21,7 @@ const string Token::toString() const {
     std::unique_ptr<char, void(*)(void*)> demangledName(
         abi::__cxa_demangle(mangledName, nullptr, nullptr, &status), std::free);
 
-    map<TokenType, string_view> types;
-
+    cout << convertTokenTypeToStr(type) << endl;
     oss << convertTokenTypeToStr(type) << " "
         << lexeme << " "
         << (status == 0 ? "null" : mangledName);
