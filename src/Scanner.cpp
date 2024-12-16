@@ -23,8 +23,6 @@ void Scanner::addToken(TokenType type, any literal) {
     } else {
         text = src.substr(start, current);
     }
-
-    cout << type << endl;
     tokens.push_back(new Token(type, text, literal, line));
 }
 
