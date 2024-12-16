@@ -14,6 +14,7 @@ class Scanner {
         void addToken(TokenType type, any literal);
         void scanToken();
         void print();
+        bool getErrStatus();
 
     private:
         string src;
@@ -21,6 +22,7 @@ class Scanner {
         int start = 0;
         int current = 0;
         int line = 1;
+        bool isError = false;
 };
 
 #endif 

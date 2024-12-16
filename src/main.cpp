@@ -31,8 +31,13 @@ int main(int argc, char *argv[]) {
         if(!file_contents.empty()) {
             Scanner scanner(file_contents);
             scanner.print();
+            if(!scanner.getErrStatus())
+                return 0;
+            else 
+                return 65;
         } else {
             cout << "EOF  null" << endl;
+            return 0;
         }
         
     } else {
@@ -41,6 +46,7 @@ int main(int argc, char *argv[]) {
     }
 
     return 0;
+
 }
 
 std::string read_file_contents(const std::string& filename) {

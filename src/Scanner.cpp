@@ -9,6 +9,7 @@ Scanner::Scanner(const string& src) : src(src)
     }
 }
 
+bool Scanner::getErrStatus() { return isError; }
 bool Scanner::isAtEnd() { return current >= src.size(); }
 const char Scanner::advance() { return src.at(current++); }
 
@@ -40,11 +41,12 @@ void Scanner::scanToken() {
       case ';': addToken(SEMICOLON); break;
       case '*': addToken(STAR); break; 
       case '/': addToken(SLASH); break;
-      default: cerr << "[line 1] Error: Unexpected character: "<<c<<endl; break;
-    //   default:  cerr << "[line " << line << "]"
-    //             << " Error: Unexpected character: "
-    //             << c
-    //             << endl; break;
+      default:  cerr << "[line " << line << "]"
+                << " Error: Unexpected character: "
+                << c
+                << endl; 
+                isError = true; 
+                break;
     }
 }
 
