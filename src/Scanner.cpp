@@ -32,9 +32,16 @@ void Scanner::addToken(TokenType type, any literal) {
 }
 
 int Scanner::getNewLineIndex() {
+    int index = current;
+
     for(int i = current; i < src.size(); i++) {
-        if(src.at(i) == '\n') return i;
+        if(src.at(i) == '\n') {
+            index = i;
+            break;
+        }
     }
+
+    return index;
 }
 
 void Scanner::scanToken() {
