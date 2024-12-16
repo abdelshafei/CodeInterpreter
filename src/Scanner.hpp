@@ -19,7 +19,7 @@ class Scanner {
         string src;
         vector<Token*> tokens;
         int start = 0;
-        int current = 0;
+        int current = -1;
         int line = 1;
 };
 
