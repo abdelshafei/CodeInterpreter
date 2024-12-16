@@ -30,3 +30,9 @@ void Scanner::scanToken() {
       case '*': addToken(STAR); break; 
     }
 }
+
+void Scanner::print() {
+    for(Token* token : tokens) {
+        cout << token->toString() << endl;
+    }
+}

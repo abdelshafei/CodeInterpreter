@@ -2,6 +2,7 @@
 #define SCANNER_H
 
 #include <vector>
+#include <iostream>
 #include "Token.hpp"
 
 class Scanner {
@@ -12,6 +13,7 @@ class Scanner {
         void addToken(TokenType type);
         void addToken(TokenType type, any literal);
         void scanToken();
+        void print();
 
     private:
         string src;
