@@ -4,6 +4,7 @@
 #include <typeinfo>
 #include <cxxabi.h> // For demangling
 #include <memory> 
+#include <string_view>
 
 Token::Token(TokenType type, const string& lexeme, const any& literal, int lineNo) 
     : type(type), lexeme(lexeme), literal(literal), lineNo(lineNo) {}
