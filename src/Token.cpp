@@ -17,7 +17,7 @@ const string Token::toString() const {
 
     oss << type << " "
         << lexeme << " "
-        << (status == 0 ? "NULL" : mangledName);
+        << (status == 0 ? "null" : mangledName);
 
     return oss.str();
 }
