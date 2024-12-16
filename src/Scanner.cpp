@@ -1,7 +1,10 @@
 #include "Scanner.hpp"
 
-Scanner::Scanner(const string& src) 
-    : src(src) {}
+Scanner::Scanner(const string& src) : src(src) 
+{
+    while(!isAtEnd()) 
+        scanToken();   
+}
 
 bool Scanner::isAtEnd() { return current >= src.size(); }
 const char Scanner::advance() { return src.at(current++); }
@@ -32,8 +35,7 @@ void Scanner::scanToken() {
 }
 
 void Scanner::print() {
-    cout << tokens.size() << endl;
-    // for(Token* token : tokens) {
-    //     cout << token->toString() << endl;
-    // }
+    for(Token* token : tokens) {
+        cout << token->toString() << endl;
+    }
 }
