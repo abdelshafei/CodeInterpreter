@@ -15,9 +15,9 @@ const string Token::toString() const {
     std::unique_ptr<char, void(*)(void*)> demangledName(
         abi::__cxa_demangle(mangledName, nullptr, nullptr, &status), std::free);
 
-    oss << mangledName << " "
+    oss << type << " "
         << lexeme << " "
-        << (status == 0 ? demangledName.get() : mangledName);
+        << (status == 0 ? "NULL" : mangledName);
 
     return oss.str();
 }
