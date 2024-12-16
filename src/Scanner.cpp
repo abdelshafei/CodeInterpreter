@@ -31,13 +31,19 @@ void Scanner::addToken(TokenType type, any literal) {
     tokens.push_back(new Token(type, text, literal, line));
 }
 
+int Scanner::getNewLineIndex() {
+    for(int i = current; i < src.size(); i++) {
+        if(src.at(i) == '\n') return i;
+    }
+}
+
 void Scanner::scanToken() {
     char c = advance();
     switch (c) {
       case '\n': line++; break;
       case ' ': break;//space
       case '\t': break;//tab
-    //   case '\r': break;//enter
+      case '\r': break;//enter
       case '(': addToken(LEFT_PAREN); break;
       case ')': addToken(RIGHT_PAREN); break;
       case '{': addToken(LEFT_BRACE); break;
@@ -60,7 +66,7 @@ void Scanner::scanToken() {
       case '>': if(src.size() != current && src.at(current) == '=') addToken(GREATER_EQUAL);
                 else                                                addToken(GREATER);
                 break;
-      case '/': if(src.size() != current && src.at(current) == '/') current = src.size(); // when implementing new lines we need to find where the /n is at and set the current to the index of n.
+      case '/': if(src.size() != current && src.at(current) == '/') current = getNewLineIndex() + 1
                 else                                                addToken(SLASH); 
                 break;
       default:  cerr << "[line " << line << "]"
