@@ -21,7 +21,7 @@ void Scanner::addToken(TokenType type, any literal) {
     if(type == END_OF_FILE) {
         text = "";
     } else {
-        text = src.at(current);
+        text = src.at(current-1);
     }
     tokens.push_back(new Token(type, text, literal, line));
 }
