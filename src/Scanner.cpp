@@ -40,7 +40,7 @@ void Scanner::scanToken() {
       case ';': addToken(SEMICOLON); break;
       case '*': addToken(STAR); break; 
       case '/': addToken(SLASH); break;
-      default: cerr << "[line 1] Error: Unexpected character: "<<c<<endl; break
+      default: cerr << "[line 1] Error: Unexpected character: "<<c<<endl; break;
     //   default:  cerr << "[line " << line << "]"
     //             << " Error: Unexpected character: "
     //             << c
