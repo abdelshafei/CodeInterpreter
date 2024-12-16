@@ -19,10 +19,8 @@ void Scanner::addToken(TokenType type) {
 void Scanner::addToken(TokenType type, any literal) {
     string text;
     if(type == END_OF_FILE) {
-        cout << current << endl;
         text = " ";
     } else {
-        cout << current << endl;
         text = src.substr(start, current);
     }
     tokens.push_back(new Token(type, text, literal, line));
