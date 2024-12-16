@@ -4,7 +4,7 @@ Scanner::Scanner(const string& src) : src(src)
 {
     while(!isAtEnd()) {
         scanToken(); 
-        if(isAtEnd) 
+        if(isAtEnd()) 
             addToken(END_OF_FILE);
     }
 }
