@@ -28,7 +28,7 @@ bool Scanner::isAtEnd() { return current >= src.size(); }
 const char Scanner::advance() { return src.at(current++); }
 
 void Scanner::addToken(TokenType type) {
-    addToken(type, nullptr);
+    addToken(type, "");
 }
 
 void Scanner::addToken(TokenType type, string literal) {
