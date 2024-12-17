@@ -15,15 +15,10 @@ const string& Token::convertTokenTypeToStr(TokenType type) const {
 
 const string Token::toString() const {
     ostringstream oss;
-    
-    int status;
-    const char* mangledName = literal.type().name();
-    std::unique_ptr<char, void(*)(void*)> demangledName(
-        abi::__cxa_demangle(mangledName, nullptr, nullptr, &status), std::free);
 
     oss << convertTokenTypeToStr(type) << " "
         << lexeme << " "
-        << (status == 0 ? "null" : mangledName);
+        << (literal.has_value() != true ? "null" : any_cast<string>(literal));
 
     return oss.str();
 }
