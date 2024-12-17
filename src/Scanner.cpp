@@ -81,6 +81,7 @@ void Scanner::scanToken() {
       case '/': if(src.size() != current && src.at(current) == '/') current = skipCommentIndex();
                 else                                                addToken(SLASH); 
                 break;
+      case '"': //read string literals 
       default:  cerr << "[line " << line << "]"
                 << " Error: Unexpected character: "
                 << c

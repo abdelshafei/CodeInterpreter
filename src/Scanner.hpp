@@ -16,6 +16,7 @@ class Scanner {
         void print();
         bool getErrStatus();
         int skipCommentIndex();
+        string getStringLiteral();
 
     private:
         string src;
