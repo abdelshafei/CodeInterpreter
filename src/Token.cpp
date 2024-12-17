@@ -6,7 +6,7 @@
 #include <memory> 
 #include <string_view>
 
-Token::Token(TokenType type, const string& lexeme, const any& literal, int lineNo) 
+Token::Token(TokenType type, const string& lexeme, const string& literal, int lineNo) 
     : type(type), lexeme(lexeme), literal(literal), lineNo(lineNo) {}
 
 const string& Token::convertTokenTypeToStr(TokenType type) const {
@@ -18,7 +18,7 @@ const string Token::toString() const {
 
     oss << convertTokenTypeToStr(type) << " "
         << lexeme << " "
-        << (literal.has_value() != true ? "null" : any_cast<string>(literal));
+        << (literal.empty() == true ? "null" : literal);
 
     return oss.str();
 }

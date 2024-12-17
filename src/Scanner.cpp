@@ -31,7 +31,7 @@ void Scanner::addToken(TokenType type) {
     addToken(type, nullptr);
 }
 
-void Scanner::addToken(TokenType type, any literal) {
+void Scanner::addToken(TokenType type, string literal) {
     string text;
     if(type == END_OF_FILE) {
         text = "";

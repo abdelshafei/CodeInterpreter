@@ -11,7 +11,7 @@ class Scanner {
         bool isAtEnd();
         const char advance();
         void addToken(TokenType type);
-        void addToken(TokenType type, any literal);
+        void addToken(TokenType type, string literal);
         void scanToken();
         void print();
         bool getErrStatus();
