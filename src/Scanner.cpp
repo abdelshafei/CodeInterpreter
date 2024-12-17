@@ -11,7 +11,7 @@ Scanner::Scanner(const string& src) : src(src)
 
 string Scanner::getStringLiteral() {
     string stringBuilder = "";
-    for(int i = current+1; i < src.size(); i++) {
+    for(int i = current; i < src.size(); i++) {
         if(src.at(i) = '"') {
             current = i+1;
             break;
