@@ -9,6 +9,16 @@ Scanner::Scanner(const string& src) : src(src)
     }
 }
 
+string& Scanner::getStringLiteral() {
+    string stringBuilder = "";
+    for(int i = current; i < src.size(); i++) {
+        if(src.at(i) = '"') break;
+        stringBuilder += src.at(i);
+    }
+
+    return stringBuilder;
+}
+
 bool Scanner::getErrStatus() { return isError; }
 bool Scanner::isAtEnd() { return current >= src.size(); }
 const char Scanner::advance() { return src.at(current++); }
@@ -25,6 +35,10 @@ void Scanner::addToken(TokenType type, any literal) {
         text = src.at(current-1);
         text += src.at(current);
         ++current;
+    } else if(type == STRING) {
+        text = "\"";
+        text += any_cast<string>(literal);
+        text += "\"";
     } else {
         text = src.at(current-1);
     }
@@ -81,7 +95,7 @@ void Scanner::scanToken() {
       case '/': if(src.size() != current && src.at(current) == '/') current = skipCommentIndex();
                 else                                                addToken(SLASH); 
                 break;
-      case '"': //read string literals 
+      case '"': addToken(STRING, getStringLiteral()); break;
       default:  cerr << "[line " << line << "]"
                 << " Error: Unexpected character: "
                 << c
