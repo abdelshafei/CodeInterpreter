@@ -12,7 +12,10 @@ Scanner::Scanner(const string& src) : src(src)
 string Scanner::getStringLiteral() {
     string stringBuilder = "";
     for(int i = current; i < src.size(); i++) {
-        if(src.at(i) = '"') break;
+        if(src.at(i) = '"') {
+            current = i+1;
+            break;
+        }
         cout<<src.at(i)<<endl;
         stringBuilder += src.at(i);
     }
