@@ -19,6 +19,7 @@ class Scanner {
         string getStringLiteral();
         string getNumberLiteral();
         bool isDigit(char c);
+        bool isDouble(const string&);
 
     private:
         string src;

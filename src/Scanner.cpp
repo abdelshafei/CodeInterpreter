@@ -30,12 +30,10 @@ string Scanner::getStringLiteral() {
 
 string Scanner::getNumberLiteral() {
     string stringBuilder = "";
-    bool isDouble = false;
 
     for(int i = current-1; i < src.size(); i++) {
-        if(src.at(i) == '.' && (i+1) < src.size() && isDigit(src.at(i+1))) {
-            isDouble = true;
-        } else if(!isDigit(src.at(i))) {
+        
+        if(!isDigit(src.at(i)) && !(src.at(i) == '.' && (i+1) < src.size() && isDigit(src.at(i+1)))) {
             current = i;
             break;
         }
@@ -44,13 +42,21 @@ string Scanner::getNumberLiteral() {
         if(i == src.size() - 1) current = i + 1;
     }
 
-    if(!isDouble) {
-        stringBuilder += ".0";
-    }
-
     return stringBuilder;    
 }
 
+bool Scanner::isDouble(const string& txt) {
+    char prevChar = '\0';
+
+    for(const char& c : txt) {
+        if(prevChar == '.' && isDigit(c)) {
+            return true;
+        }
+        prevChar = c;
+    }
+
+    return false;
+}
 bool Scanner::isDigit(char c) { return c >= '0' && c <= '9'; }
 bool Scanner::getErrStatus() { return isError; }
 bool Scanner::isAtEnd() { return current >= src.size(); }
@@ -78,6 +84,7 @@ void Scanner::addToken(TokenType type, string literal) {
         text += "\"";
     } else if(type == NUMBER) {
         text = any_cast<string>(literal);
+        if(!isDouble(literal)) literal += '.0';
     } else {
         text = src.at(current-1);
     }
