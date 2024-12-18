@@ -12,7 +12,7 @@ Scanner::Scanner(const string& src) : src(src)
 string Scanner::getStringLiteral() { 
     string stringBuilder = "";
     for(int i = current; i < src.size(); i++) {
-        if(src.at(i) == ' ' && i == src.size()-1) {
+        if(src.at(i) != '"' && i == src.size()-1) {
           isError = true;
           break;
         }
