@@ -13,7 +13,7 @@ string Scanner::getStringLiteral() {
     string stringBuilder = "";
     for(int i = current; i < src.size(); i++) {
         if(src.at(i) == '"') {
-            current = i;
+            current = i+1;
             break;
         }
         stringBuilder += src.at(i);
