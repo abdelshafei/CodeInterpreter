@@ -35,13 +35,13 @@ string Scanner::getNumberLiteral() {
     for(int i = current-1; i < src.size(); i++) {
         if(src.at(i) == '.' && (i+1) < src.size() && isDigit(src.at(i+1))) {
             isDouble = true;
-        }
-
-        if(!isDigit(src.at(i))) {
+        } else if(!isDigit(src.at(i))) {
             current = i;
             break;
         }
+
         stringBuilder += src.at(i);
+        if(i == src.size() - 1) current = i + 1;
     }
 
     if(!isDouble) {
