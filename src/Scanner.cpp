@@ -115,6 +115,7 @@ void Scanner::identifier() {
     while(isAlphaNumeric(peek())) advance();
 
     string txt = src.substr(start, (current-start));
+    cout << "Start pos: " << start << " Current pos: " << current << endl;
     TokenType type = keywords.count(txt) ? keywords.at(txt) : IDENTIFIER;
     addToken(type);
 }
