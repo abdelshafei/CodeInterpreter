@@ -12,6 +12,11 @@ Scanner::Scanner(const string& src) : src(src)
 string Scanner::getStringLiteral() { 
     string stringBuilder = "";
     for(int i = current; i < src.size(); i++) {
+        if(src.at(i) == ' ' && i == src.size()-1) {
+          isError = true;
+          break;
+        }
+
         if(src.at(i) == '"') {
             current = i+1;
             break;
@@ -39,6 +44,10 @@ void Scanner::addToken(TokenType type, string literal) {
         text += src.at(current);
         ++current;
     } else if(type == STRING) {
+        if(getErrStatus() == true) {
+            cerr << "[line " << line << "]" << " Error: Unterimnated string. " << endl;
+            return;
+        }
         text = "\"";
         text += any_cast<string>(literal);
         text += "\"";
