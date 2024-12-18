@@ -61,8 +61,6 @@ bool Scanner::isDouble(const string& txt) {
 string Scanner::NormalizeDouble(const string& txt) {
     string strBuilder = "";
 
-    cout << txt << endl;
-
     bool atDot = false;
     bool isAllZeros = false;
 
@@ -74,9 +72,7 @@ string Scanner::NormalizeDouble(const string& txt) {
 
         if(!atDot) {
             strBuilder += c;
-            cout << "hereNotDot" << endl;
         } else {
-            cout << "hereDot" << endl;
             if(c == '0') isAllZeros = true;
             else        isAllZeros = false;
 
