@@ -74,7 +74,7 @@ string Scanner::NormalizeDouble(const string& txt) {
         if(!atDot) {
             strBuilder += c;
         } else {
-            if(c == 48) isAllZeros = true;
+            if(c == '0') isAllZeros = true;
             else        isAllZeros = false;
 
             if(!isAllZeros) {
