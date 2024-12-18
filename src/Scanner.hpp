@@ -18,6 +18,7 @@ class Scanner {
         int skipCommentIndex();
         string getStringLiteral();
         string getNumberLiteral();
+        bool isDigit(char c);
 
     private:
         string src;

@@ -33,11 +33,11 @@ string Scanner::getNumberLiteral() {
     bool isDouble = false;
 
     for(int i = current; i < src.size(); i++) {
-        if(src.at(i) == '.' && (i+1) < src.size() && (src.at(i+1) >= 48 && src.at(i+1) <= 57)) {
+        if(src.at(i) == '.' && (i+1) < src.size() && isDigit(src.at(i+1))) {
             isDouble = true;
         }
 
-        if(src.at(i) < 48 && src.at(i) > 57) {
+        if(!isDigit(src.at(i))) {
             current = i;
             break;
         }
@@ -51,6 +51,7 @@ string Scanner::getNumberLiteral() {
     return stringBuilder;    
 }
 
+bool Scanner::isDigit(char c) { return c >= '0' && c <= '9'; }
 bool Scanner::getErrStatus() { return isError; }
 bool Scanner::isAtEnd() { return current >= src.size(); }
 const char Scanner::advance() { return src.at(current++); }
@@ -137,13 +138,18 @@ void Scanner::scanToken() {
                 else                                                addToken(SLASH); 
                 break;
       case '"': addToken(STRING, getStringLiteral()); break;
-      case ('0' || '1' || '2' || '3' || '4' || '5' || '6' || '7' || '8' || '9'): addToken(NUMBER, getNumberLiteral()); break;
-      default:  cerr << "[line " << line << "]"
+      default:  
+        if(isDigit(c)) {
+            addToken(NUMBER, getNumberLiteral()); 
+            break;
+        } else {
+            cerr << "[line " << line << "]"
                 << " Error: Unexpected character: "
                 << c
                 << endl; 
-                isError = true; 
-                break;
+            isError = true; 
+            break;
+        }
     }
 }
 
