@@ -1,5 +1,25 @@
 #include "Scanner.hpp"
 
+const unordered_map<string, TokenType> Scanner::keywords = 
+{
+    {"and", AND},
+    {"class", CLASS},
+    {"else", ELSE},
+    {"false", FALSE},
+    {"fun", FUN},
+    {"for", FOR},
+    {"if", IF},
+    {"nil", NIL},
+    {"or", OR},
+    {"print", PRINT},
+    {"return", RETURN},
+    {"super", SUPER},
+    {"this", THIS},
+    {"true", TRUE},
+    {"var", VAR},
+    {"while", WHILE}
+};
+
 Scanner::Scanner(const string& src) : src(src) 
 {
     while(!isAtEnd()) {
@@ -87,10 +107,27 @@ string Scanner::NormalizeDouble(const string& txt) {
 
 }
 
+bool Scanner::isAlpha(char c) { return ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '_'); }
+
+bool Scanner::isAlphaNumeric(char c) { return isAlpha(c) || isDigit(c); }
+
+void Scanner::identifier() {
+    while(isAlphaNumeric(peek())) advance();
+
+    string txt = src.substr(start, (current-start));
+    TokenType type = keywords.at(txt);
+    if(type == NULL) type = IDENTIFIER;
+    addToken(type);
+}
+
 bool Scanner::isDigit(char c) { return c >= '0' && c <= '9'; }
 bool Scanner::getErrStatus() { return isError; }
 bool Scanner::isAtEnd() { return current >= src.size(); }
 const char Scanner::advance() { return src.at(current++); }
+char Scanner::peek() { 
+    if (isAtEnd()) return '\0';
+    return src.at(current);
+}
 
 void Scanner::addToken(TokenType type) {
     addToken(type, "");
@@ -177,6 +214,9 @@ void Scanner::scanToken() {
         if(isDigit(c)) {
             addToken(NUMBER, getNumberLiteral()); 
             break;
+        } else if(isAlpha(c)) {
+            start = current - 1;
+            identifier();
         } else {
             cerr << "[line " << line << "]"
                 << " Error: Unexpected character: "

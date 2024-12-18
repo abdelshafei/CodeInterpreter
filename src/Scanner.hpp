@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include "Token.hpp"
+#include <unordered_map>
 
 class Scanner {
     public:
@@ -14,15 +15,24 @@ class Scanner {
         void addToken(TokenType type, string literal);
         void scanToken();
         void print();
+        char peek();
         bool getErrStatus();
         int skipCommentIndex();
 
+        /* String literal */
         string getStringLiteral();
 
+        /* Numerical literal */
         string getNumberLiteral();
         bool isDigit(char c);
         bool isDouble(const string&);
         string NormalizeDouble(const string&);
+
+        /* Identifier tokens */
+        bool isAlpha(char c);
+        bool isAlphaNumeric(char c);
+        void identifier();
+
 
     private:
         string src;
@@ -31,6 +41,8 @@ class Scanner {
         int current = 0;
         int line = 1;
         bool isError = false;
+
+        const static unordered_map<string, TokenType> keywords;
 };
 
 #endif 
