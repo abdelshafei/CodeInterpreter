@@ -32,7 +32,7 @@ string Scanner::getNumberLiteral() {
     string stringBuilder = "";
     bool isDouble = false;
 
-    for(int i = current; i < src.size(); i++) {
+    for(int i = current-1; i < src.size(); i++) {
         if(src.at(i) == '.' && (i+1) < src.size() && isDigit(src.at(i+1))) {
             isDouble = true;
         }
