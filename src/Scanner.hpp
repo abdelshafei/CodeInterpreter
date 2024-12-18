@@ -16,10 +16,13 @@ class Scanner {
         void print();
         bool getErrStatus();
         int skipCommentIndex();
+
         string getStringLiteral();
+
         string getNumberLiteral();
         bool isDigit(char c);
         bool isDouble(const string&);
+        string NormalizeDouble(const string&);
 
     private:
         string src;

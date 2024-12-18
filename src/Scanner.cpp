@@ -57,6 +57,36 @@ bool Scanner::isDouble(const string& txt) {
 
     return false;
 }
+
+string Scanner::NormalizeDouble(const string& txt) {
+    string strBuilder = "";
+
+    bool atDot = false;
+    bool isAllZeros = false;
+
+    for(const char& c : txt) {
+        if(c == '.') {
+            atDot = true;
+            strBuilder += c;
+            break;
+        }
+
+        if(!atDot) {
+            strBuilder += c;
+        } else {
+            if(c == 48) isAllZeros = true;
+            else        isAllZeros = false;
+
+            if(!isAllZeros) {
+              strBuilder += c;  
+            }
+        }
+    }
+
+    if(isAllZeros) strBuilder += ".0";
+
+}
+
 bool Scanner::isDigit(char c) { return c >= '0' && c <= '9'; }
 bool Scanner::getErrStatus() { return isError; }
 bool Scanner::isAtEnd() { return current >= src.size(); }
@@ -85,6 +115,7 @@ void Scanner::addToken(TokenType type, string literal) {
     } else if(type == NUMBER) {
         text = any_cast<string>(literal);
         if(!isDouble(literal)) literal += ".0";
+        else literal = NormalizeDouble(literal);
     } else {
         text = src.at(current-1);
     }
