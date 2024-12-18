@@ -67,7 +67,6 @@ string Scanner::NormalizeDouble(const string& txt) {
     for(const char& c : txt) {
         if(c == '.') {
             atDot = true;
-            strBuilder += c;
         }
 
         if(!atDot) {
