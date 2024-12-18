@@ -84,7 +84,7 @@ void Scanner::addToken(TokenType type, string literal) {
         text += "\"";
     } else if(type == NUMBER) {
         text = any_cast<string>(literal);
-        if(!isDouble(literal)) literal += '.0';
+        if(!isDouble(literal)) literal += ".0";
     } else {
         text = src.at(current-1);
     }
