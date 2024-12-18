@@ -74,6 +74,7 @@ string Scanner::NormalizeDouble(const string& txt) {
         if(!atDot) {
             strBuilder += c;
         } else {
+            cout << "here" << endl;
             if(c == '0') isAllZeros = true;
             else        isAllZeros = false;
 
