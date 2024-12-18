@@ -46,7 +46,7 @@ void Scanner::addToken(TokenType type, string literal) {
         ++current;
     } else if(type == STRING) {
         if(getErrStatus() == true) {
-            cerr << "[line " << line << "]" << " Error: Unterimnated string." << endl;
+            cerr << "[line " << line << "]" << " Error: Unterminated string." << endl;
             return;
         }
         text = "\"";
