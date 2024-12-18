@@ -9,15 +9,13 @@ Scanner::Scanner(const string& src) : src(src)
     }
 }
 
-string Scanner::getStringLiteral() {
-    // cout << src.at(current) << endl;
+string Scanner::getStringLiteral() { 
     string stringBuilder = "";
     for(int i = current; i < src.size(); i++) {
         if(src.at(i) == '"') {
             current = i;
             break;
         }
-        cout<<src.at(i)<<endl;
         stringBuilder += src.at(i);
     }
 
