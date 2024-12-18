@@ -115,9 +115,16 @@ void Scanner::identifier() {
     while(isAlphaNumeric(peek())) advance();
 
     string txt = src.substr(start, (current-start));
-    cout << "Start pos: " << start << " Current pos: " << current << endl;
     TokenType type = keywords.count(txt) ? keywords.at(txt) : IDENTIFIER;
     addToken(type);
+}
+
+bool Scanner::isTypeinKeyword(TokenType type) {
+    for(const auto& pair : keywords) {
+        if(type == pair.second) return true;
+    }
+
+    return false;
 }
 
 bool Scanner::isDigit(char c) { return c >= '0' && c <= '9'; }
@@ -153,6 +160,10 @@ void Scanner::addToken(TokenType type, string literal) {
         text = any_cast<string>(literal);
         if(!isDouble(literal)) literal += ".0";
         else literal = NormalizeDouble(literal);
+    } else if(type == IDENTIFIER) {
+        text = src.substr(start, (current - start));
+    } else if(isTypeinKeyword(type)) {
+        text = src.substr(start, (current - start));
     } else {
         text = src.at(current-1);
     }

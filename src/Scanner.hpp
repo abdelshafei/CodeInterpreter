@@ -32,6 +32,7 @@ class Scanner {
         bool isAlpha(char c);
         bool isAlphaNumeric(char c);
         void identifier();
+        bool isTypeinKeyword(TokenType type);
 
 
     private:
