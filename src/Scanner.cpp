@@ -81,7 +81,7 @@ string Scanner::NormalizeDouble(const string& txt) {
         }
     }
 
-    if(isAllZeros) strBuilder += ".0";
+    if(isAllZeros) strBuilder += "0";
 
     return strBuilder;
 
