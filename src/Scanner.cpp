@@ -85,6 +85,8 @@ string Scanner::NormalizeDouble(const string& txt) {
 
     if(isAllZeros) strBuilder += ".0";
 
+    return strBuilder;
+
 }
 
 bool Scanner::isDigit(char c) { return c >= '0' && c <= '9'; }
