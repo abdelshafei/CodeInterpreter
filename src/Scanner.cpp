@@ -115,8 +115,7 @@ void Scanner::identifier() {
     while(isAlphaNumeric(peek())) advance();
 
     string txt = src.substr(start, (current-start));
-    TokenType type = keywords.at(txt);
-    if(type == NULL) type = IDENTIFIER;
+    TokenType type = keywords.count(txt) ? keywords.at(txt) : IDENTIFIER;
     addToken(type);
 }
 
