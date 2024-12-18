@@ -45,7 +45,7 @@ string Scanner::getNumberLiteral() {
     }
 
     if(!isDouble) {
-        stringBuilder += ".00";
+        stringBuilder += ".0";
     }
 
     return stringBuilder;    
@@ -77,9 +77,7 @@ void Scanner::addToken(TokenType type, string literal) {
         text += any_cast<string>(literal);
         text += "\"";
     } else if(type == NUMBER) {
-        text = "\"";
-        text += any_cast<string>(literal);
-        text += "\"";
+        text = any_cast<string>(literal);
     } else {
         text = src.at(current-1);
     }
@@ -106,7 +104,6 @@ int Scanner::skipCommentIndex() {
 
 void Scanner::scanToken() {
     char c = advance();
-    cout << c << endl;
     switch (c) {
       case '\n': line++; break;
       case ' ': break;//space
