@@ -14,6 +14,7 @@ string Scanner::getStringLiteral() {
     for(int i = current; i < src.size(); i++) {
         if(src.at(i) != '"' && i == src.size()-1) {
           isError = true;
+          current = i+1;
           break;
         }
 
