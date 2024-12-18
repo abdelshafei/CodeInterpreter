@@ -28,6 +28,29 @@ string Scanner::getStringLiteral() {
     return stringBuilder;
 }
 
+string Scanner::getNumberLiteral() {
+    string stringBuilder = "";
+    bool isDouble = false;
+
+    for(int i = current; i < src.size(); i++) {
+        if(src.at(i) == '.' && (i+1) < src.size() && (src.at(i+1) >= 48 && src.at(i+1) <= 57)) {
+            isDouble = true;
+        }
+
+        if(src.at(i) < 48 && src.at(i) > 57) {
+            current = i;
+            break;
+        }
+        stringBuilder += src.at(i);
+    }
+
+    if(!isDouble) {
+        stringBuilder += ".00";
+    }
+
+    return stringBuilder;    
+}
+
 bool Scanner::getErrStatus() { return isError; }
 bool Scanner::isAtEnd() { return current >= src.size(); }
 const char Scanner::advance() { return src.at(current++); }
@@ -49,6 +72,10 @@ void Scanner::addToken(TokenType type, string literal) {
             cerr << "[line " << line << "]" << " Error: Unterminated string." << endl;
             return;
         }
+        text = "\"";
+        text += any_cast<string>(literal);
+        text += "\"";
+    } else if(type == NUMBER) {
         text = "\"";
         text += any_cast<string>(literal);
         text += "\"";
@@ -109,6 +136,7 @@ void Scanner::scanToken() {
                 else                                                addToken(SLASH); 
                 break;
       case '"': addToken(STRING, getStringLiteral()); break;
+      case ('0' || '1' || '2' || '3' || '4' || '5' || '6' || '7' || '8' || '9'): addToken(NUMBER, getNumberLiteral()); break;
       default:  cerr << "[line " << line << "]"
                 << " Error: Unexpected character: "
                 << c
