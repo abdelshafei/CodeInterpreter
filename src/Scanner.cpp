@@ -105,6 +105,7 @@ int Scanner::skipCommentIndex() {
 
 void Scanner::scanToken() {
     char c = advance();
+    cout << c << endl;
     switch (c) {
       case '\n': line++; break;
       case ' ': break;//space
