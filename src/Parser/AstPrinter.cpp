@@ -35,10 +35,10 @@ template<typename... Expr>
 string AstPrinter::parenthesize(const string& name, const Expr... exprs) {
     string strBuilder;
 
-    strBuilder += "(" 
+    strBuilder += "(";
     strBuilder += name;
 
-    for(Expr expr : exprs) {
+    for(Expr exprs : ...) {
         strBuilder += " ";
         strBuilder += exprs.accept(*this);
     }
