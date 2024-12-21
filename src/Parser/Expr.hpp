@@ -19,6 +19,7 @@ class Expr {
                 // virtual string visitThisExpr(const class This& expr);
                 virtual string visitUnaryExpr(const class Unary& expr);
                 // virtual string visitVariableExpr(const class Variable& expr);
+                virtual ~Visitor() = default; 
         };
 
         virtual string accept(Visitor& visitor) const;
