@@ -27,15 +27,23 @@ string AstPrinter::visitLiteralExpr(const Literal& expr) {
     }, expr.value);
 }
 
+string AstPrinter::visitUnaryExpr(const Unary& expr) {
+    return parenthesize("", expr.oprator.lexeme, expr.right);
+}
+
 template<typename... Expr>
 string AstPrinter::parenthesize(const string& name, const Expr... exprs) {
-    ostringstream oss;
+    string strBuilder;
 
-    oss << "(" << name;
+    strBuilder += "(" 
+    strBuilder += name;
 
-    ((oss << " " << exprs.accept(*this)), ...)
+    for(Expr expr : exprs) {
+        strBuilder += " ";
+        strBuilder += exprs.accept(*this);
+    }
 
-    oss << ")";
+    strBuilder += ")"
 
-    return oss;
+    return strBuilder;
 }
