@@ -38,10 +38,7 @@ string AstPrinter::parenthesize(const string& name, const Expr... exprs) {
     strBuilder += "(";
     strBuilder += name;
 
-    for(Expr exprs : ...) {
-        strBuilder += " ";
-        strBuilder += exprs.accept(*this);
-    }
+    ((strBuilder += " " + exprs.accept(*this)), ...);
 
     strBuilder += ")";
 
