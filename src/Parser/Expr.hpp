@@ -28,28 +28,28 @@ class Expr {
 
 class Binary : public Expr {
     public:
-        Binary(Expr left, Token oprator, Expr right)
+        Binary(Expr* left, Token oprator, Expr* right)
             : left(left), oprator(oprator), right(right) {}
 
         string accept(Visitor& visitor) const override {
             return visitor.visitBinaryExpr(*this);
         }
 
-        Expr left;
+        Expr* left;
         Token oprator;
-        Expr right; 
+        Expr* right; 
 };
 
 class Grouping : public Expr {
     public:
-        Grouping(Expr expression)
+        Grouping(Expr* expression)
             : expression(expression) {}
 
         string accept(Visitor& visitor) const override {
             return visitor.visitGroupingExpr(*this);
         }
 
-        Expr expression; 
+        Expr* expression; 
 };
 
 class Literal : public Expr {
@@ -67,7 +67,7 @@ class Literal : public Expr {
 
 class Unary : public Expr { //Unary operators: ++, -- etc.
     public: 
-        Unary(Token oprator, Expr right) 
+        Unary(Token oprator, Expr* right) 
             : oprator(oprator), right(right) {}
 
         string accept(Visitor& visitor) const override {
@@ -75,7 +75,7 @@ class Unary : public Expr { //Unary operators: ++, -- etc.
         }
 
         Token oprator;
-        Expr right;
+        Expr* right;
 };
 
 #endif

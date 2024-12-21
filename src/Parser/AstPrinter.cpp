@@ -2,7 +2,7 @@
 
 #include <sstream>
 
-string AstPrinter::print(Expr expression) {
+string AstPrinter::print(Expr& expression) {
     return expression.accept(*this);
 }
 
@@ -32,7 +32,7 @@ string AstPrinter::visitUnaryExpr(const Unary& expr) {
 }
 
 template<typename... Expr>
-string AstPrinter::parenthesize(const string& name, Expr... exprs) {
+string AstPrinter::parenthesize(const string& name, Expr&... exprs) {
     string strBuilder;
 
     strBuilder += "(";
