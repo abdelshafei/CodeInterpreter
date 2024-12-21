@@ -1,7 +1,7 @@
 #ifndef EXPR_H
 #define EXPR_H
 
-#include "Tokenization/Token.hpp"
+#include "../Tokenization/Token.hpp"
 
 class Expr {
     public:
