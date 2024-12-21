@@ -3,7 +3,7 @@
 
 #include "Expr.hpp"
 
-class AstPrinter : public Expr::Visitor {
+class AstPrinter : public Visitor {
     public:
         string print(Expr* expression);
         string visitBinaryExpr(const Binary& expr) override;
