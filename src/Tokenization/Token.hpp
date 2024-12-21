@@ -13,7 +13,6 @@ class Token {
         const string toString() const;
         const string& convertTokenTypeToStr(TokenType type) const;
     
-    private:
         TokenType type;
         string lexeme;
         string literal;
