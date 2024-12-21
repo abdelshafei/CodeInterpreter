@@ -2,8 +2,8 @@
 
 #include <sstream>
 
-string AstPrinter::print(Expr& expression) {
-    return expression.accept(*this);
+string AstPrinter::print(Expr* expression) {
+    return expression->accept(*this);
 }
 
 string AstPrinter::visitBinaryExpr(const Binary& expr) {
@@ -32,13 +32,13 @@ string AstPrinter::visitUnaryExpr(const Unary& expr) {
 }
 
 template<typename... Expr>
-string AstPrinter::parenthesize(const string& name, Expr&... exprs) {
+string AstPrinter::parenthesize(const string& name, Expr*... exprs) {
     string strBuilder;
 
     strBuilder += "(";
     strBuilder += name;
 
-    ((strBuilder += " " + exprs.accept(*this)), ...);
+    ((strBuilder += " " + exprs->accept(*this)), ...);
 
     strBuilder += ")";
 
