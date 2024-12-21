@@ -1,6 +1,6 @@
 #include "AstPrinter.hpp"
 
-#include <iostream>
+#include <sstream>
 
 string AstPrinter::print(Expr expression) {
     return expression.accept(*this);
