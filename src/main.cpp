@@ -4,7 +4,8 @@
 #include <sstream>
 #include <string>
 
-#include "Scanner.hpp"
+#include "Scanner/Scanner.hpp"
+#include "Parser/Parser.hpp"
 
 using namespace std;
 
@@ -40,6 +41,13 @@ int main(int argc, char *argv[]) {
             return 0;
         }
         
+    } else if(command == "parse") {
+        std::string file_contents = read_file_contents(argv[2]);
+
+        Scanner scanner(file_contents);
+        Parser parser(scanner.getTokens());
+
+
     } else {
         cerr << "Unknown command: " << command << endl;
         return 1;

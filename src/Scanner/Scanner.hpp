@@ -18,6 +18,7 @@ class Scanner {
         char peek();
         bool getErrStatus();
         int skipCommentIndex();
+        vector<Token*>* getTokens();
 
         /* String literal */
         string getStringLiteral();

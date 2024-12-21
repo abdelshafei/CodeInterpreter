@@ -29,6 +29,8 @@ Scanner::Scanner(const string& src) : src(src)
     }
 }
 
+vector<Token*>* Scanner::getTokens() { return &tokens; }
+
 string Scanner::getStringLiteral() { 
     string stringBuilder = "";
     for(int i = current; i < src.size(); i++) {
