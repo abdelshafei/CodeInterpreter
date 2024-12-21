@@ -7,7 +7,7 @@ string AstPrinter::print(Expr expression) {
 }
 
 string AstPrinter::visitBinaryExpr(const Binary& expr) {
-    return parenthesize("", expr.oprator.lexeme, expr.left, expr.right);
+    return parenthesize(expr.oprator.lexeme, expr.left, expr.right);
 }
 
 string AstPrinter::visitGroupingExpr(const Grouping& expr) {
@@ -28,7 +28,7 @@ string AstPrinter::visitLiteralExpr(const Literal& expr) {
 }
 
 string AstPrinter::visitUnaryExpr(const Unary& expr) {
-    return parenthesize("", expr.oprator.lexeme, expr.right);
+    return parenthesize(expr.oprator.lexeme, expr.right);
 }
 
 template<typename... Expr>
