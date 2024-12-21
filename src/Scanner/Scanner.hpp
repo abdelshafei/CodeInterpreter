@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <iostream>
-#include "../Tokenization/Token.hpp"
+#include "Token.hpp"
 #include <unordered_map>
 
 class Scanner {
