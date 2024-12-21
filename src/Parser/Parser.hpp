@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <iostream>
-#include "Tokenization/Token.hpp"
+#include "../Tokenization/Token.hpp"
 
 class Parser {
     public:

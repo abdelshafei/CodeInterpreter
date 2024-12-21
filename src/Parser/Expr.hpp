@@ -52,9 +52,9 @@ class Grouping : public Expr {
         Expr expression; 
 };
 
-template <typename T>
 class Literal : public Expr {
     public:
+        using T = std::variant<int, double, std::string, bool>;
         Literal(T value)
             : value(value) {}
         
