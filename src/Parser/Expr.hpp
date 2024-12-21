@@ -7,18 +7,18 @@ class Expr {
     public:
         class Visitor {
             public:
-                virtual string visitAssignExpr(const class Assign& expr);
+                // virtual string visitAssignExpr(const class Assign& expr);
                 virtual string visitBinaryExpr(const class Binary& expr);
-                virtual string visitCallExpr(const class Call& expr);
-                virtual string visitGetExpr(const class Get& expr);
+                // virtual string visitCallExpr(const class Call& expr);
+                // virtual string visitGetExpr(const class Get& expr);
                 virtual string visitGroupingExpr(const class Grouping& expr);
                 virtual string visitLiteralExpr(const class Literal& expr);
-                virtual string visitLogicalExpr(const class Logical& expr);
-                virtual string visitSetExpr(const class Set& expr);
-                virtual string visitSuperExpr(const class Super& expr);
-                virtual string visitThisExpr(const class This& expr);
+                // virtual string visitLogicalExpr(const class Logical& expr);
+                // virtual string visitSetExpr(const class Set& expr);
+                // virtual string visitSuperExpr(const class Super& expr);
+                // virtual string visitThisExpr(const class This& expr);
                 virtual string visitUnaryExpr(const class Unary& expr);
-                virtual string visitVariableExpr(const class Variable& expr);
+                // virtual string visitVariableExpr(const class Variable& expr);
         };
 
         virtual string accept(Visitor& visitor) const;
