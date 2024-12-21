@@ -22,7 +22,7 @@ class Expr {
                 virtual ~Visitor() = default; 
         };
 
-        virtual string accept(Visitor& visitor) const;
+        virtual string accept(const Visitor& visitor) const;
 
         virtual ~Expr() = default;
 };
@@ -32,7 +32,7 @@ class Binary : public Expr {
         Binary(Expr* left, Token oprator, Expr* right)
             : left(left), oprator(oprator), right(right) {}
 
-        string accept(Visitor& visitor) const override {
+        string accept(const Visitor& visitor) const override {
             return visitor.visitBinaryExpr(*this);
         }
 
@@ -46,7 +46,7 @@ class Grouping : public Expr {
         Grouping(Expr* expression)
             : expression(expression) {}
 
-        string accept(Visitor& visitor) const override {
+        string accept(const Visitor& visitor) const override {
             return visitor.visitGroupingExpr(*this);
         }
 
@@ -59,7 +59,7 @@ class Literal : public Expr {
         Literal(T value)
             : value(value) {}
         
-        string accept(Visitor& visitor) const override {
+        string accept(const Visitor& visitor) const override {
             return visitor.visitLiteralExpr(*this);
         }
 
@@ -71,7 +71,7 @@ class Unary : public Expr { //Unary operators: ++, -- etc.
         Unary(Token oprator, Expr* right) 
             : oprator(oprator), right(right) {}
 
-        string accept(Visitor& visitor) const override {
+        string accept(const Visitor& visitor) const override {
             return visitor.visitUnaryExpr(*this);
         }
 
