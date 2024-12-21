@@ -32,13 +32,13 @@ string AstPrinter::visitUnaryExpr(const Unary& expr) {
 }
 
 template<typename... Expr>
-string AstPrinter::parenthesize(const string& name, const Expr... exprs) {
+string AstPrinter::parenthesize(const string& name, const Expr&... exprs) {
     string strBuilder;
 
     strBuilder += "(";
     strBuilder += name;
 
-    ((strBuilder += " " + exprs.accept(*this)), ...);
+    ((strBuilder += " " + exprs->accept(*this)), ...);
 
     strBuilder += ")";
 

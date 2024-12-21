@@ -11,7 +11,7 @@ class AstPrinter : public Expr::Visitor {
         string visitLiteralExpr(const Literal& expr) override;
         string visitUnaryExpr(const Unary& expr) override;
         template<typename... Expr>
-        string parenthesize(const string& name, const Expr... exprs);
+        string parenthesize(const string& name, const Expr&... exprs);
 };
 
 #endif
