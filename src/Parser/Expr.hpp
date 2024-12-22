@@ -57,11 +57,9 @@ class Grouping : public Expr {
 
 class Literal : public Expr {
     public:
-        using T = std::variant<int, double, std::string, bool>;
+        using T = std::variant<int, double, std::string, bool, nullptr_t>;
         Literal(T value)
             : value(value) {}
-        Literal(nullptr_t value) 
-            : value("nil") {}
         ~Literal() override = default;
         
         string accept(const Visitor& visitor) const override {
