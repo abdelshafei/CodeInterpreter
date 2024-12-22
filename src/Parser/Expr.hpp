@@ -58,6 +58,8 @@ class Literal : public Expr {
         using T = std::variant<int, double, std::string, bool>;
         Literal(T value)
             : value(value) {}
+        Literal(nullptr_t) 
+            : value("nil") {}
         
         string accept(const Visitor& visitor) const override {
             return visitor.visitLiteralExpr(*this);
