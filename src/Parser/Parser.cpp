@@ -90,25 +90,19 @@ Expr* Parser::primary() {
         expr = new Literal(false);
         expressions.push_back(expr);
         return expr;
-    }
-    if(match(TRUE)) {
+    } else if(match(TRUE)) {
         expr = new Literal(true);
         expressions.push_back(expr);
         return expr;
-    }
-    if(match(NIL)) {
+    } else if(match(NIL)) {
         expr = new Literal(nullptr);
         expressions.push_back(expr);
         return expr;
-    }
-
-    if(match(NUMBER, STRING)) {
+    } else if(match(NUMBER, STRING)) {
         expr = new Literal(previous()->literal);
         expressions.push_back(expr);
         return expr;
-    }
-
-    if(match(LEFT_PAREN)) {
+    } else if(match(LEFT_PAREN)) {
         expr = expression(); // recursively calls all of the exprs in between the parenthesis
         consume(RIGHT_PAREN, "Expect ')' after expression");
         Expr* groupedExpr = new Grouping(expr);
@@ -132,42 +126,45 @@ Expr* Parser::unary() {
 }
 
 Expr* Parser::factor() {
-    Expr* expr = unary();
+    Expr* left = unary();
 
     while(match(SLASH, STAR)) {
         Token* oprator = previous();
         Expr* right = unary();
-        expr = new Binary(expr, oprator, right);
+        Expr* expr = new Binary(left, oprator, right);
         expressions.push_back(expr);
+        return expr;
     }
 
-    return expr;
+    return left;
 }
 
 Expr* Parser::term() {
-    Expr* expr = factor();
+    Expr* left = factor();
 
     while(match(MINUS, PLUS)) {
         Token* oprator = previous();
         Expr* right = factor();
-        expr = new Binary(expr, oprator, right);
+        Expr* expr = new Binary(left, oprator, right);
         expressions.push_back(expr);
+        return expr;
     }
 
-    return expr;
+    return left;
 }
 
 Expr* Parser::comparison() {
-    Expr* expr = term();
+    Expr* left = term();
 
     while(match(GREATER, GREATER_EQUAL, LESS, LESS_EQUAL)) {
         Token* oprator = previous();
         Expr* right = term();
-        expr = new Binary(expr, oprator, right);
+        Expr* expr = new Binary(left, oprator, right);
         expressions.push_back(expr);
+        return expr;
     }
 
-    return expr;
+    return left;
 }
 
 Expr* Parser::equality() {
