@@ -31,6 +31,7 @@ class Binary : public Expr {
     public:
         Binary(Expr* left, Token* oprator, Expr* right)
             : left(left), oprator(oprator), right(right) {}
+        ~Binary() override = default;
 
         string accept(const Visitor& visitor) const override {
             return visitor.visitBinaryExpr(*this);
@@ -45,6 +46,7 @@ class Grouping : public Expr {
     public:
         Grouping(Expr* expression)
             : expression(expression) {}
+        ~Grouping() override = default;
 
         string accept(const Visitor& visitor) const override {
             return visitor.visitGroupingExpr(*this);
@@ -58,8 +60,9 @@ class Literal : public Expr {
         using T = std::variant<int, double, std::string, bool>;
         Literal(T value)
             : value(value) {}
-        Literal(nullptr_t) 
+        Literal(nullptr_t value) 
             : value("nil") {}
+        ~Literal() override = default;
         
         string accept(const Visitor& visitor) const override {
             return visitor.visitLiteralExpr(*this);
@@ -72,6 +75,7 @@ class Unary : public Expr { //Unary operators: ++, -- etc.
     public: 
         Unary(Token* oprator, Expr* right) 
             : oprator(oprator), right(right) {}
+        ~Unary() override = default;
 
         string accept(const Visitor& visitor) const override {
             return visitor.visitUnaryExpr(*this);
