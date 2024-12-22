@@ -5,7 +5,7 @@
 
 class Expr {
     public:
-        class Visitor {
+        class Visitor { //Interface
             public:
                 // virtual string visitAssignExpr(const class Assign& expr) const = 0;
                 virtual string visitBinaryExpr(const class Binary& expr) const = 0;
@@ -29,7 +29,7 @@ class Expr {
 
 class Binary : public Expr {
     public:
-        Binary(Expr* left, Token oprator, Expr* right)
+        Binary(Expr* left, Token* oprator, Expr* right)
             : left(left), oprator(oprator), right(right) {}
 
         string accept(const Visitor& visitor) const override {
@@ -37,7 +37,7 @@ class Binary : public Expr {
         }
 
         Expr* left;
-        Token oprator;
+        Token* oprator;
         Expr* right; 
 };
 
@@ -68,14 +68,14 @@ class Literal : public Expr {
 
 class Unary : public Expr { //Unary operators: ++, -- etc.
     public: 
-        Unary(Token oprator, Expr* right) 
+        Unary(Token* oprator, Expr* right) 
             : oprator(oprator), right(right) {}
 
         string accept(const Visitor& visitor) const override {
             return visitor.visitUnaryExpr(*this);
         }
 
-        Token oprator;
+        Token* oprator;
         Expr* right;
 };
 

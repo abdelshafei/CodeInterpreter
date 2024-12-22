@@ -6,6 +6,7 @@
 
 #include "Scanner/Scanner.hpp"
 #include "Parser/Parser.hpp"
+#include "Parser/AstPrinter.hpp"
 
 using namespace std;
 
@@ -20,7 +21,7 @@ int main(int argc, char *argv[]) {
     std::cerr << "Logs from your program will appear here!" << std::endl;
 
     if (argc < 3) {
-        std::cerr << "Usage: ./your_program tokenize <filename>" << std::endl;
+        std::cerr << "Usage: ./your_program (tokenize || parse || evaluate) <filename>" << std::endl;
         return 1;
     }
 
@@ -29,24 +30,30 @@ int main(int argc, char *argv[]) {
     if (command == "tokenize") {
         std::string file_contents = read_file_contents(argv[2]);
         
-        if(!file_contents.empty()) {
-            Scanner scanner(file_contents);
-            scanner.print();
-            if(!scanner.getErrStatus())
-                return 0;
-            else 
-                return 65;
-        } else {
-            cout << "EOF  null" << endl;
+        Scanner scanner(file_contents);
+        scanner.print();
+        if(!scanner.getErrStatus())
             return 0;
-        }
+        else 
+            return 65;
         
     } else if(command == "parse") {
         std::string file_contents = read_file_contents(argv[2]);
 
         Scanner scanner(file_contents);
         Parser parser(scanner.getTokens());
+        AstPrinter printer;
+        try {
+            printer.print(parser.parse());
+            parser.cleanUpExpressions();
+        } catch (runtime_error& err) {
+            parser.cleanUpExpressions();
+            return 65;
+        }
 
+        return 0;
+
+    } else if(command == "evaluate") {
 
     } else {
         cerr << "Unknown command: " << command << endl;
