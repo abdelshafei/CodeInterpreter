@@ -14,6 +14,8 @@ class Parser {
         // Method Helpers
         template<typename... TokenType>
         bool match(TokenType... types);
+        template<typename... TokenType>
+        bool matchTypes(TokenType... types);
         bool check(TokenType type);
         Token* advance();
         bool isAtEnd();

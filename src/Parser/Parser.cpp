@@ -42,6 +42,16 @@ bool Parser::match(TokenType... types) {
     return false;
 }
 
+template<typename... TokenType>
+bool Parser::matchTypes(TokenType... types) {
+        for (auto type : {types...}) {
+        if (check(type)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 void Parser::synchronize() { // starts at the beginning of a line
     advance();
 
@@ -114,7 +124,7 @@ Expr* Parser::primary() {
         Expr* groupedExpr = new Grouping(expr);
         expressions.push_back(groupedExpr);
         return groupedExpr;
-    } else if(match(MINUS, PLUS, SLASH, STAR, GREATER, GREATER_EQUAL, LESS, LESS_EQUAL)) {
+    } else if(matchTypes(MINUS, PLUS, SLASH, STAR, GREATER, GREATER_EQUAL, LESS, LESS_EQUAL)) {
         // consume(NUMBER, "Expect a number after expression");
         if(peek()->type != NUMBER) {
             throw err(peek(), "Expect a number after expression");
@@ -152,7 +162,8 @@ Expr* Parser::factor() {
 Expr* Parser::term() {
     Expr* expr = factor();
 
-    while(match(MINUS, PLUS)) {
+    
+    while(primary() == nullptr && match(MINUS, PLUS)) {
         Token* oprator = previous();
         Expr* right = factor();
         expr = new Binary(expr, oprator, right);
