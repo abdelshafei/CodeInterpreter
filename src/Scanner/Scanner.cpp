@@ -58,6 +58,7 @@ string Scanner::getStringLiteral() {
 
 string Scanner::getNumberLiteral() {
     string stringBuilder = "";
+    charNo--;
 
     for(int i = current-1; i < src.size(); i++) {
         
