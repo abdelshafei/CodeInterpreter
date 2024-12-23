@@ -35,7 +35,7 @@ class Parser {
         Token* consume(TokenType type, string msg);
         runtime_error err(Token* token, string msg);
 
-
+        vector<Expr*>* getExprs() { return &expressions; }
     private:
         vector<Token*> tokens;
         vector<Expr*> expressions; // to free them at the end after printing
