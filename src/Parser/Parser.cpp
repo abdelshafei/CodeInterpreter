@@ -149,8 +149,8 @@ Expr* Parser::term() {
 
     while(match(MINUS, PLUS)) {
         Token* oprator = previous();
-        consume(NUMBER, "Expect number after expression");
         Expr* right = factor();
+        consume(NUMBER, "Expect number after expression");
         expr = new Binary(expr, oprator, right);
         expressions.push_back(expr);
     }
