@@ -82,7 +82,7 @@ runtime_error Parser::err(Token* token, string msg) {
         + " Error at '" 
         + token->lexeme 
         + "' " 
-        + "[char No. " + to_string(token->charNo) + "]"
+        + "[char No. " + to_string(token->charNo) + "] "
         + msg);
     }
 }
