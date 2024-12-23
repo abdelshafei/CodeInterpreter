@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
         scanner.print();
         AstPrinter printer;
         try {
-            printer.print(parser.parse());
+            cout << printer.print(parser.parse()) << endl;
             parser.cleanUpExpressions();
         } catch (runtime_error& err) {
             parser.cleanUpExpressions();
