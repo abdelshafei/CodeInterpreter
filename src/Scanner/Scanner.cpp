@@ -35,6 +35,7 @@ vector<Token*>* Scanner::getTokens() { return &tokens; }
 
 string Scanner::getStringLiteral() { 
     string stringBuilder = "";
+    charNo++;
     for(int i = current; i < src.size(); i++ && charNo++) {
         if(src.at(i) != '"' && i == src.size()-1) {
           isError = true;
