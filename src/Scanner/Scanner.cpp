@@ -37,7 +37,7 @@ vector<Token*>* Scanner::getTokens() { return &tokens; }
 string Scanner::getStringLiteral() { 
     string stringBuilder = "";
     charNo++;
-    for(int i = current; i < src.size(); i++ && charNo++) {
+    for(int i = current; i < src.size(); i++) {
         if(src.at(i) != '"' && i == src.size()-1) {
           isError = true;
           current = i+1;
@@ -48,7 +48,9 @@ string Scanner::getStringLiteral() {
             current = i+1;
             break;
         }
+
         stringBuilder += src.at(i);
+        charNo++;
     }
 
     return stringBuilder;
@@ -57,7 +59,7 @@ string Scanner::getStringLiteral() {
 string Scanner::getNumberLiteral() {
     string stringBuilder = "";
 
-    for(int i = current-1; i < src.size(); i++ && charNo++) {
+    for(int i = current-1; i < src.size(); i++) {
         
         if(!isDigit(src.at(i)) && !(src.at(i) == '.' && (i+1) < src.size() && isDigit(src.at(i+1)))) {
             current = i;
@@ -65,6 +67,7 @@ string Scanner::getNumberLiteral() {
         }
 
         stringBuilder += src.at(i);
+        charNo++;
         if(i == src.size() - 1) current = i + 1;
     }
 
@@ -125,6 +128,7 @@ void Scanner::identifier() {
     while(isAlphaNumeric(peek())) advance();
 
     string txt = src.substr(start, (current-start));
+    charNo = current - start - 1;
     TokenType type = keywords.count(txt) ? keywords.at(txt) : IDENTIFIER;
     addToken(type);
 }
