@@ -74,9 +74,9 @@ Token* Parser::consume(TokenType type, string msg) {
 
 runtime_error Parser::err(Token* token, string msg) {
     if(token->type == END_OF_FILE) {
-        return runtime_error(to_string(token->lineNo) + "at end" + msg);
+        return runtime_error("[line " + to_string(token->lineNo) + "]" + " at end " + msg);
     } else {
-        return runtime_error(to_string(token->lineNo) + " at '" + token->lexeme + "'" + msg);
+        return runtime_error("[line " + to_string(token->lineNo) + "]" + " Error at '" + token->lexeme + "' " + msg);
     }
 }
 /**************************************************************/
@@ -104,7 +104,6 @@ Expr* Parser::primary() {
         return expr;
     } else if(match(LEFT_PAREN)) {
         expr = expression(); // recursively calls all of the exprs in between the parenthesis
-        cout << "here";
         consume(RIGHT_PAREN, "Expect ')' after expression");
         Expr* groupedExpr = new Grouping(expr);
         expressions.push_back(groupedExpr);

@@ -41,7 +41,6 @@ int main(int argc, char *argv[]) {
         std::string file_contents = read_file_contents(argv[2]);
 
         Scanner scanner(file_contents);
-
         if(scanner.getErrStatus())
             return 65;
 
