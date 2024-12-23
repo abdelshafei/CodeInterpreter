@@ -150,7 +150,7 @@ Expr* Parser::term() {
     while(match(MINUS, PLUS)) {
         Token* oprator = previous();
         Expr* right = factor();
-        consume(NUMBER, "Expect number after expression");
+        // consume(NUMBER, "Expect number after expression");
         expr = new Binary(expr, oprator, right);
         expressions.push_back(expr);
     }
