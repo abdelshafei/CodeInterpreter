@@ -69,7 +69,7 @@ class Literal : public Expr {
         T value;
 };
 
-class Unary : public Expr { //Unary operators: ++, -- etc.
+class Unary : public Expr { 
     public: 
         Unary(Token* oprator, Expr* right) 
             : oprator(oprator), right(right) {}
