@@ -126,60 +126,56 @@ Expr* Parser::unary() {
 }
 
 Expr* Parser::factor() {
-    Expr* left = unary();
+    Expr* expr = unary();
 
     while(match(SLASH, STAR)) {
         Token* oprator = previous();
         Expr* right = unary();
-        Expr* expr = new Binary(left, oprator, right);
+        Expr* expr = new Binary(expr, oprator, right);
         expressions.push_back(expr);
-        return expr;
     }
 
-    return left;
+    return expr;
 }
 
 Expr* Parser::term() {
-    Expr* left = factor();
+    Expr* expr = factor();
 
     while(match(MINUS, PLUS)) {
         Token* oprator = previous();
         Expr* right = factor();
-        Expr* expr = new Binary(left, oprator, right);
+        Expr* expr = new Binary(expr, oprator, right);
         expressions.push_back(expr);
-        return expr;
     }
 
-    return left;
+    return expr;
 }
 
 Expr* Parser::comparison() {
-    Expr* left = term();
+    Expr* expr = term();
 
     while(match(GREATER, GREATER_EQUAL, LESS, LESS_EQUAL)) {
         Token* oprator = previous();
         Expr* right = term();
-        Expr* expr = new Binary(left, oprator, right);
+        Expr* expr = new Binary(expr, oprator, right);
         expressions.push_back(expr);
-        return expr;
     }
 
-    return left;
+    return expr;
 }
 
 Expr* Parser::equality() {
-    Expr* left = comparison();
+    Expr* expr = comparison();
 
 
     while(match(BANG_EQUAL, EQUAL_EQUAL)) {
         Token* oprator = previous();
         Expr* right = comparison();
-        Expr* expr = new Binary(left, oprator, right);
+        Expr* expr = new Binary(expr, oprator, right);
         expressions.push_back(expr);
-        return expr;
     }
 
-    return left;
+    return expr;
 }
 
 Expr* Parser::expression() { // For readabiliity
