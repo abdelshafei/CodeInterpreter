@@ -25,6 +25,7 @@ Scanner::Scanner(const string& src) : src(src)
     if(isAtEnd()) addToken(END_OF_FILE);
 
     while(!isAtEnd()) {
+        ++charNo;
         scanToken(); 
         if(isAtEnd()) 
             addToken(END_OF_FILE);
@@ -36,7 +37,7 @@ vector<Token*>* Scanner::getTokens() { return &tokens; }
 string Scanner::getStringLiteral() { 
     string stringBuilder = "";
     charNo++;
-    for(int i = current; i < src.size(); i++ && ++charNo) {
+    for(int i = current; i < src.size(); i++ && charNo++) {
         if(src.at(i) != '"' && i == src.size()-1) {
           isError = true;
           current = i+1;
