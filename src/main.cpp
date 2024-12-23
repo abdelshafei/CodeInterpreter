@@ -48,10 +48,10 @@ int main(int argc, char *argv[]) {
             return 65;
 
         Parser parser(scanner.getTokens());
+        scanner.print();
         AstPrinter printer;
         try {
             cout << printer.print(parser.parse()) << endl;
-            scanner.print();
             parser.cleanUpExpressions();
         } catch (runtime_error& err) {
             parser.cleanUpExpressions();
