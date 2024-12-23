@@ -69,7 +69,6 @@ void Parser::synchronize() { // starts at the beginning of a line
 Token* Parser::consume(TokenType type, string msg) {
     if(check(type)) return advance();
 
-    cout << "here";
     throw err(peek(), msg);
 }
 
@@ -105,6 +104,7 @@ Expr* Parser::primary() {
         return expr;
     } else if(match(LEFT_PAREN)) {
         expr = expression(); // recursively calls all of the exprs in between the parenthesis
+        cout << "here";
         consume(RIGHT_PAREN, "Expect ')' after expression");
         Expr* groupedExpr = new Grouping(expr);
         expressions.push_back(groupedExpr);
