@@ -115,7 +115,10 @@ Expr* Parser::primary() {
         expressions.push_back(groupedExpr);
         return groupedExpr;
     } else if(match(MINUS, PLUS, SLASH, STAR, GREATER, GREATER_EQUAL, LESS, LESS_EQUAL)) {
-        consume(NUMBER, "Expect a number after expression");
+        // consume(NUMBER, "Expect a number after expression");
+        if(peek()->type != NUMBER) {
+            throw err(peek(), "Expect a number after expression");
+        }
     }
 
     return nullptr;
