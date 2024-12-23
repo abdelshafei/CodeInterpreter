@@ -22,6 +22,8 @@ const unordered_map<string, TokenType> Scanner::keywords =
 
 Scanner::Scanner(const string& src) : src(src) 
 {
+    if(isAtEnd()) addToken(END_OF_FILE);
+    
     while(!isAtEnd()) {
         scanToken(); 
         if(isAtEnd()) 
