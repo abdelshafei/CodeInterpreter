@@ -93,6 +93,7 @@ Expr* Parser::primary() {
     } else if(match(TRUE)) {
         expr = new Literal(true);
         expressions.push_back(expr);
+        cout << "here";
         return expr;
     } else if(match(NIL)) {
         expr = new Literal(nullptr);
