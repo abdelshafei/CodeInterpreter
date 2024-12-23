@@ -42,13 +42,10 @@ int main(int argc, char *argv[]) {
 
         Scanner scanner(file_contents);
 
-        if(!scanner.getErrStatus())
-            return 0;
-        else 
+        if(scanner.getErrStatus())
             return 65;
 
         Parser parser(scanner.getTokens());
-        scanner.print();
         AstPrinter printer;
         try {
             cout << printer.print(parser.parse()) << endl;
