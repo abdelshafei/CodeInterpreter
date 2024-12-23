@@ -22,7 +22,9 @@ class Expr {
                 virtual ~Visitor() = default; 
         };
 
-        virtual string accept(const Visitor& visitor) const;
+        virtual string accept(const Visitor& visitor) const {
+            throw runtime_error("accept called on base class Expr");
+        }
 
         virtual ~Expr() = default;
 };
