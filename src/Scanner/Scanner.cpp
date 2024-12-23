@@ -166,7 +166,7 @@ void Scanner::addToken(TokenType type, string literal) {
         ++current;
     } else if(type == STRING) {
         if(getErrStatus() == true) {
-            cerr << "[Line " << line << "]"
+            cerr << "[line " << line << "]"
                 << " Error: Unterminated string." 
                 << endl;
             return;
@@ -247,7 +247,7 @@ void Scanner::scanToken() {
             start = current - 1;
             identifier();
         } else {
-            cerr << "[Line " << line << "]"
+            cerr << "[line " << line << "]"
                 << " Error: Unexpected character: "
                 << c
                 << endl; 
