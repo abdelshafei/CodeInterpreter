@@ -63,15 +63,14 @@ void Parser::synchronize() { // starts at the beginning of a line
         if(previous()->type == SEMICOLON) return;
 
         switch(peek()->type) {
-        case CLASS:
-        case FUN:
-        case VAR:
-        case FOR:
-        case IF:
-        case WHILE:
-        case PRINT:
-        case RETURN:
-          return;
+        case CLASS: return;
+        case FUN: return;
+        case VAR: return;
+        case FOR: return;
+        case IF: return;
+        case WHILE: return;
+        case PRINT: return;
+        case RETURN: return;
         }
     }
 
@@ -131,8 +130,19 @@ Expr* Parser::primary() {
     } else if(matchTypes(MINUS, PLUS, SLASH, STAR)) {
         // consume(NUMBER, "Expect a number after expression");
         if(peekAfter()->type != NUMBER) {
-            throw err(peekAfter(), "Expect a number after expression");
-        }
+
+            if(peekAfter()->type == STRING) {
+                if(tokens.size() > 2 && previous()->type != STRING)
+                    throw err(peekAfter(), "Expect a number after expression");
+                else 
+                    return nullptr;
+            }
+
+            if(tokens.size() > 2 && previous()->type == NUMBER)
+                throw err(peekAfter(), "Expect a number after expression");
+            else 
+                throw err(peekAfter(), "Expect a number or a string after expression");
+        } 
     }
 
     return nullptr;
