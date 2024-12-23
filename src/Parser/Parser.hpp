@@ -20,6 +20,7 @@ class Parser {
         Token* advance();
         bool isAtEnd();
         Token* peek();
+        Token* peekAfter();
         Token* previous();
         void synchronize();
 

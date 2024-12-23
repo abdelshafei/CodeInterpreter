@@ -14,6 +14,10 @@ Token* Parser::peek() {
     return tokens.at(current);
 }
 
+Token* Parser::peekAfter() {
+    return tokens.at(current+1);
+}
+
 bool Parser::isAtEnd() {
     return peek()->type == END_OF_FILE;
 }
@@ -124,10 +128,10 @@ Expr* Parser::primary() {
         Expr* groupedExpr = new Grouping(expr);
         expressions.push_back(groupedExpr);
         return groupedExpr;
-    } else if(matchTypes(MINUS, PLUS, SLASH, STAR, GREATER, GREATER_EQUAL, LESS, LESS_EQUAL)) {
+    } else if(matchTypes(MINUS, PLUS, SLASH, STAR)) {
         // consume(NUMBER, "Expect a number after expression");
-        if(peek()->type != NUMBER) {
-            throw err(peek(), "Expect a number after expression");
+        if(peekAfter()->type != NUMBER) {
+            throw err(peekAfter(), "Expect a number after expression");
         }
     }
 
