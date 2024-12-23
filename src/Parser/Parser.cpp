@@ -74,9 +74,16 @@ Token* Parser::consume(TokenType type, string msg) {
 
 runtime_error Parser::err(Token* token, string msg) {
     if(token->type == END_OF_FILE) {
-        return runtime_error("[line " + to_string(token->lineNo) + "]" + " at end " + msg);
+        return runtime_error("[line " + to_string(token->lineNo) + "]" 
+        + " at end " 
+        + msg);
     } else {
-        return runtime_error("[line " + to_string(token->lineNo) + "]" + " Error at '" + token->lexeme + "' " + msg);
+        return runtime_error("[line " + to_string(token->lineNo) + "]" 
+        + " Error at '" 
+        + token->lexeme 
+        + "' " 
+        + "[char No. " + to_string(token->charNo) + "]"
+        + msg);
     }
 }
 /**************************************************************/

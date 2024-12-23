@@ -42,7 +42,9 @@ class Scanner {
         int start = 0;
         int current = 0;
         int line = 1;
+        int charNo = 0;
         bool isError = false;
+
 
         const static unordered_map<string, TokenType> keywords;
 };

@@ -6,8 +6,8 @@
 #include <memory> 
 #include <string_view>
 
-Token::Token(TokenType type, const string& lexeme, const string& literal, int lineNo) 
-    : type(type), lexeme(lexeme), literal(literal), lineNo(lineNo) {}
+Token::Token(TokenType type, const string& lexeme, const string& literal, int lineNo, int charNo) 
+    : type(type), lexeme(lexeme), literal(literal), lineNo(lineNo), charNo(charNo) {}
 
 const string& Token::convertTokenTypeToStr(TokenType type) const {
     return TokenTypeNames[type];

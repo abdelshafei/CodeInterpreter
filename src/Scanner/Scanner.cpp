@@ -35,7 +35,7 @@ vector<Token*>* Scanner::getTokens() { return &tokens; }
 
 string Scanner::getStringLiteral() { 
     string stringBuilder = "";
-    for(int i = current; i < src.size(); i++) {
+    for(int i = current; i < src.size(); i++ && charNo++) {
         if(src.at(i) != '"' && i == src.size()-1) {
           isError = true;
           current = i+1;
@@ -55,7 +55,7 @@ string Scanner::getStringLiteral() {
 string Scanner::getNumberLiteral() {
     string stringBuilder = "";
 
-    for(int i = current-1; i < src.size(); i++) {
+    for(int i = current-1; i < src.size(); i++ && charNo++) {
         
         if(!isDigit(src.at(i)) && !(src.at(i) == '.' && (i+1) < src.size() && isDigit(src.at(i+1)))) {
             current = i;
@@ -158,7 +158,10 @@ void Scanner::addToken(TokenType type, string literal) {
         ++current;
     } else if(type == STRING) {
         if(getErrStatus() == true) {
-            cerr << "[line " << line << "]" << " Error: Unterminated string." << endl;
+            cerr << "[line " << line << "]"
+                << "[char" << charNo << "]"
+                << " Error: Unterminated string." 
+                << endl;
             return;
         }
         text = "\"";
@@ -175,7 +178,7 @@ void Scanner::addToken(TokenType type, string literal) {
     } else {
         text = src.at(current-1);
     }
-    tokens.push_back(new Token(type, text, literal, line));
+    tokens.push_back(new Token(type, text, literal, line, ++charNo));
 }
 
 int Scanner::skipCommentIndex() {
@@ -199,7 +202,7 @@ int Scanner::skipCommentIndex() {
 void Scanner::scanToken() {
     char c = advance();
     switch (c) {
-      case '\n': line++; break;
+      case '\n': line++; charNo = 0; break;
       case ' ': break;//space
       case '\t': break;//tab
       case '\r': break;//enter
@@ -238,6 +241,7 @@ void Scanner::scanToken() {
             identifier();
         } else {
             cerr << "[line " << line << "]"
+                << "[char" << charNo << "]"
                 << " Error: Unexpected character: "
                 << c
                 << endl; 

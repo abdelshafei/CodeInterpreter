@@ -9,7 +9,7 @@ using namespace std;
 
 class Token {
     public:
-        Token(TokenType type, const string& lexeme, const string& literal, int lineNo);
+        Token(TokenType type, const string& lexeme, const string& literal, int lineNo, int charNo);
         const string toString() const;
         const string& convertTokenTypeToStr(TokenType type) const;
     
@@ -17,6 +17,7 @@ class Token {
         string lexeme;
         string literal;
         int lineNo;
+        int charNo;
 };
 
 #endif
