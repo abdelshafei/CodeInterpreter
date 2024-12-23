@@ -178,7 +178,7 @@ void Scanner::addToken(TokenType type, string literal) {
     } else {
         text = src.at(current-1);
     }
-    tokens.push_back(new Token(type, text, literal, line, ++charNo));
+    tokens.push_back(new Token(type, text, literal, line, charNo));
 }
 
 int Scanner::skipCommentIndex() {
