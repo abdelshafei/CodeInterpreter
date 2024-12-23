@@ -48,6 +48,7 @@ int main(int argc, char *argv[]) {
             parser.cleanUpExpressions();
         } catch (runtime_error& err) {
             parser.cleanUpExpressions();
+            cout << "here" ;
             return 65;
         }
 
