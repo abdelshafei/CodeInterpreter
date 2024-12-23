@@ -82,8 +82,7 @@ runtime_error Parser::err(Token* token, string msg) {
         + " Error at '" 
         + token->lexeme 
         + "' " 
-        + msg
-        + "token type: " + to_string());
+        + msg);
     }
 }
 /**************************************************************/
