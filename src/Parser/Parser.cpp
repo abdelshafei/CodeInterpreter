@@ -69,6 +69,7 @@ void Parser::synchronize() { // starts at the beginning of a line
 Token* Parser::consume(TokenType type, string msg) {
     if(check(type)) return advance();
 
+    cout << "here";
     throw err(peek(), msg);
 }
 
