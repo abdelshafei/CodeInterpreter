@@ -58,14 +58,16 @@ string Scanner::getStringLiteral() {
 
 string Scanner::getNumberLiteral() {
     string stringBuilder = "";
+    charNo--;
 
-    for(int i = current-1; i < src.size(); i++ && charNo++) {
+    for(int i = current-1; i < src.size(); i++) {
         
         if(!isDigit(src.at(i)) && !(src.at(i) == '.' && (i+1) < src.size() && isDigit(src.at(i+1)))) {
             current = i;
             break;
         }
 
+        charNo++;
         stringBuilder += src.at(i);
         if(i == src.size() - 1) current = i + 1;
     }
@@ -160,6 +162,7 @@ void Scanner::addToken(TokenType type, string literal) {
     } else if(type == EQUAL_EQUAL || type == BANG_EQUAL || type == LESS_EQUAL || type == GREATER_EQUAL) {
         text = src.at(current-1);
         text += src.at(current);
+        ++charNo;
         ++current;
     } else if(type == STRING) {
         if(getErrStatus() == true) {
