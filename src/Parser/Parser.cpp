@@ -187,8 +187,7 @@ Expr* Parser::parse() {
     try {
         return expression();
     } catch (const runtime_error& e) {
-        cerr << e.what();
-        throw runtime_error("");
+        throw e;
     }
 }
 /***************************************************************/
