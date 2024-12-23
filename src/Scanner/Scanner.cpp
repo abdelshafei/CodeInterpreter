@@ -23,7 +23,7 @@ const unordered_map<string, TokenType> Scanner::keywords =
 Scanner::Scanner(const string& src) : src(src) 
 {
     if(isAtEnd()) addToken(END_OF_FILE);
-    
+
     while(!isAtEnd()) {
         scanToken(); 
         if(isAtEnd()) 
@@ -87,6 +87,7 @@ string Scanner::NormalizeDouble(const string& txt) {
 
     bool atDot = false;
     bool isAllZeros = false;
+    bool isDecimal = false;
 
     for(const char& c : txt) {
         if(c == '.') {
@@ -97,7 +98,10 @@ string Scanner::NormalizeDouble(const string& txt) {
             strBuilder += c;
         } else {
             if(c == '0') isAllZeros = true;
-            else        isAllZeros = false;
+            else        {
+                isAllZeros = false;
+                isDecimal = true;
+            }
 
             if(!isAllZeros) {
               strBuilder += c;  
@@ -105,7 +109,7 @@ string Scanner::NormalizeDouble(const string& txt) {
         }
     }
 
-    if(isAllZeros) strBuilder += "0";
+    if(isAllZeros && !isDecimal) strBuilder += "0";
 
     return strBuilder;
 
