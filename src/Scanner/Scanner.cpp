@@ -58,9 +58,8 @@ string Scanner::getStringLiteral() {
 
 string Scanner::getNumberLiteral() {
     string stringBuilder = "";
-    charNo--;
 
-    for(int i = current-1; i < src.size(); i++) {
+    for(int i = current-1; i < src.size(); i++ && charNo++) {
         
         if(!isDigit(src.at(i)) && !(src.at(i) == '.' && (i+1) < src.size() && isDigit(src.at(i+1)))) {
             current = i;
@@ -68,7 +67,6 @@ string Scanner::getNumberLiteral() {
         }
 
         stringBuilder += src.at(i);
-        charNo++;
         if(i == src.size() - 1) current = i + 1;
     }
 
@@ -129,7 +127,7 @@ void Scanner::identifier() {
     while(isAlphaNumeric(peek())) advance();
 
     string txt = src.substr(start, (current-start));
-    charNo += current - start;
+    charNo += current - start - 1;
     TokenType type = keywords.count(txt) ? keywords.at(txt) : IDENTIFIER;
     addToken(type);
 }
