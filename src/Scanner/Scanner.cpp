@@ -98,7 +98,7 @@ string Scanner::NormalizeDouble(const string& txt) {
             strBuilder += c;
         } else {
             if(c == '0') isAllZeros = true;
-            else        {
+            else if(isDigit(c) && c != '0')  {
                 isAllZeros = false;
                 isDecimal = true;
             }
