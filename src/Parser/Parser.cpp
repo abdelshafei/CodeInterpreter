@@ -131,7 +131,7 @@ Expr* Parser::factor() {
     while(match(SLASH, STAR)) {
         Token* oprator = previous();
         Expr* right = unary();
-        Expr* expr = new Binary(expr, oprator, right);
+        expr = new Binary(expr, oprator, right);
         expressions.push_back(expr);
     }
 
@@ -144,7 +144,7 @@ Expr* Parser::term() {
     while(match(MINUS, PLUS)) {
         Token* oprator = previous();
         Expr* right = factor();
-        Expr* expr = new Binary(expr, oprator, right);
+        expr = new Binary(expr, oprator, right);
         expressions.push_back(expr);
     }
 
@@ -157,7 +157,7 @@ Expr* Parser::comparison() {
     while(match(GREATER, GREATER_EQUAL, LESS, LESS_EQUAL)) {
         Token* oprator = previous();
         Expr* right = term();
-        Expr* expr = new Binary(expr, oprator, right);
+        expr = new Binary(expr, oprator, right);
         expressions.push_back(expr);
     }
 
@@ -171,7 +171,7 @@ Expr* Parser::equality() {
     while(match(BANG_EQUAL, EQUAL_EQUAL)) {
         Token* oprator = previous();
         Expr* right = comparison();
-        Expr* expr = new Binary(expr, oprator, right);
+        expr = new Binary(expr, oprator, right);
         expressions.push_back(expr);
     }
 
