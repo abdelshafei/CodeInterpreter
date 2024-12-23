@@ -129,9 +129,9 @@ Expr* Parser::primary() {
         expressions.push_back(groupedExpr);
         return groupedExpr;
     } else if(matchTypes(MINUS, PLUS, SLASH, STAR)) {
-
-        if(peekAfter()->type != NUMBER ||  peekAfter()->type != STRING) {
-            throw err(peekAfter(), "Expect a something after expression");
+        // consume(NUMBER, "Expect a number after expression");
+        if(peekAfter()->type != NUMBER) {
+            throw err(peekAfter(), "Expect a number after expression");
         }
     }
 
