@@ -5,20 +5,21 @@
 
 class Expr {
     public:
+        using T = std::variant<int, double, std::string, bool, nullptr_t>;
         class Visitor { //Interface
             public:
-                // virtual string visitAssignExpr(const class Assign& expr) const = 0;
-                virtual string visitBinaryExpr(const class Binary& expr) const = 0;
-                // virtual string visitCallExpr(const class Call& expr) const = 0;
-                // virtual string visitGetExpr(const class Get& expr) const = 0;
-                virtual string visitGroupingExpr(const class Grouping& expr) const = 0;
-                virtual string visitLiteralExpr(const class Literal& expr) const = 0;
-                // virtual string visitLogicalExpr(const class Logical& expr) const = 0;
-                // virtual string visitSetExpr(const class Set& expr) const = 0;
-                // virtual string visitSuperExpr(const class Super& expr) const = 0;
-                // virtual string visitThisExpr(const class This& expr) const = 0;
-                virtual string visitUnaryExpr(const class Unary& expr) const = 0;
-                // virtual string visitVariableExpr(const class Variable& expr) const = 0;
+                // virtual T visitAssignExpr(const class Assign& expr) const = 0;
+                virtual T visitBinaryExpr(const class Binary& expr) const = 0;
+                // virtual T visitCallExpr(const class Call& expr) const = 0;
+                // virtual T visitGetExpr(const class Get& expr) const = 0;
+                virtual T visitGroupingExpr(const class Grouping& expr) const = 0;
+                virtual T visitLiteralExpr(const class Literal& expr) const = 0;
+                // virtual T visitLogicalExpr(const class Logical& expr) const = 0;
+                // virtual T visitSetExpr(const class Set& expr) const = 0;
+                // virtual T visitSuperExpr(const class Super& expr) const = 0;
+                // virtual T visitThisExpr(const class This& expr) const = 0;
+                virtual T visitUnaryExpr(const class Unary& expr) const = 0;
+                // virtual T visitVariableExpr(const class Variable& expr) const = 0;
                 virtual ~Visitor() = default; 
         };
 
@@ -59,7 +60,7 @@ class Grouping : public Expr {
 
 class Literal : public Expr {
     public:
-        using T = std::variant<int, double, std::string, bool, nullptr_t>;
+        using T = std::variant<int, double, string, bool, nullptr_t>;
         Literal(T value)
             : value(value) {}
         ~Literal() override = default;
