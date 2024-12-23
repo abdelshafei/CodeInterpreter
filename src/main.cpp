@@ -42,7 +42,6 @@ int main(int argc, char *argv[]) {
 
         Scanner scanner(file_contents);
         Parser parser(scanner.getTokens());
-        scanner.print();
         AstPrinter printer;
         try {
             cout << printer.print(parser.parse()) << endl;
