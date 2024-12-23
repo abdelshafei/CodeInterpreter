@@ -114,6 +114,8 @@ Expr* Parser::primary() {
         Expr* groupedExpr = new Grouping(expr);
         expressions.push_back(groupedExpr);
         return groupedExpr;
+    } else if(match(MINUS, PLUS, SLASH, STAR, GREATER, GREATER_EQUAL, LESS, LESS_EQUAL)) {
+        consume(NUMBER, "Expect a number after expression");
     }
 
     return nullptr;
@@ -150,7 +152,6 @@ Expr* Parser::term() {
     while(match(MINUS, PLUS)) {
         Token* oprator = previous();
         Expr* right = factor();
-        consume(NUMBER, "Expect number after expression");
         expr = new Binary(expr, oprator, right);
         expressions.push_back(expr);
     }
