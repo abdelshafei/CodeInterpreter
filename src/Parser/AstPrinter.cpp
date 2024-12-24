@@ -19,7 +19,7 @@ string AstPrinter::visitLiteralExpr(const Literal& expr) const {
         if constexpr (is_same_v<decay_t<decltype(val)>, string>) {
             return val; 
         } else if constexpr (is_same_v<decay_t<decltype(val)>, bool>) {
-            return val ? "true" : "false";
+            return to_string(val);
         } else if constexpr (is_same_v<decay_t<decltype(val)>, nullptr_t>) {
             return "nil";
         } else {

@@ -7,6 +7,7 @@
 #include "Scanner/Scanner.hpp"
 #include "Parser/Parser.hpp"
 #include "Parser/AstPrinter.hpp"
+#include "Interpreter/Interpreter.hpp"
 
 using namespace std;
 

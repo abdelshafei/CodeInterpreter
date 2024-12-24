@@ -2,6 +2,7 @@
 #define EXPR_H
 
 #include "../Scanner/Token.hpp"
+using T = variant<int, double, string, bool, nullptr_t>;
 
 class Expr {
     public:
@@ -59,7 +60,6 @@ class Grouping : public Expr {
 
 class Literal : public Expr {
     public:
-        using T = std::variant<int, double, string, bool, nullptr_t>;
         Literal(T value)
             : value(value) {}
         ~Literal() override = default;

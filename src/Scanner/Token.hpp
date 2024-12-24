@@ -7,6 +7,7 @@
 
 using namespace std;
 
+
 class Token {
     public:
         Token(TokenType type, const string& lexeme, const string& literal, int lineNo, int charNo);
