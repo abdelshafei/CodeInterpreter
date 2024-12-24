@@ -9,7 +9,7 @@ string Interpreter::TtoString(T value) const {
         } else if constexpr (is_same_v<decay_t<decltype(val)>, nullptr_t>) {
             return "nil";
         } else {
-            return val; 
+            return to_string(val); 
         }
     }, value);
 }
