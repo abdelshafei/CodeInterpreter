@@ -128,7 +128,6 @@ Expr* Parser::primary() {
         expressions.push_back(groupedExpr);
         return groupedExpr;
     } else if(matchTypes(MINUS, PLUS, SLASH, STAR)) {
-        // consume(NUMBER, "Expect a number after expression");
         if(peekAfter()->type != NUMBER) {
 
             if(peekAfter()->type == STRING) {

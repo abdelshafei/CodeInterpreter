@@ -72,10 +72,24 @@ include CMakeFiles/interpreter.dir/flags.make
 CMakeFiles/interpreter.dir/codegen:
 .PHONY : CMakeFiles/interpreter.dir/codegen
 
+CMakeFiles/interpreter.dir/src/Interpreter/Interpreter.cpp.o: CMakeFiles/interpreter.dir/flags.make
+CMakeFiles/interpreter.dir/src/Interpreter/Interpreter.cpp.o: src/Interpreter/Interpreter.cpp
+CMakeFiles/interpreter.dir/src/Interpreter/Interpreter.cpp.o: CMakeFiles/interpreter.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/abdelrahmanelshafei/Documents/Projects/codecrafters-interpreter-cpp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/interpreter.dir/src/Interpreter/Interpreter.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/interpreter.dir/src/Interpreter/Interpreter.cpp.o -MF CMakeFiles/interpreter.dir/src/Interpreter/Interpreter.cpp.o.d -o CMakeFiles/interpreter.dir/src/Interpreter/Interpreter.cpp.o -c /Users/abdelrahmanelshafei/Documents/Projects/codecrafters-interpreter-cpp/src/Interpreter/Interpreter.cpp
+
+CMakeFiles/interpreter.dir/src/Interpreter/Interpreter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/interpreter.dir/src/Interpreter/Interpreter.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/abdelrahmanelshafei/Documents/Projects/codecrafters-interpreter-cpp/src/Interpreter/Interpreter.cpp > CMakeFiles/interpreter.dir/src/Interpreter/Interpreter.cpp.i
+
+CMakeFiles/interpreter.dir/src/Interpreter/Interpreter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/interpreter.dir/src/Interpreter/Interpreter.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/abdelrahmanelshafei/Documents/Projects/codecrafters-interpreter-cpp/src/Interpreter/Interpreter.cpp -o CMakeFiles/interpreter.dir/src/Interpreter/Interpreter.cpp.s
+
 CMakeFiles/interpreter.dir/src/Parser/AstPrinter.cpp.o: CMakeFiles/interpreter.dir/flags.make
 CMakeFiles/interpreter.dir/src/Parser/AstPrinter.cpp.o: src/Parser/AstPrinter.cpp
 CMakeFiles/interpreter.dir/src/Parser/AstPrinter.cpp.o: CMakeFiles/interpreter.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/abdelrahmanelshafei/Documents/Projects/codecrafters-interpreter-cpp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/interpreter.dir/src/Parser/AstPrinter.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/abdelrahmanelshafei/Documents/Projects/codecrafters-interpreter-cpp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/interpreter.dir/src/Parser/AstPrinter.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/interpreter.dir/src/Parser/AstPrinter.cpp.o -MF CMakeFiles/interpreter.dir/src/Parser/AstPrinter.cpp.o.d -o CMakeFiles/interpreter.dir/src/Parser/AstPrinter.cpp.o -c /Users/abdelrahmanelshafei/Documents/Projects/codecrafters-interpreter-cpp/src/Parser/AstPrinter.cpp
 
 CMakeFiles/interpreter.dir/src/Parser/AstPrinter.cpp.i: cmake_force
@@ -89,7 +103,7 @@ CMakeFiles/interpreter.dir/src/Parser/AstPrinter.cpp.s: cmake_force
 CMakeFiles/interpreter.dir/src/Parser/Parser.cpp.o: CMakeFiles/interpreter.dir/flags.make
 CMakeFiles/interpreter.dir/src/Parser/Parser.cpp.o: src/Parser/Parser.cpp
 CMakeFiles/interpreter.dir/src/Parser/Parser.cpp.o: CMakeFiles/interpreter.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/abdelrahmanelshafei/Documents/Projects/codecrafters-interpreter-cpp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/interpreter.dir/src/Parser/Parser.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/abdelrahmanelshafei/Documents/Projects/codecrafters-interpreter-cpp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/interpreter.dir/src/Parser/Parser.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/interpreter.dir/src/Parser/Parser.cpp.o -MF CMakeFiles/interpreter.dir/src/Parser/Parser.cpp.o.d -o CMakeFiles/interpreter.dir/src/Parser/Parser.cpp.o -c /Users/abdelrahmanelshafei/Documents/Projects/codecrafters-interpreter-cpp/src/Parser/Parser.cpp
 
 CMakeFiles/interpreter.dir/src/Parser/Parser.cpp.i: cmake_force
@@ -103,7 +117,7 @@ CMakeFiles/interpreter.dir/src/Parser/Parser.cpp.s: cmake_force
 CMakeFiles/interpreter.dir/src/Scanner/Scanner.cpp.o: CMakeFiles/interpreter.dir/flags.make
 CMakeFiles/interpreter.dir/src/Scanner/Scanner.cpp.o: src/Scanner/Scanner.cpp
 CMakeFiles/interpreter.dir/src/Scanner/Scanner.cpp.o: CMakeFiles/interpreter.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/abdelrahmanelshafei/Documents/Projects/codecrafters-interpreter-cpp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/interpreter.dir/src/Scanner/Scanner.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/abdelrahmanelshafei/Documents/Projects/codecrafters-interpreter-cpp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/interpreter.dir/src/Scanner/Scanner.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/interpreter.dir/src/Scanner/Scanner.cpp.o -MF CMakeFiles/interpreter.dir/src/Scanner/Scanner.cpp.o.d -o CMakeFiles/interpreter.dir/src/Scanner/Scanner.cpp.o -c /Users/abdelrahmanelshafei/Documents/Projects/codecrafters-interpreter-cpp/src/Scanner/Scanner.cpp
 
 CMakeFiles/interpreter.dir/src/Scanner/Scanner.cpp.i: cmake_force
@@ -117,7 +131,7 @@ CMakeFiles/interpreter.dir/src/Scanner/Scanner.cpp.s: cmake_force
 CMakeFiles/interpreter.dir/src/Scanner/Token.cpp.o: CMakeFiles/interpreter.dir/flags.make
 CMakeFiles/interpreter.dir/src/Scanner/Token.cpp.o: src/Scanner/Token.cpp
 CMakeFiles/interpreter.dir/src/Scanner/Token.cpp.o: CMakeFiles/interpreter.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/abdelrahmanelshafei/Documents/Projects/codecrafters-interpreter-cpp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/interpreter.dir/src/Scanner/Token.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/abdelrahmanelshafei/Documents/Projects/codecrafters-interpreter-cpp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/interpreter.dir/src/Scanner/Token.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/interpreter.dir/src/Scanner/Token.cpp.o -MF CMakeFiles/interpreter.dir/src/Scanner/Token.cpp.o.d -o CMakeFiles/interpreter.dir/src/Scanner/Token.cpp.o -c /Users/abdelrahmanelshafei/Documents/Projects/codecrafters-interpreter-cpp/src/Scanner/Token.cpp
 
 CMakeFiles/interpreter.dir/src/Scanner/Token.cpp.i: cmake_force
@@ -131,7 +145,7 @@ CMakeFiles/interpreter.dir/src/Scanner/Token.cpp.s: cmake_force
 CMakeFiles/interpreter.dir/src/main.cpp.o: CMakeFiles/interpreter.dir/flags.make
 CMakeFiles/interpreter.dir/src/main.cpp.o: src/main.cpp
 CMakeFiles/interpreter.dir/src/main.cpp.o: CMakeFiles/interpreter.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/abdelrahmanelshafei/Documents/Projects/codecrafters-interpreter-cpp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/interpreter.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/abdelrahmanelshafei/Documents/Projects/codecrafters-interpreter-cpp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/interpreter.dir/src/main.cpp.o"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/interpreter.dir/src/main.cpp.o -MF CMakeFiles/interpreter.dir/src/main.cpp.o.d -o CMakeFiles/interpreter.dir/src/main.cpp.o -c /Users/abdelrahmanelshafei/Documents/Projects/codecrafters-interpreter-cpp/src/main.cpp
 
 CMakeFiles/interpreter.dir/src/main.cpp.i: cmake_force
@@ -144,6 +158,7 @@ CMakeFiles/interpreter.dir/src/main.cpp.s: cmake_force
 
 # Object files for target interpreter
 interpreter_OBJECTS = \
+"CMakeFiles/interpreter.dir/src/Interpreter/Interpreter.cpp.o" \
 "CMakeFiles/interpreter.dir/src/Parser/AstPrinter.cpp.o" \
 "CMakeFiles/interpreter.dir/src/Parser/Parser.cpp.o" \
 "CMakeFiles/interpreter.dir/src/Scanner/Scanner.cpp.o" \
@@ -153,6 +168,7 @@ interpreter_OBJECTS = \
 # External object files for target interpreter
 interpreter_EXTERNAL_OBJECTS =
 
+interpreter: CMakeFiles/interpreter.dir/src/Interpreter/Interpreter.cpp.o
 interpreter: CMakeFiles/interpreter.dir/src/Parser/AstPrinter.cpp.o
 interpreter: CMakeFiles/interpreter.dir/src/Parser/Parser.cpp.o
 interpreter: CMakeFiles/interpreter.dir/src/Scanner/Scanner.cpp.o
@@ -160,7 +176,7 @@ interpreter: CMakeFiles/interpreter.dir/src/Scanner/Token.cpp.o
 interpreter: CMakeFiles/interpreter.dir/src/main.cpp.o
 interpreter: CMakeFiles/interpreter.dir/build.make
 interpreter: CMakeFiles/interpreter.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/abdelrahmanelshafei/Documents/Projects/codecrafters-interpreter-cpp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable interpreter"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/abdelrahmanelshafei/Documents/Projects/codecrafters-interpreter-cpp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable interpreter"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/interpreter.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

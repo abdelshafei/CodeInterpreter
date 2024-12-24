@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/Users/abdelrahmanelshafei/Documents/Projects/codecrafters-interpreter-cpp/src/Interpreter/Interpreter.cpp" "CMakeFiles/interpreter.dir/src/Interpreter/Interpreter.cpp.o" "gcc" "CMakeFiles/interpreter.dir/src/Interpreter/Interpreter.cpp.o.d"
   "/Users/abdelrahmanelshafei/Documents/Projects/codecrafters-interpreter-cpp/src/Parser/AstPrinter.cpp" "CMakeFiles/interpreter.dir/src/Parser/AstPrinter.cpp.o" "gcc" "CMakeFiles/interpreter.dir/src/Parser/AstPrinter.cpp.o.d"
   "/Users/abdelrahmanelshafei/Documents/Projects/codecrafters-interpreter-cpp/src/Parser/Parser.cpp" "CMakeFiles/interpreter.dir/src/Parser/Parser.cpp.o" "gcc" "CMakeFiles/interpreter.dir/src/Parser/Parser.cpp.o.d"
   "/Users/abdelrahmanelshafei/Documents/Projects/codecrafters-interpreter-cpp/src/Scanner/Scanner.cpp" "CMakeFiles/interpreter.dir/src/Scanner/Scanner.cpp.o" "gcc" "CMakeFiles/interpreter.dir/src/Scanner/Scanner.cpp.o.d"

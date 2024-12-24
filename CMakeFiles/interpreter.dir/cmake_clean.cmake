@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/interpreter.dir/src/Interpreter/Interpreter.cpp.o"
+  "CMakeFiles/interpreter.dir/src/Interpreter/Interpreter.cpp.o.d"
   "CMakeFiles/interpreter.dir/src/Parser/AstPrinter.cpp.o"
   "CMakeFiles/interpreter.dir/src/Parser/AstPrinter.cpp.o.d"
   "CMakeFiles/interpreter.dir/src/Parser/Parser.cpp.o"

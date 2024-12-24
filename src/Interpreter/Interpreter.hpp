@@ -11,7 +11,6 @@ class Interpreter : public Expr::Visitor {
         string visitLiteralExpr(const Literal& expr) const override;
         string visitUnaryExpr(const Unary& expr) const override;
         bool isTruthy(T value) const;
-
         string TtoString(T value) const;
 };
 

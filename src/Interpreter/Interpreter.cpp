@@ -15,7 +15,15 @@ string Interpreter::TtoString(T value) const {
 }
 
 bool Interpreter::isTruthy(T value) const {
-    
+    visit([](const auto& val) -> bool {
+        if constexpr (is_same_v<decay_t<decltype(val)>, bool>) {
+            return val;
+        } else if constexpr (is_same_v<decay_t<decltype(val)>, nullptr_t>) {
+            return false;
+        } 
+    }, value);
+
+    return true;
 }
 
 string Interpreter::evaluate(Expr* expr) const {
@@ -26,4 +34,7 @@ string Interpreter::visitLiteralExpr(const Literal& expr) const {
     return TtoString(expr.value);
 }
 
+string Interpreter::visitUnaryExpr(const Unary& expr) const {
+    
+}
 

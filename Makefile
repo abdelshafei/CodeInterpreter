@@ -129,6 +129,30 @@ interpreter/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/interpreter.dir/build.make CMakeFiles/interpreter.dir/build
 .PHONY : interpreter/fast
 
+src/Interpreter/Interpreter.o: src/Interpreter/Interpreter.cpp.o
+.PHONY : src/Interpreter/Interpreter.o
+
+# target to build an object file
+src/Interpreter/Interpreter.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/interpreter.dir/build.make CMakeFiles/interpreter.dir/src/Interpreter/Interpreter.cpp.o
+.PHONY : src/Interpreter/Interpreter.cpp.o
+
+src/Interpreter/Interpreter.i: src/Interpreter/Interpreter.cpp.i
+.PHONY : src/Interpreter/Interpreter.i
+
+# target to preprocess a source file
+src/Interpreter/Interpreter.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/interpreter.dir/build.make CMakeFiles/interpreter.dir/src/Interpreter/Interpreter.cpp.i
+.PHONY : src/Interpreter/Interpreter.cpp.i
+
+src/Interpreter/Interpreter.s: src/Interpreter/Interpreter.cpp.s
+.PHONY : src/Interpreter/Interpreter.s
+
+# target to generate assembly for a file
+src/Interpreter/Interpreter.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/interpreter.dir/build.make CMakeFiles/interpreter.dir/src/Interpreter/Interpreter.cpp.s
+.PHONY : src/Interpreter/Interpreter.cpp.s
+
 src/Parser/AstPrinter.o: src/Parser/AstPrinter.cpp.o
 .PHONY : src/Parser/AstPrinter.o
 
@@ -258,6 +282,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... interpreter"
+	@echo "... src/Interpreter/Interpreter.o"
+	@echo "... src/Interpreter/Interpreter.i"
+	@echo "... src/Interpreter/Interpreter.s"
 	@echo "... src/Parser/AstPrinter.o"
 	@echo "... src/Parser/AstPrinter.i"
 	@echo "... src/Parser/AstPrinter.s"
