@@ -83,29 +83,24 @@ T Interpreter::Quotient(T left, T right) const {
         if(get<double>(right) == 0) {
             throw runtime_error("Division by zero.");
         }
-        cout << get<double>(left) / get<double>(right) << endl;
         return get<double>(left) / get<double>(right);
     } else if(holds_alternative<int>(left) && holds_alternative<int>(right)) {
         if(get<int>(right) == 0) {
             throw runtime_error("Division by zero.");
         } else if(get<int>(left) % get<int>(right) == 0) {
-            cout << get<int>(left) / get<int>(right) << endl;
             return get<int>(left) / get<int>(right);
         } else {
-            cout << static_cast<double>(get<int>(left)) / static_cast<double>(get<int>(right)) << endl;
             return static_cast<double>(get<int>(left)) / static_cast<double>(get<int>(right));
         }
     } else if(holds_alternative<double>(left) && holds_alternative<int>(right)) {
         if(get<int>(right) == 0) {
             throw runtime_error("Division by zero.");
         }
-        cout << get<double>(left) / get<int>(right) << endl;
         return get<double>(left) / get<int>(right);
     } else if(holds_alternative<int>(left) && holds_alternative<double>(right)) {
         if(get<double>(right) == 0) {
             throw runtime_error("Division by zero.");
         }
-        cout << get<int>(left) / get<double>(right) << endl;
         return get<int>(left) / get<double>(right);
     } else {
         throw runtime_error("Operands must be numbers.");
