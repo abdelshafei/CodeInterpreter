@@ -266,9 +266,23 @@ T Interpreter::evalBinaryExpr(const Binary& expr) {
                     throw runtime_error("Operands must be two numbers or two strings");
                 }
             case STAR:
-                return Product(left, right);
+                // return Product(left, right);
+                if(holds_alternative<double>(left) && holds_alternative<double>(right)) {
+                    return get<double>(left) * get<double>(right);
+                } else if(holds_alternative<int>(left) && holds_alternative<int>(right)) {
+                    return get<int>(left) * get<int>(right);
+                } else {
+                    throw runtime_error("Operands must be numbers.");
+                }
             case SLASH:
-                return Quotient(left, right);
+                // return Quotient(left, right);
+                if(holds_alternative<double>(left) && holds_alternative<double>(right)) {
+                    return get<double>(left) / get<double>(right);
+                } else if(holds_alternative<int>(left) && holds_alternative<int>(right)) {
+                    return get<int>(left) / get<int>(right);
+                } else {
+                    throw runtime_error("Operands must be numbers.");
+                }
             case GREATER:
                 return isLogical(left, right, GREATER);
             case GREATER_EQUAL:
