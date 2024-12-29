@@ -64,13 +64,10 @@ T Interpreter::Product(T left, T right) const {
     if(holds_alternative<double>(left) && holds_alternative<double>(right)) {
         return get<double>(left) * get<double>(right);
     } else if(holds_alternative<int>(left) && holds_alternative<int>(right)) {
-        cout << get<int>(left) * get<int>(right) << endl;
         return get<int>(left) * get<int>(right);
     } else if(holds_alternative<double>(left) && holds_alternative<int>(right)) {
-        cout << get<double>(left) * get<int>(right) << endl;
         return get<double>(left) * get<int>(right);
     } else if(holds_alternative<int>(left) && holds_alternative<double>(right)) {
-        cout << get<int>(left) * get<double>(right) << endl;
         return get<int>(left) * get<double>(right);
     } else {
         throw runtime_error("Operands must be numbers.");
