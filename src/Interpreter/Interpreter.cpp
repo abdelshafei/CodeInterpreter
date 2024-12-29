@@ -7,7 +7,7 @@ bool Interpreter::isTruthy(T value) const {
             return true;
         } 
         
-        return true;
+        return false;
 
     }, value);
 }
