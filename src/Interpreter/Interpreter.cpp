@@ -62,7 +62,6 @@ string Interpreter::to_string(const T& value) const {
 
 T Interpreter::Product(T left, T right) const {
     if(holds_alternative<double>(left) && holds_alternative<double>(right)) {
-        cout << get<double>(left) * get<double>(right) << endl;
         return get<double>(left) * get<double>(right);
     } else if(holds_alternative<int>(left) && holds_alternative<int>(right)) {
         cout << get<int>(left) * get<int>(right) << endl;
