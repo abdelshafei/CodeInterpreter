@@ -14,7 +14,7 @@ class Interpreter {
         T evalUnaryExpr(const Unary& expr);
 
         bool isTruthy(T value) const;
-        string to_string(T value) const;
+        string to_string(const T& value) const;
         double negateDouble(T value) const;
         string NormalizeDouble(const string& txt) const;
         double Difference(T lValue, T rValue) const;

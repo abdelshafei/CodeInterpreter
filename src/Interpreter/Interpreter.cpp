@@ -14,7 +14,7 @@ bool Interpreter::isTruthy(T value) const {
 
 double Interpreter::negateDouble(T value) const {
     return visit([](const auto& right) -> double {
-        if constexpr (is_same_v<decltype(value), double>){
+        if constexpr (is_same_v<decltype(right), double>){
             return -right;
         }   
 
@@ -54,23 +54,18 @@ string Interpreter::NormalizeDouble(const string& txt) const {
     return strBuilder;
 }
 
-string Interpreter::to_string(T value) const {
-        return visit(
-        [&](const auto& val) -> string {
-            if constexpr (is_same_v<decltype(val), string>){
-                return val;
-            } else if constexpr (is_same_v<decltype(val), bool>) {
-                return val ? "true" : "false";
-            } else if constexpr (is_same_v<decltype(val), double>) {
-                cout << "its double!" << endl;
-                return NormalizeDouble(to_string(val));
-            } else if constexpr (is_same_v<decltype(val), nullptr_t>) {
-                return "nil";
-            }
-
-            throw runtime_error("wrong Type of T detected");
-        },
-        value);
+string Interpreter::to_string(const T& value) const {
+    if (holds_alternative<double>(value)) {
+        return NormalizeDouble(std::to_string(get<double>(value)));
+    } else if (holds_alternative<bool>(value)) {
+        return get<bool>(value) ? "true" : "false";
+    } else if (holds_alternative<string>(value)) {
+        return get<string>(value);
+    } else if (holds_alternative<nullptr_t>(value)) {
+        return "nil";
+    } else {
+        throw runtime_error("wrong Type of T detected");
+    } 
 }
 
 double Interpreter::Difference(T lValue, T rValue) const {
@@ -207,10 +202,8 @@ T Interpreter::evaluate(const Expr& expr) {
     } else if (auto grouping = dynamic_cast<const Grouping*>(&expr)) {
         return evalGroupingExpr(*grouping);
     } else if (auto literal = dynamic_cast<const Literal*>(&expr)) {
-        cout << "its literal" << endl;
         return evalLiteralExpr(*literal);
     } else if (auto unary = dynamic_cast<const Unary*>(&expr)) {
-        cout << "its Unary" << endl;
         return evalUnaryExpr(*unary);
     } else {
         throw std::runtime_error("Unsupported expression type.");
@@ -230,20 +223,7 @@ T Interpreter::evalUnaryExpr(const Unary& expr) {
 
     switch(expr.oprator->type) {
         case MINUS:
-            cout << "There is a minus!" << endl;
-            if (std::holds_alternative<double>(right)) {
-                std::cout << "Type is double before returning from MINUS" << std::endl;
-            } else if (std::holds_alternative<bool>(right)) {
-                std::cout << "Type is bool before returning from MINUS" << std::endl;
-            } else if (std::holds_alternative<std::string>(right)) {
-                std::cout << "Type is string before returning from MINUS" << std::endl;
-            } else if (std::holds_alternative<std::nullptr_t>(right)) {
-                std::cout << "Type is nullptr_t before returning from MINUS" << std::endl;
-            } else {
-                std::cout << "Unknown type in MINUS case!" << std::endl;
-            }
-
-            return negateDouble(right);
+            return -get<double>(right);
         case BANG:
             return isTruthy(right);
         default:

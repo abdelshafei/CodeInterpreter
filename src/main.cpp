@@ -68,9 +68,8 @@ int main(int argc, char *argv[]) {
         Parser parser(scanner.getTokens());
         Interpreter interpret;
         try {
-            T eval = interpret.evaluate(*parser.parse());
-
-            cout << interpret.to_string(eval) << endl;
+            string eval = interpret.to_string(interpret.evaluate(*parser.parse()));
+            cout << eval << endl;
             parser.cleanUpExpressions();
         } catch (runtime_error& err) {
             parser.cleanUpExpressions();

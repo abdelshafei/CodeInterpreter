@@ -3,6 +3,7 @@
 #include <string>
 #include <any>
 #include <iostream>
+#include <variant>
 #include "TokenType.hpp"
 
 using namespace std;
