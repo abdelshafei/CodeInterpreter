@@ -54,8 +54,10 @@ string AstPrinter::visitLiteralExpr(const Literal& expr) const {
             return val ? "true" : "false";
         } else if constexpr (is_same_v<decay_t<decltype(val)>, nullptr_t>) {
             return "nil";
-        } else {
+        } else if constexpr (is_same_v<decay_t<decltype(val)>, double>) {
             return this->NormalizeDouble(to_string(val)); 
+        } else {
+            return to_string(val) + ".0";
         }
     }, expr.value);
 }
