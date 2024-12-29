@@ -3,7 +3,7 @@
 Parser::Parser(vector<Token*>* tokens)
     : tokens(*tokens) {}
 
-void Parser::cleanUpExpressions() {
+Parser::~Parser() { 
     for(Expr* expr : expressions) {
         delete expr;
     }

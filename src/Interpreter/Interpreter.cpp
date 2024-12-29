@@ -12,16 +12,6 @@ bool Interpreter::isTruthy(T value) const {
     }, value);
 }
 
-double Interpreter::negateDouble(T value) const {
-    return visit([](const auto& right) -> double {
-        if constexpr (is_same_v<decltype(right), double>){
-            return -right;
-        }   
-
-        throw runtime_error("Operand must be numbers.");         
-    }, value);
-}
-
 string Interpreter::NormalizeDouble(const string& txt) const {
     string strBuilder = "";
 
@@ -70,64 +60,33 @@ string Interpreter::to_string(const T& value) const {
     } 
 }
 
-double Interpreter::Difference(T lValue, T rValue) const {
-    return visit(
-        [](const auto& left, const auto& right) -> double {
-            if constexpr (is_same_v<decltype(left), double> && is_same_v<decltype(right), double>) {
-                return left - right;
-            }
-
-            throw runtime_error("Operands must be numbers.");
-        },
-    lValue, rValue);
-}
-
-double Interpreter::Sum(T lValue, T rValue) const {
-    return visit(
-        [](const auto& left, const auto& right) -> double {
-            if constexpr (is_same_v<decltype(left), double> && is_same_v<decltype(right), double>) {
-                return left + right;
-            }
-
-            throw runtime_error("Operands must be two numbers or two strings");
-        },
-    lValue, rValue);
-}
-
-double Interpreter::Product(T lValue, T rValue) const {
-    return visit(
-        [](const auto& left, const auto& right) -> double {
-            if constexpr (is_same_v<decltype(left), double> && is_same_v<decltype(right), double>) {
-                return left * right;
-            }
-
-            throw runtime_error("Operands must be numbers.");
-        },
-    lValue, rValue);
-}
-
-double Interpreter::Quotient(T lValue, T rValue) const {
-    return visit(
-        [](const auto& left, const auto& right) -> double {
-            if constexpr (is_same_v<decltype(left), double> && is_same_v<decltype(right), double>) {
-                return left / right;
-            }
-
-            throw runtime_error("Operands must be numbers.");
-        },
-    lValue, rValue);
-}
-
-string Interpreter::Concatenate(T lValue, T rValue) const {
-    return visit(
-        [](const auto& left, const auto& right) -> string {
-            if constexpr (is_same_v<decltype(left), string> && is_same_v<decltype(right), string>) {
-                return left + right;
-            }
-
-            throw runtime_error("Operands must be two numbers or two strings");
-        },
-    lValue, rValue);
+T Interpreter::Quotient(T left, T right) const {
+    if(holds_alternative<double>(left) && holds_alternative<double>(right)) {
+        if(get<double>(right) == 0) {
+            throw runtime_error("Division by zero.");
+        }
+        return get<double>(left) / get<double>(right);
+    } else if(holds_alternative<int>(left) && holds_alternative<int>(right)) {
+        if(get<int>(right) == 0) {
+            throw runtime_error("Division by zero.");
+        } else if(get<int>(right) % get<int>(left) == 0) {
+            return get<int>(left) / get<int>(right);
+        } else {
+            return static_cast<double>(get<int>(left) / get<int>(right));
+        }
+    } else if(holds_alternative<double>(left) && holds_alternative<int>(right)) {
+        if(get<int>(right) == 0) {
+            throw runtime_error("Division by zero.");
+        }
+        return get<double>(left) / get<int>(right);
+    } else if(holds_alternative<int>(left) && holds_alternative<double>(right)) {
+        if(get<double>(right) == 0) {
+            throw runtime_error("Division by zero.");
+        }
+        return get<int>(left) / get<double>(right);
+    } else {
+        throw runtime_error("Operands must be numbers.");
+    }
 }
 
 bool Interpreter::isLogical(T lValue, T rValue, TokenType relational) const {
@@ -245,8 +204,7 @@ T Interpreter::evalBinaryExpr(const Binary& expr) {
     try {
         switch (expr.oprator->type)
         {
-            case MINUS:
-                // return Difference(left, right);
+            case MINUS: 
                 if(holds_alternative<double>(left) && holds_alternative<double>(right)) {
                     return get<double>(left) - get<double>(right);
                 } else if(holds_alternative<int>(left) && holds_alternative<int>(right)) {
@@ -255,7 +213,6 @@ T Interpreter::evalBinaryExpr(const Binary& expr) {
                     throw runtime_error("Operands must be numbers.");
                 }
             case PLUS:
-                // return Sum(left, right);
                 if(holds_alternative<double>(left) && holds_alternative<double>(right)) {
                     return get<double>(left) + get<double>(right);
                 } else if(holds_alternative<int>(left) && holds_alternative<int>(right)) {
@@ -266,7 +223,6 @@ T Interpreter::evalBinaryExpr(const Binary& expr) {
                     throw runtime_error("Operands must be two numbers or two strings");
                 }
             case STAR:
-                // return Product(left, right);
                 if(holds_alternative<double>(left) && holds_alternative<double>(right)) {
                     return get<double>(left) * get<double>(right);
                 } else if(holds_alternative<int>(left) && holds_alternative<int>(right)) {
@@ -275,14 +231,7 @@ T Interpreter::evalBinaryExpr(const Binary& expr) {
                     throw runtime_error("Operands must be numbers.");
                 }
             case SLASH:
-                // return Quotient(left, right);
-                if(holds_alternative<double>(left) && holds_alternative<double>(right)) {
-                    return get<double>(left) / get<double>(right);
-                } else if(holds_alternative<int>(left) && holds_alternative<int>(right)) {
-                    return get<int>(left) / get<int>(right);
-                } else {
-                    throw runtime_error("Operands must be numbers.");
-                }
+                return Quotient(left, right);
             case GREATER:
                 return isLogical(left, right, GREATER);
             case GREATER_EQUAL:

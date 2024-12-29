@@ -9,6 +9,7 @@
 class Scanner {
     public:
         Scanner(const string& src);
+        ~Scanner();
         bool isAtEnd();
         const char advance();
         void addToken(TokenType type);

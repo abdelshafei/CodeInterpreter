@@ -15,13 +15,11 @@ class Interpreter {
 
         bool isTruthy(T value) const;
         string to_string(const T& value) const;
-        double negateDouble(T value) const;
         string NormalizeDouble(const string& txt) const;
-        double Difference(T lValue, T rValue) const;
-        double Sum(T lValue, T rValue) const;
-        double Product(T lValue, T rValue) const;
-        double Quotient(T lValue, T rValue) const;
-        string Concatenate(T lValue, T rValue) const;
+        T Difference(T lValue, T rValue) const;
+        T Sum(T lValue, T rValue) const;
+        T Product(T lValue, T rValue) const;
+        T Quotient(T lValue, T rValue) const;
         bool isLogical(T lValue, T rValue, TokenType relational) const;
 };
 

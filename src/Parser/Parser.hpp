@@ -9,8 +9,7 @@
 class Parser {
     public:
         Parser(vector<Token*>* tokens); 
-
-        void cleanUpExpressions();
+        ~Parser();
 
         // Method Helpers
         template<typename... TokenType>

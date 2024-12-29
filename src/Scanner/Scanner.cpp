@@ -32,6 +32,12 @@ Scanner::Scanner(const string& src) : src(src)
     }
 }
 
+Scanner::~Scanner() {
+    for(Token* token : tokens) {
+        delete token;
+    }
+}
+
 vector<Token*>* Scanner::getTokens() { return &tokens; }
 
 string Scanner::getStringLiteral() { 
