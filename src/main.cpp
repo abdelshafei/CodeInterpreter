@@ -69,6 +69,7 @@ int main(int argc, char *argv[]) {
         Interpreter interpret;
         try {
             T eval = interpret.evaluate(*parser.parse());
+
             cout << interpret.to_string(eval) << endl;
             parser.cleanUpExpressions();
         } catch (runtime_error& err) {

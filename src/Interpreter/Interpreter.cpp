@@ -2,13 +2,23 @@
 bool Interpreter::isTruthy(T value) const {
     return visit([](const auto& val) -> bool {
         if constexpr (is_same_v<decay_t<decltype(val)>, bool>) {
-            return val;
+            return !val;
         } else if constexpr (is_same_v<decay_t<decltype(val)>, nullptr_t>) {
             return false;
         } else {
             return true;
         }
 
+    }, value);
+}
+
+double Interpreter::negateDouble(T value) const {
+    return visit([](const auto& right) -> double {
+        if constexpr (is_same_v<decltype(value), double>){
+            return -right;
+        }   
+
+        throw runtime_error("Operand must be numbers.");         
     }, value);
 }
 
@@ -217,31 +227,27 @@ T Interpreter::evalGroupingExpr(const Grouping& expr) {
 
 T Interpreter::evalUnaryExpr(const Unary& expr) {
     T right = evaluate(*expr.right);
-    
-    try {
-        switch(expr.oprator->type) {
-            case MINUS:
-                cout << "There is a minus!" << endl;
-                if (std::holds_alternative<double>(right)) {
-                    std::cout << -get<double>(right) << std::endl;
-                } else if (std::holds_alternative<bool>(right)) {
-                    std::cout << "Type is bool before returning from MINUS" << std::endl;
-                } else if (std::holds_alternative<std::string>(right)) {
-                    std::cout << "Type is string before returning from MINUS" << std::endl;
-                } else if (std::holds_alternative<std::nullptr_t>(right)) {
-                    std::cout << "Type is nullptr_t before returning from MINUS" << std::endl;
-                } else {
-                    std::cout << "Unknown type in MINUS case!" << std::endl;
-                }
 
-                return -get<double>(right);
-            case BANG:
-                return isTruthy(right);
-            default:
-                return static_cast<nullptr_t>(nullptr);
-        }
-    } catch(runtime_error& err) {
-        throw err;
+    switch(expr.oprator->type) {
+        case MINUS:
+            cout << "There is a minus!" << endl;
+            if (std::holds_alternative<double>(right)) {
+                std::cout << "Type is double before returning from MINUS" << std::endl;
+            } else if (std::holds_alternative<bool>(right)) {
+                std::cout << "Type is bool before returning from MINUS" << std::endl;
+            } else if (std::holds_alternative<std::string>(right)) {
+                std::cout << "Type is string before returning from MINUS" << std::endl;
+            } else if (std::holds_alternative<std::nullptr_t>(right)) {
+                std::cout << "Type is nullptr_t before returning from MINUS" << std::endl;
+            } else {
+                std::cout << "Unknown type in MINUS case!" << std::endl;
+            }
+
+            return negateDouble(right);
+        case BANG:
+            return isTruthy(right);
+        default:
+            return static_cast<nullptr_t>(nullptr);
     }
 }
 

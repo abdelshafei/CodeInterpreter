@@ -15,6 +15,7 @@ class Interpreter {
 
         bool isTruthy(T value) const;
         string to_string(T value) const;
+        double negateDouble(T value) const;
         string NormalizeDouble(const string& txt) const;
         double Difference(T lValue, T rValue) const;
         double Sum(T lValue, T rValue) const;
