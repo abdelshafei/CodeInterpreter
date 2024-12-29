@@ -246,9 +246,25 @@ T Interpreter::evalBinaryExpr(const Binary& expr) {
         switch (expr.oprator->type)
         {
             case MINUS:
-                return Difference(left, right);
+                // return Difference(left, right);
+                if(holds_alternative<double>(left) && holds_alternative<double>(right)) {
+                    return get<double>(left) - get<double>(right);
+                } else if(holds_alternative<int>(left) && holds_alternative<int>(right)) {
+                    return get<int>(left) - get<int>(right);
+                } else {
+                    throw runtime_error("Operands must be numbers.");
+                }
             case PLUS:
-                return Sum(left, right);
+                // return Sum(left, right);
+                if(holds_alternative<double>(left) && holds_alternative<double>(right)) {
+                    return get<double>(left) + get<double>(right);
+                } else if(holds_alternative<int>(left) && holds_alternative<int>(right)) {
+                    return get<int>(left) + get<int>(right);
+                } else if(holds_alternative<string>(left) && holds_alternative<string>(right)) {
+                    return get<string>(left) + get<string>(right);
+                } else {
+                    throw runtime_error("Operands must be two numbers or two strings");
+                }
             case STAR:
                 return Product(left, right);
             case SLASH:
