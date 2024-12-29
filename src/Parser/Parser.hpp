@@ -24,6 +24,7 @@ class Parser {
         Token* peekAfter();
         Token* previous();
         void synchronize();
+        bool isDouble(const string& no);
 
         // Expression Collectors
         Expr* expression();

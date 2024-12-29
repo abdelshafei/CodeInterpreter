@@ -57,6 +57,8 @@ string Interpreter::NormalizeDouble(const string& txt) const {
 string Interpreter::to_string(const T& value) const {
     if (holds_alternative<double>(value)) {
         return NormalizeDouble(std::to_string(get<double>(value)));
+    } else if(holds_alternative<int>(value)) {
+        return std::to_string(get<int>(value));
     } else if (holds_alternative<bool>(value)) {
         return get<bool>(value) ? "true" : "false";
     } else if (holds_alternative<string>(value)) {
@@ -223,7 +225,11 @@ T Interpreter::evalUnaryExpr(const Unary& expr) {
 
     switch(expr.oprator->type) {
         case MINUS:
-            return -get<double>(right);
+            if(holds_alternative<double>(right)) {
+                return -get<double>(right);
+            } else if(holds_alternative<int>(right)){
+                return -get<int>(right);
+            }
         case BANG:
             return isTruthy(right);
         default:

@@ -78,6 +78,16 @@ void Parser::synchronize() { // starts at the beginning of a line
     advance();
 }
 
+bool Parser::isDouble(const string& no) {
+    for(char c : no) {
+        if(c == '.') {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 /********************************************************/
 
 /******************** Syntax Error Catcher ********************/
@@ -124,7 +134,11 @@ Expr* Parser::primary() {
         expressions.push_back(expr);
         return expr;
     } else if(match(NUMBER)) {
-        expr = new Literal(stod(previous()->literal));
+        if(isDouble(previous()->lexeme)) {
+            expr = new Literal(stod(previous()->lexeme));
+        } else {
+            expr = new Literal(stoi(previous()->lexeme));
+        }
         expressions.push_back(expr);
         return expr;
     } else if(match(LEFT_PAREN)) {
