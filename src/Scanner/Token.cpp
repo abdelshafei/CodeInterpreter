@@ -18,7 +18,7 @@ const string Token::toString() const {
 
     oss << convertTokenTypeToStr(type) << " "
         << lexeme << " "
-        << (literal.empty() == true ? "null" : literal);
+        << (literal.empty() == true ? "null" : literal); //
 
     return oss.str();
 }

@@ -3,6 +3,8 @@
         "iosfwd": "cpp",
         "string": "cpp",
         "iostream": "cpp",
-        "stdexcept": "cpp"
+        "stdexcept": "cpp",
+        "variant": "cpp",
+        "vector": "cpp"
     }
 }

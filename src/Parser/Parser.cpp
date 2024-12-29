@@ -63,19 +63,21 @@ void Parser::synchronize() { // starts at the beginning of a line
         if(previous()->type == SEMICOLON) return;
 
         switch(peek()->type) {
-        case CLASS: return;
-        case FUN: return;
-        case VAR: return;
-        case FOR: return;
-        case IF: return;
-        case WHILE: return;
-        case PRINT: return;
-        case RETURN: return;
+            case CLASS: return;
+            case FUN: return;
+            case VAR: return;
+            case FOR: return;
+            case IF: return;
+            case WHILE: return;
+            case PRINT: return;
+            case RETURN: return;
+            default: break;
         }
     }
 
     advance();
 }
+
 /********************************************************/
 
 /******************** Syntax Error Catcher ********************/
@@ -117,8 +119,12 @@ Expr* Parser::primary() {
         expr = new Literal(nullptr);
         expressions.push_back(expr);
         return expr;
-    } else if(match(NUMBER, STRING)) {
+    } else if(match(STRING)) {
         expr = new Literal(previous()->literal);
+        expressions.push_back(expr);
+        return expr;
+    } else if(match(NUMBER)) {
+        expr = new Literal(stod(previous()->literal));
         expressions.push_back(expr);
         return expr;
     } else if(match(LEFT_PAREN)) {

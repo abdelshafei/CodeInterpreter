@@ -3,4 +3,4 @@
 // +
 // "hello" + "world"
 // true
-+2
+- 267.1230000 // cant do + 2 because + operator hasn't been implemented in unary func in parser.cpp yet...

@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include "Expr.hpp"
+#include <iomanip>
 
 class Parser {
     public:

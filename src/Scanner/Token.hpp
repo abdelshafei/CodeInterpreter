@@ -6,6 +6,7 @@
 #include "TokenType.hpp"
 
 using namespace std;
+using T = variant<double, string, bool, nullptr_t>;
 
 
 class Token {

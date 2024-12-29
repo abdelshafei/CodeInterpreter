@@ -2,11 +2,10 @@
 #define EXPR_H
 
 #include "../Scanner/Token.hpp"
-using T = variant<int, double, string, bool, nullptr_t>;
 
 class Expr {
     public:
-        class Visitor { //Interface
+        class VisitorAst { // string Interface
             public:
                 // virtual string visitAssignExpr(const class Assign& expr) const = 0;
                 virtual string visitBinaryExpr(const class Binary& expr) const = 0;
@@ -20,12 +19,25 @@ class Expr {
                 // virtual string visitThisExpr(const class This& expr) const = 0;
                 virtual string visitUnaryExpr(const class Unary& expr) const = 0;
                 // virtual string visitVariableExpr(const class Variable& expr) const = 0;
-                virtual ~Visitor() = default; 
+                virtual ~VisitorAst() = default; 
         };
 
-        virtual string accept(const Visitor& visitor) const {
+        // class VisitorInterp { // expr Interface
+        //     public:
+        //         virtual const T visitBinaryExpr(const class Binary& expr) = 0;
+        //         virtual const T visitGroupingExpr(const class Grouping& expr) = 0;
+        //         virtual const T visitLiteralExpr(const class Literal& expr) = 0;
+        //         virtual const T visitUnaryExpr(const class Unary& expr) = 0;
+        //         virtual ~VisitorInterp() = default; 
+        // };
+
+        virtual string accept(const VisitorAst& visitor) const {
             throw runtime_error("accept called on base class Expr");
         }
+
+        // virtual const T accepti(VisitorInterp& visitor) {
+        //     throw runtime_error("accept called on base class Expr");
+        // }
 
         virtual ~Expr() = default;
 };
@@ -36,9 +48,13 @@ class Binary : public Expr {
             : left(left), oprator(oprator), right(right) {}
         ~Binary() override = default;
 
-        string accept(const Visitor& visitor) const override {
+        string accept(const VisitorAst& visitor) const override {
             return visitor.visitBinaryExpr(*this);
         }
+
+        // const Literal accepti(VisitorInterp& visitor) override {
+        //     return visitor.visitBinaryExpr(*this);
+        // }
 
         Expr* left;
         Token* oprator;
@@ -51,9 +67,13 @@ class Grouping : public Expr {
             : expression(expression) {}
         ~Grouping() override = default;
 
-        string accept(const Visitor& visitor) const override {
+        string accept(const VisitorAst& visitor) const override {
             return visitor.visitGroupingExpr(*this);
         }
+
+        // const Literal accepti(VisitorInterp& visitor) override {
+        //     return visitor.visitGroupingExpr(*this);
+        // }
 
         Expr* expression; 
 };
@@ -64,9 +84,14 @@ class Literal : public Expr {
             : value(value) {}
         ~Literal() override = default;
         
-        string accept(const Visitor& visitor) const override {
+        string accept(const VisitorAst& visitor) const override {
             return visitor.visitLiteralExpr(*this);
         }
+
+
+        // const Literal accepti(VisitorInterp& visitor) override {
+        //     return visitor.visitLiteralExpr(*this);
+        // }
 
         T value;
 };
@@ -77,9 +102,13 @@ class Unary : public Expr {
             : oprator(oprator), right(right) {}
         ~Unary() override = default;
 
-        string accept(const Visitor& visitor) const override {
+        string accept(const VisitorAst& visitor) const override {
             return visitor.visitUnaryExpr(*this);
         }
+
+        // const Literal accepti(VisitorInterp& visitor) override {
+        //     return visitor.visitUnaryExpr(*this);
+        // }
 
         Token* oprator;
         Expr* right;

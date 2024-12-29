@@ -3,15 +3,25 @@
 
 #include "../Parser/Expr.hpp"
 
-class Interpreter : public Expr::Visitor {
+using Value = variant<bool, double, string>;
+
+class Interpreter {
     public:
-        string evaluate (Expr* expr) const;
-        string visitBinaryExpr(const Binary& expr) const override;
-        string visitGroupingExpr(const Grouping& expr) const override;
-        string visitLiteralExpr(const Literal& expr) const override;
-        string visitUnaryExpr(const Unary& expr) const override;
+        T evaluate (const Expr& expr) ;
+        T evalBinaryExpr(const Binary& expr);
+        T evalGroupingExpr(const Grouping& expr);
+        T evalLiteralExpr(const Literal& expr);
+        T evalUnaryExpr(const Unary& expr);
+
         bool isTruthy(T value) const;
-        string TtoString(T value) const;
+        string to_string(T value) const;
+        string NormalizeDouble(const string& txt) const;
+        double Difference(T lValue, T rValue) const;
+        double Sum(T lValue, T rValue) const;
+        double Product(T lValue, T rValue) const;
+        double Quotient(T lValue, T rValue) const;
+        string Concatenate(T lValue, T rValue) const;
+        bool isLogical(T lValue, T rValue, TokenType relational) const;
 };
 
 #endif

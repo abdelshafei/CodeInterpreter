@@ -3,7 +3,7 @@
 
 #include "Expr.hpp"
 
-class AstPrinter : public Expr::Visitor {
+class AstPrinter : public Expr::VisitorAst {
     public:
         string print(Expr* expression) const;
         string visitBinaryExpr(const Binary& expr) const override;
@@ -12,6 +12,9 @@ class AstPrinter : public Expr::Visitor {
         string visitUnaryExpr(const Unary& expr) const override;
         template<typename... Expr>
         string parenthesize(const string& name, Expr*... exprs) const;
+
+        string NormalizeDouble(const string& txt) const;
+       
 
 };
 
