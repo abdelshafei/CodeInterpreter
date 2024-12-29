@@ -60,6 +60,20 @@ string Interpreter::to_string(const T& value) const {
     } 
 }
 
+T Interpreter::Product(T left, T right) const {
+    if(holds_alternative<double>(left) && holds_alternative<double>(right)) {
+        return get<double>(left) * get<double>(right);
+    } else if(holds_alternative<int>(left) && holds_alternative<int>(right)) {
+        return get<int>(left) * get<int>(right);
+    } else if(holds_alternative<double>(left) && holds_alternative<int>(right)) {
+        return get<double>(left) * get<int>(right);
+    } else if(holds_alternative<int>(left) && holds_alternative<double>(right)) {
+        return get<int>(left) * get<double>(right);
+    } else {
+        throw runtime_error("Operands must be numbers.");
+    }
+}
+
 T Interpreter::Quotient(T left, T right) const {
     if(holds_alternative<double>(left) && holds_alternative<double>(right)) {
         if(get<double>(right) == 0) {
@@ -72,7 +86,7 @@ T Interpreter::Quotient(T left, T right) const {
         } else if(get<int>(right) % get<int>(left) == 0) {
             return get<int>(left) / get<int>(right);
         } else {
-            return static_cast<double>(get<int>(left) / get<int>(right));
+            return static_cast<double>(get<int>(left)) / static_cast<double>(get<int>(right));
         }
     } else if(holds_alternative<double>(left) && holds_alternative<int>(right)) {
         if(get<int>(right) == 0) {

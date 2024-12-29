@@ -16,10 +16,10 @@ class Interpreter {
         bool isTruthy(T value) const;
         string to_string(const T& value) const;
         string NormalizeDouble(const string& txt) const;
-        T Difference(T lValue, T rValue) const;
-        T Sum(T lValue, T rValue) const;
         T Product(T lValue, T rValue) const;
         T Quotient(T lValue, T rValue) const;
+        T Difference(T lValue, T rValue) const;
+        T Sum(T lValue, T rValue) const;
         bool isLogical(T lValue, T rValue, TokenType relational) const;
 };
 
