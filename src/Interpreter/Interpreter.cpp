@@ -4,10 +4,10 @@ bool Interpreter::isTruthy(T value) const {
         if constexpr (is_same_v<decay_t<decltype(val)>, bool>) {
             return !val;
         } else if constexpr (is_same_v<decay_t<decltype(val)>, nullptr_t>) {
-            return false;
-        } else {
             return true;
-        }
+        } 
+        
+        return true;
 
     }, value);
 }
