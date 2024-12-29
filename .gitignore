@@ -57,6 +57,7 @@ Makefile
 .vscode
 CMakeCache.txt
 cmake_install.cmake
+CMakeFiles
 
 build
 vcpkg_installed

@@ -1,3 +1,0 @@
-/Users/abdelrahmanelshafei/Documents/Projects/codecrafters-interpreter-cpp/CMakeFiles/interpreter.dir
-/Users/abdelrahmanelshafei/Documents/Projects/codecrafters-interpreter-cpp/CMakeFiles/edit_cache.dir
-/Users/abdelrahmanelshafei/Documents/Projects/codecrafters-interpreter-cpp/CMakeFiles/rebuild_cache.dir
