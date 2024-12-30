@@ -65,12 +65,21 @@ int main(int argc, char *argv[]) {
 
         Parser parser(scanner.getTokens());
         Interpreter interpret;
+        Expr* expressions;
+
         try {
-            string eval = interpret.to_string(interpret.evaluate(*parser.parse()));
+            expressions = parser.parse();
+        } catch (runtime_error& err) { 
+            cerr << err.what();
+            return 65; // compiling error
+        }
+
+        try {
+            string eval = interpret.to_string(interpret.evaluate(*expressions));
             cout << eval << endl;
         } catch (runtime_error& err) {
             cerr << err.what();
-            return 70;
+            return 70; // runtime error
         }
     } else {
         cerr << "Unknown command: " << command << endl;
