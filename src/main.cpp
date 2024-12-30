@@ -18,9 +18,6 @@ int main(int argc, char *argv[]) {
     cout << unitbuf;
     cerr << unitbuf;
 
-    // You can use print statements as follows for debugging, they'll be visible when running tests.
-    cerr << "Logs from your program will appear here!" << endl;
-
     if (argc < 3) {
         cerr << "Usage: ./your_program (tokenize || parse || evaluate) <filename>" << endl;
         return 1;
@@ -28,7 +25,7 @@ int main(int argc, char *argv[]) {
 
     const string command = argv[1];
 
-    if (command == "tokenize") {
+    if (command == "tokenize") { // lexical analysis
         string file_contents = read_file_contents(argv[2]);
         
         Scanner scanner(file_contents);
@@ -38,7 +35,7 @@ int main(int argc, char *argv[]) {
         else 
             return 65;
         
-    } else if(command == "parse") {
+    } else if(command == "parse") { // compile-time process
         string file_contents = read_file_contents(argv[2]);
 
         Scanner scanner(file_contents);
@@ -56,7 +53,7 @@ int main(int argc, char *argv[]) {
 
         return 0;
 
-    } else if(command == "evaluate") {
+    } else if(command == "evaluate") { // run-time process
         string file_contents = read_file_contents(argv[2]);
 
         Scanner scanner(file_contents);
