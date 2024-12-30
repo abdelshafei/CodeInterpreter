@@ -103,13 +103,38 @@ T Interpreter::Quotient(T left, T right) const {
     }
 }
 
+T Interpreter::Difference(T left, T right) const {
+    if(holds_alternative<double>(left) && holds_alternative<double>(right)) {
+        return get<double>(left) - get<double>(right);
+    } else if(holds_alternative<int>(left) && holds_alternative<int>(right)) {
+        return get<int>(left) - get<int>(right);
+    } else {
+        throw runtime_error("Operands must be numbers.");
+    }
+}
+
+T Interpreter::Sum(T left, T right) const {
+    if(holds_alternative<double>(left) && holds_alternative<double>(right)) {
+        return get<double>(left) + get<double>(right);
+    } else if(holds_alternative<int>(left) && holds_alternative<int>(right)) {
+        return get<int>(left) + get<int>(right);
+    } else if(holds_alternative<string>(left) && holds_alternative<string>(right)) {
+        return get<string>(left) + get<string>(right);
+    } else {
+        throw runtime_error("Operands must be two numbers or two strings");
+    }
+}
+
 bool Interpreter::isLogical(T lValue, T rValue, TokenType relational) const {
     if(relational == GREATER) {
         return visit(
             [](const auto& left, const auto& right) -> bool {
                 if constexpr (is_same_v<decltype(left), double> && is_same_v<decltype(right), double>) {
                     return left > right;
+                } else if constexpr (is_same_v<decltype(left), int> && is_same_v<decltype(right), int>) {
+                    return left > right;
                 }
+                
 
                 throw runtime_error("Operands must be numbers.");
             },
@@ -118,6 +143,8 @@ bool Interpreter::isLogical(T lValue, T rValue, TokenType relational) const {
         return visit(
             [](const auto& left, const auto& right) -> bool {
                 if constexpr (is_same_v<decltype(left), double> && is_same_v<decltype(right), double>) {
+                    return left >= right;
+                }  else if constexpr (is_same_v<decltype(left), int> && is_same_v<decltype(right), int>) {
                     return left >= right;
                 }
 
@@ -129,6 +156,8 @@ bool Interpreter::isLogical(T lValue, T rValue, TokenType relational) const {
             [](const auto& left, const auto& right) -> bool {
                 if constexpr (is_same_v<decltype(left), double> && is_same_v<decltype(right), double>) {
                     return left < right;
+                } else if constexpr (is_same_v<decltype(left), int> && is_same_v<decltype(right), int>) {
+                    return left < right;
                 }
 
                 throw runtime_error("Operands must be numbers.");
@@ -138,6 +167,8 @@ bool Interpreter::isLogical(T lValue, T rValue, TokenType relational) const {
         return visit(
             [](const auto& left, const auto& right) -> bool {
                 if constexpr (is_same_v<decltype(left), double> && is_same_v<decltype(right), double>) {
+                    return left <= right;
+                }  else if constexpr (is_same_v<decltype(left), int> && is_same_v<decltype(right), int>) {
                     return left <= right;
                 }
 
@@ -149,7 +180,13 @@ bool Interpreter::isLogical(T lValue, T rValue, TokenType relational) const {
             [](const auto& left, const auto& right) -> bool {
                 if constexpr (is_same_v<decltype(left), double> && is_same_v<decltype(right), double>) {
                     return left != right;
-                } // same condition for other types
+                }  else if constexpr (is_same_v<decltype(left), int> && is_same_v<decltype(right), int>) {
+                    return left != right;
+                } else if constexpr (is_same_v<decltype(left), bool> && is_same_v<decltype(right), bool>) {
+                    return left != right;
+                } else if constexpr (is_same_v<decltype(left), string> && is_same_v<decltype(right), string>) {
+                    return left != right;
+                }
 
               throw runtime_error("Operands must be of the same type.");
             },
@@ -159,7 +196,13 @@ bool Interpreter::isLogical(T lValue, T rValue, TokenType relational) const {
             [](const auto& left, const auto& right) -> bool {
                 if constexpr (is_same_v<decltype(left), double> && is_same_v<decltype(right), double>) {
                     return left == right;
-                } // same condition for other types
+                } else if constexpr (is_same_v<decltype(left), int> && is_same_v<decltype(right), int>) {
+                    return left == right;
+                } else if constexpr (is_same_v<decltype(left), bool> && is_same_v<decltype(right), bool>) {
+                    return left == right;
+                } else if constexpr (is_same_v<decltype(left), string> && is_same_v<decltype(right), string>) {
+                    return left == right;
+                }
 
                 throw runtime_error("Operands must be of the same type.");
             },
@@ -219,23 +262,9 @@ T Interpreter::evalBinaryExpr(const Binary& expr) {
         switch (expr.oprator->type)
         {
             case MINUS: 
-                if(holds_alternative<double>(left) && holds_alternative<double>(right)) {
-                    return get<double>(left) - get<double>(right);
-                } else if(holds_alternative<int>(left) && holds_alternative<int>(right)) {
-                    return get<int>(left) - get<int>(right);
-                } else {
-                    throw runtime_error("Operands must be numbers.");
-                }
+                return Difference(left, right);
             case PLUS:
-                if(holds_alternative<double>(left) && holds_alternative<double>(right)) {
-                    return get<double>(left) + get<double>(right);
-                } else if(holds_alternative<int>(left) && holds_alternative<int>(right)) {
-                    return get<int>(left) + get<int>(right);
-                } else if(holds_alternative<string>(left) && holds_alternative<string>(right)) {
-                    return get<string>(left) + get<string>(right);
-                } else {
-                    throw runtime_error("Operands must be two numbers or two strings");
-                }
+                return Sum(left, right);
             case STAR:
                 return Product(left, right);
             case SLASH:
