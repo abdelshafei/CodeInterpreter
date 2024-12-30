@@ -70,7 +70,7 @@ int main(int argc, char *argv[]) {
             cout << eval << endl;
         } catch (runtime_error& err) {
             cerr << err.what();
-            return 65;
+            return 70;
         }
     } else {
         cerr << "Unknown command: " << command << endl;
