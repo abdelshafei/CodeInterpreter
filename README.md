@@ -2,7 +2,7 @@
 
 2 - Run ```make`` in the same repo directory
 
-3 - finally to excute the program run ```./Interpreter <command> <test file>```
+3 - finally to excute the program run ```./interpreter <command> <test file>```
 
 4 - There are several commands to choose from that each do their own thing but build off of each other:
 

@@ -172,6 +172,16 @@ Expr* Parser::primary() {
                 throw err(peekAfter(), "Expect a number after expression");
             }
         } 
+    } else if(matchTypes(GREATER, GREATER_EQUAL, LESS, LESS_EQUAL, BANG_EQUAL, EQUAL_EQUAL)) {
+        if(peekAfter()->type != NUMBER && peekAfter()->type != LEFT_PAREN) {
+            if(peekAfter()->type == STRING) {
+                throw err(peekAfter(), "Expect a number after expression");
+            }
+
+            if(tokens.size() > 2 && previous()->type == NUMBER) {
+                throw err(peekAfter(), "Expect a number after expression");
+            }
+        } 
     }
 
     return nullptr;
@@ -219,7 +229,7 @@ Expr* Parser::term() {
 Expr* Parser::comparison() {
     Expr* expr = term();
 
-    while(match(GREATER, GREATER_EQUAL, LESS, LESS_EQUAL)) {
+    while(primary() == nullptr && match(GREATER, GREATER_EQUAL, LESS, LESS_EQUAL)) {
         Token* oprator = previous();
         Expr* right = term();
         expr = new Binary(expr, oprator, right);
@@ -233,7 +243,7 @@ Expr* Parser::equality() {
     Expr* expr = comparison();
 
 
-    while(match(BANG_EQUAL, EQUAL_EQUAL)) {
+    while(primary() == nullptr && match(BANG_EQUAL, EQUAL_EQUAL)) {
         Token* oprator = previous();
         Expr* right = comparison();
         expr = new Binary(expr, oprator, right);
