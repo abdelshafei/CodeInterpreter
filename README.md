@@ -1,50 +1,15 @@
-[![progress-banner](https://backend.codecrafters.io/progress/interpreter/d0b3525e-9fb4-4f96-a841-9b95d4419451)](https://app.codecrafters.io/users/codecrafters-bot?r=2qF)
+1 - Run ```cmake .``` in the directory of the repo directory
 
-This is a starting point for C++ solutions to the
-["Build your own Interpreter" Challenge](https://app.codecrafters.io/courses/interpreter/overview).
+2 - Run ```make`` in the same repo directory
 
-This challenge follows the book
-[Crafting Interpreters](https://craftinginterpreters.com/) by Robert Nystrom.
+3 - finally to excute the program run ```./Interpreter <command> <test file>```
 
-In this challenge you'll build an interpreter for
-[Lox](https://craftinginterpreters.com/the-lox-language.html), a simple
-scripting language. Along the way, you'll learn about tokenization, ASTs,
-tree-walk interpreters and more.
+4 - There are several commands to choose from that each do their own thing but build off of each other:
 
-Before starting this challenge, make sure you've read the "Welcome" part of the
-book that contains these chapters:
+  > tokenize - lexically analyzes your code.
+  > parse - parses the expressions in your code.
+  > evaluate - evaluates the expressions in your code to individual literals.
 
-- [Introduction](https://craftinginterpreters.com/introduction.html) (chapter 1)
-- [A Map of the Territory](https://craftinginterpreters.com/a-map-of-the-territory.html)
-  (chapter 2)
-- [The Lox Language](https://craftinginterpreters.com/the-lox-language.html)
-  (chapter 3)
-
-These chapters don't involve writing code, so they won't be covered in this
-challenge. This challenge will start from chapter 4,
-[Scanning](https://craftinginterpreters.com/scanning.html).
-
-**Note**: If you're viewing this repo on GitHub, head over to
-[codecrafters.io](https://codecrafters.io) to try the challenge.
-
-# Passing the first stage
-
-The entry point for your program is in `src/main.cpp`. Study and uncomment the
-relevant code, and push your changes to pass the first stage:
-
-```sh
-git commit -am "pass 1st stage" # any msg
-git push origin master
-```
-
-Time to move on to the next stage!
-
-# Stage 2 & beyond
-
-Note: This section is for stages 2 and beyond.
-
-1. Ensure you have `cmake` installed locally
-2. Run `./your_program.sh` to run your program, which is implemented in
-   `src/main.cpp`.
-3. Commit your changes and run `git push origin master` to submit your solution
-   to CodeCrafters. Test output will be streamed to your terminal.
+  TODO: run - runs through each each statement in your code and evaluates them.
+  
+OPTIONAL:- to clean the project run ```make clean``` all while in the same repo directory

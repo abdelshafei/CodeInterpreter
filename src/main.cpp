@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
         else 
             return 65;
         
-    } else if(command == "parse") { // compile-time process
+    } else if(command == "parse") { // expression analysis
         string file_contents = read_file_contents(argv[2]);
 
         Scanner scanner(file_contents);
