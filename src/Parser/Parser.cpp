@@ -116,7 +116,7 @@ runtime_error Parser::err(Token* token, string msg) {
 }
 /**************************************************************/
 
-/******************** Expression Collecters ********************/
+/******************** Expression Collecters *******************/
 Expr* Parser::primary() {
 
     Expr* expr;
@@ -151,7 +151,7 @@ Expr* Parser::primary() {
         Expr* groupedExpr = new Grouping(expr);
         expressions.push_back(groupedExpr);
         return groupedExpr;
-    } else if(matchTypes(PLUS, STAR, SLASH, MINUS, GREATER, GREATER_EQUAL, LESS, LESS_EQUAL, BANG_EQUAL, EQUAL_EQUAL)) {
+    } else if(matchTypes(BANG, PLUS, STAR, SLASH, MINUS, GREATER, GREATER_EQUAL, LESS, LESS_EQUAL, BANG_EQUAL, EQUAL_EQUAL)) {
         if(peekAfter()->type != LEFT_PAREN) {
             if(peekAfter()->type == RIGHT_PAREN || peekAfter()->type == END_OF_FILE) {
                 throw err(peek(), "Expects a number operand after expression");
@@ -165,6 +165,11 @@ Expr* Parser::primary() {
 }
 
 Expr* Parser::unary() {
+
+    if(peekAfter()->type == BANG) {
+        throw err(peekAfter(), "not Expecting an operand before expression");
+    }
+
     if(match(BANG, MINUS)) {
         Token* oprator = previous();
         Expr* right = unary();

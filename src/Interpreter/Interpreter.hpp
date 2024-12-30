@@ -2,6 +2,7 @@
 #define INTERPRETER_H
 
 #include "../Parser/Expr.hpp"
+#include "../Parser/Stmt.hpp"
 
 using Value = variant<bool, double, string>;
 
