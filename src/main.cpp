@@ -71,7 +71,7 @@ int main(int argc, char *argv[]) {
             expressions = parser.parse();
         } catch (runtime_error& err) { 
             cerr << err.what();
-            return 65; // compiling error
+            return 70;
         }
 
         try {
@@ -79,7 +79,7 @@ int main(int argc, char *argv[]) {
             cout << eval << endl;
         } catch (runtime_error& err) {
             cerr << err.what();
-            return 70; // runtime error
+            return 70;
         }
     } else {
         cerr << "Unknown command: " << command << endl;
