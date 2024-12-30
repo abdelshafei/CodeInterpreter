@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
     cerr << unitbuf;
 
     if (argc < 3) {
-        cerr << "Usage: ./your_program (tokenize || parse || evaluate) <filename>" << endl;
+        cerr << "Usage: ./your_program (tokenize || parse || evaluate || run) <filename>" << endl;
         return 1;
     }
 
@@ -53,7 +53,7 @@ int main(int argc, char *argv[]) {
 
         return 0;
 
-    } else if(command == "evaluate") { // run-time process
+    } else if(command == "evaluate") { // evaluation analysis
         string file_contents = read_file_contents(argv[2]);
 
         Scanner scanner(file_contents);
@@ -78,6 +78,8 @@ int main(int argc, char *argv[]) {
             cerr << err.what();
             return 70;
         }
+    } else if(command == "run") {
+
     } else {
         cerr << "Unknown command: " << command << endl;
         return 1;
