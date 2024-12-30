@@ -9,9 +9,11 @@
   > tokenize - lexically analyzes your code.
 
   > parse - parses the expressions in your code.
-  
+
   > evaluate - evaluates the expressions in your code to individual literals.
 
   TODO: run - runs through each each statement in your code and evaluates them.
   
 OPTIONAL:- to clean the project run ```make clean``` all while in the same repo directory
+
+*** The Program works but doesn't on github workspace for some reason ***
