@@ -48,7 +48,7 @@ bool Parser::match(TokenType... types) {
 
 template<typename... TokenType>
 bool Parser::matchTypes(TokenType... types) {
-        for (auto type : {types...}) {
+    for (auto type : {types...}) {
         if (check(type)) {
             return true;
         }
@@ -147,9 +147,8 @@ Expr* Parser::primary() {
         Expr* groupedExpr = new Grouping(expr);
         expressions.push_back(groupedExpr);
         return groupedExpr;
-    } else if(matchTypes(MINUS, PLUS, SLASH, STAR)) {
+    } else if(matchTypes(PLUS)) {
         if(peekAfter()->type != NUMBER && peekAfter()->type != LEFT_PAREN) {
-
             if(peekAfter()->type == STRING) {
                 if(tokens.size() > 2 && previous()->type != STRING)
                     throw err(peekAfter(), "Expect a number after expression");
@@ -157,10 +156,21 @@ Expr* Parser::primary() {
                     return nullptr;
             }
 
-            if(tokens.size() > 2 && previous()->type == NUMBER)
+            if(tokens.size() > 2 && previous()->type == NUMBER) {
                 throw err(peekAfter(), "Expect a number after expression");
-            else 
-                throw err(peekAfter(), "Expect a number or a string after expression");
+            } else {
+                throw err(peekAfter(), "Expect a number or a string after and before expression");
+            }
+        } 
+    } else if(matchTypes(STAR, SLASH, MINUS)) {
+        if(peekAfter()->type != NUMBER && peekAfter()->type != LEFT_PAREN) {
+            if(peekAfter()->type == STRING) {
+                throw err(peekAfter(), "Expect a number after expression");
+            }
+
+            if(tokens.size() > 2 && previous()->type == NUMBER) {
+                throw err(peekAfter(), "Expect a number after expression");
+            }
         } 
     }
 
@@ -182,7 +192,7 @@ Expr* Parser::unary() {
 Expr* Parser::factor() {
     Expr* expr = unary();
 
-    while(match(SLASH, STAR)) {
+    while(primary() == nullptr && match(STAR, SLASH)) {
         Token* oprator = previous();
         Expr* right = unary();
         expr = new Binary(expr, oprator, right);

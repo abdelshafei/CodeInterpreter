@@ -28,15 +28,26 @@ int main(int argc, char *argv[]) {
     if (command == "tokenize") { // lexical analysis
         string file_contents = read_file_contents(argv[2]);
         
-        Scanner scanner(file_contents);
-        scanner.print();
-        if(!scanner.getErrStatus())
-            return 0;
-        else 
+        try {
+            Scanner scanner(file_contents);
+            if(!scanner.getErrStatus())
+                return 0;
+            else 
+                return 65;
+        } catch (invalid_argument& err) {
+            cerr << err.what();
             return 65;
+        }
         
     } else if(command == "parse") { // expression analysis
         string file_contents = read_file_contents(argv[2]);
+
+        try { // checks for any unterminated comment blocks
+            Scanner scan(file_contents);
+        } catch (invalid_argument& err) {
+            cerr << err.what();
+            return 65;
+        }
 
         Scanner scanner(file_contents);
         if(scanner.getErrStatus())
@@ -55,6 +66,13 @@ int main(int argc, char *argv[]) {
 
     } else if(command == "evaluate") { // evaluation analysis
         string file_contents = read_file_contents(argv[2]);
+
+        try { // checks for any unterminated comment blocks
+            Scanner scan(file_contents);
+        } catch (invalid_argument& err) {
+            cerr << err.what();
+            return 65;
+        }
 
         Scanner scanner(file_contents);
         if(scanner.getErrStatus())

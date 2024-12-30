@@ -212,6 +212,31 @@ int Scanner::skipCommentIndex() {
     return index;
 }
 
+int Scanner::skipCommentBlock() {
+    int index = current;
+
+    bool isEnd = false;
+
+    for(int i = current; i < src.size(); i++) {
+        if(src.at(i) == '*' && i+1 < src.size() && src.at(i+1) == '/') {
+            index = i+2;
+            isEnd = true;
+            break;
+        }
+
+        if(src.at(i) == '\n') {
+            line++;
+            charNo = 0;
+        }
+    }
+
+    if(!isEnd) {
+        throw invalid_argument("[line " + to_string(line) + "] Error: Unterminated block comment.");
+    }
+
+    return index;
+}
+
 void Scanner::scanToken() {
     char c = advance();
     switch (c) {
@@ -242,6 +267,7 @@ void Scanner::scanToken() {
                 else                                                addToken(GREATER);
                 break;
       case '/': if(src.size() != current && src.at(current) == '/') current = skipCommentIndex();
+                else if(src.size() != current && src.at(current) == '*') current = skipCommentBlock();
                 else                                                addToken(SLASH); 
                 break;
       case '"': addToken(STRING, getStringLiteral()); break;

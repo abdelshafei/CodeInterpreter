@@ -6,7 +6,7 @@
 
 4 - There are several commands to choose from that each do their own thing but build off of each other:
 
-  > tokenize - lexically analyzes your code.
+  > tokenize - lexically analyzes your code. (skips over comment blocks and normal comments)
 
   > parse - parses the expressions in your code.
 
