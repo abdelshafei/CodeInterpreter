@@ -176,6 +176,10 @@ bool Interpreter::isLogical(T lValue, T rValue, TokenType relational) const {
             return get<bool>(lValue) != get<bool>(rValue);
         } else if(holds_alternative<string>(lValue) && holds_alternative<string>(rValue)) {
             return get<string>(lValue) != get<string>(rValue);
+        } else if((holds_alternative<int>(lValue) && holds_alternative<string>(rValue)) || (holds_alternative<string>(lValue) && holds_alternative<int>(rValue))) {
+            return false;
+        } else if((holds_alternative<double>(lValue) && holds_alternative<string>(rValue)) || (holds_alternative<string>(lValue) && holds_alternative<double>(rValue))) {
+            return false;
         }
 
         throw runtime_error("Operands must be numbers.");      
@@ -190,9 +194,9 @@ bool Interpreter::isLogical(T lValue, T rValue, TokenType relational) const {
         } else if(holds_alternative<string>(lValue) && holds_alternative<string>(rValue)) {
             return get<string>(lValue) == get<string>(rValue);
         } else if((holds_alternative<int>(lValue) && holds_alternative<string>(rValue)) || (holds_alternative<string>(lValue) && holds_alternative<int>(rValue))) {
-            return false;
+            return true;
         } else if((holds_alternative<double>(lValue) && holds_alternative<string>(rValue)) || (holds_alternative<string>(lValue) && holds_alternative<double>(rValue))) {
-            return false;
+            return true;
         }
 
         throw runtime_error("Operands must be numbers or strings.");     
@@ -235,6 +239,7 @@ T Interpreter::evalUnaryExpr(const Unary& expr) {
             } else if(holds_alternative<int>(right)){
                 return -get<int>(right);
             }
+            throw runtime_error("Operand must be a number.");
         case BANG:
             return isTruthy(right);
         default:
