@@ -177,9 +177,9 @@ bool Interpreter::isLogical(T lValue, T rValue, TokenType relational) const {
         } else if(holds_alternative<string>(lValue) && holds_alternative<string>(rValue)) {
             return get<string>(lValue) != get<string>(rValue);
         } else if((holds_alternative<int>(lValue) && holds_alternative<string>(rValue)) || (holds_alternative<string>(lValue) && holds_alternative<int>(rValue))) {
-            return false;
+            return true;
         } else if((holds_alternative<double>(lValue) && holds_alternative<string>(rValue)) || (holds_alternative<string>(lValue) && holds_alternative<double>(rValue))) {
-            return false;
+            return true;
         }
 
         throw runtime_error("Operands must be numbers.");      
@@ -194,9 +194,9 @@ bool Interpreter::isLogical(T lValue, T rValue, TokenType relational) const {
         } else if(holds_alternative<string>(lValue) && holds_alternative<string>(rValue)) {
             return get<string>(lValue) == get<string>(rValue);
         } else if((holds_alternative<int>(lValue) && holds_alternative<string>(rValue)) || (holds_alternative<string>(lValue) && holds_alternative<int>(rValue))) {
-            return true;
+            return false;
         } else if((holds_alternative<double>(lValue) && holds_alternative<string>(rValue)) || (holds_alternative<string>(lValue) && holds_alternative<double>(rValue))) {
-            return true;
+            return false;
         }
 
         throw runtime_error("Operands must be numbers or strings.");     
