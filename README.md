@@ -12,7 +12,7 @@
 
   > evaluate - evaluates the expressions in your code to individual literals.
 
-  TODO: run - runs through each each statement in your code and evaluates them.
+  TODO: run - runs through each statement in your code and evaluates them.
   
 OPTIONAL:- to clean the project run ```make clean``` all while in the same repo directory
 
