@@ -16,4 +16,4 @@
   
 OPTIONAL:- to clean the project run ```make clean``` all while in the same repo directory
 
-### The program operates as expected in a local environment; however, it encounters issues when deployed on GitHub Workspace
+### The program operates as expected in a local environment; however, it encounters issues when deployed on GitHub Workspace.
