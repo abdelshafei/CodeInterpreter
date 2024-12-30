@@ -30,9 +30,10 @@ int main(int argc, char *argv[]) {
         
         try {
             Scanner scanner(file_contents);
-            if(!scanner.getErrStatus())
+            if(!scanner.getErrStatus()) {
+                scanner.print();
                 return 0;
-            else 
+            } else 
                 return 65;
         } catch (invalid_argument& err) {
             cerr << err.what();

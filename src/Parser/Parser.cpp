@@ -88,6 +88,10 @@ bool Parser::isDouble(const string& no) {
     return false;
 }
 
+bool Parser::isBool(TokenType type) {
+    return type == TRUE || type == FALSE;
+}
+
 /********************************************************/
 
 /******************** Syntax Error Catcher ********************/
@@ -143,45 +147,18 @@ Expr* Parser::primary() {
         return expr;
     } else if(match(LEFT_PAREN)) {
         expr = expression(); // recursively calls all of the exprs in between the parenthesis
-        consume(RIGHT_PAREN, "Expect ')' after expression");
+        consume(RIGHT_PAREN, "Expects ')' after expression");
         Expr* groupedExpr = new Grouping(expr);
         expressions.push_back(groupedExpr);
         return groupedExpr;
-    } else if(matchTypes(PLUS)) {
-        if(peekAfter()->type != NUMBER && peekAfter()->type != LEFT_PAREN) {
-            if(peekAfter()->type == STRING) {
-                if(tokens.size() > 2 && previous()->type != STRING)
-                    throw err(peekAfter(), "Expect a number after expression");
-                else 
-                    return nullptr;
+    } else if(matchTypes(PLUS, STAR, SLASH, MINUS, GREATER, GREATER_EQUAL, LESS, LESS_EQUAL, BANG_EQUAL, EQUAL_EQUAL)) {
+        if(peekAfter()->type != LEFT_PAREN) {
+            if(peekAfter()->type == RIGHT_PAREN || peekAfter()->type == END_OF_FILE) {
+                throw err(peek(), "Expects a number operand after expression");
+            } else if(current == 0) {
+                throw err(peek(), "Expects a number operand before expression");
             }
-
-            if(tokens.size() > 2 && previous()->type == NUMBER) {
-                throw err(peekAfter(), "Expect a number after expression");
-            } else {
-                throw err(peekAfter(), "Expect a number or a string after and before expression");
-            }
-        } 
-    } else if(matchTypes(STAR, SLASH, MINUS)) {
-        if(peekAfter()->type != NUMBER && peekAfter()->type != LEFT_PAREN) {
-            if(peekAfter()->type == STRING) {
-                throw err(peekAfter(), "Expect a number after expression");
-            }
-
-            if(tokens.size() > 2 && previous()->type == NUMBER) {
-                throw err(peekAfter(), "Expect a number after expression");
-            }
-        } 
-    } else if(matchTypes(GREATER, GREATER_EQUAL, LESS, LESS_EQUAL, BANG_EQUAL, EQUAL_EQUAL)) {
-        if(peekAfter()->type != NUMBER && peekAfter()->type != LEFT_PAREN) {
-            if(peekAfter()->type == STRING) {
-                throw err(peekAfter(), "Expect a number after expression");
-            }
-
-            if(tokens.size() > 2 && previous()->type == NUMBER) {
-                throw err(peekAfter(), "Expect a number after expression");
-            }
-        } 
+        }   
     }
 
     return nullptr;
