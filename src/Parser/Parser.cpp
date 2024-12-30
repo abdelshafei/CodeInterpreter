@@ -148,7 +148,7 @@ Expr* Parser::primary() {
         expressions.push_back(groupedExpr);
         return groupedExpr;
     } else if(matchTypes(MINUS, PLUS, SLASH, STAR)) {
-        if(peekAfter()->type != NUMBER) {
+        if(peekAfter()->type != NUMBER && peekAfter()->type != LEFT_PAREN) {
 
             if(peekAfter()->type == STRING) {
                 if(tokens.size() > 2 && previous()->type != STRING)

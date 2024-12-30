@@ -149,9 +149,9 @@ bool Interpreter::isLogical(T lValue, T rValue, TokenType relational) const {
             [](const auto& left, const auto& right) -> bool {
                 if constexpr (is_same_v<decltype(left), double> && is_same_v<decltype(right), double>) {
                     return left != right;
-                }
+                } // same condition for other types
 
-                throw runtime_error("Operands must be numbers.");
+              throw runtime_error("Operands must be of the same type.");
             },
         lValue, rValue);       
     } else if(relational == EQUAL_EQUAL) {
@@ -159,9 +159,9 @@ bool Interpreter::isLogical(T lValue, T rValue, TokenType relational) const {
             [](const auto& left, const auto& right) -> bool {
                 if constexpr (is_same_v<decltype(left), double> && is_same_v<decltype(right), double>) {
                     return left == right;
-                }
+                } // same condition for other types
 
-                throw runtime_error("Operands must be numbers.");
+                throw runtime_error("Operands must be of the same type.");
             },
         lValue, rValue);
     }

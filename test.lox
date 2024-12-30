@@ -4,5 +4,6 @@
 // "hello" + "world"
 // true
 // (!!22) // cant do + 2 because + operator hasn't been implemented in unary func in parser.cpp yet...
-70 / 1
+// 70 / 1
 // 7 * 3 / 7 / 1
+14 + 15 - (-(97 - 62))
