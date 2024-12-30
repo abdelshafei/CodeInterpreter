@@ -126,87 +126,72 @@ T Interpreter::Sum(T left, T right) const {
 }
 
 bool Interpreter::isLogical(T lValue, T rValue, TokenType relational) const {
-    if(relational == GREATER) {
-        return visit(
-            [](const auto& left, const auto& right) -> bool {
-                if constexpr (is_same_v<decltype(left), double> && is_same_v<decltype(right), double>) {
-                    return left > right;
-                } else if constexpr (is_same_v<decltype(left), int> && is_same_v<decltype(right), int>) {
-                    return left > right;
-                }
-                
+    if(relational == GREATER) { 
 
-                throw runtime_error("Operands must be numbers.");
-            },
-        lValue, rValue);
+        if(holds_alternative<double>(lValue) && holds_alternative<double>(rValue)) {
+            return get<double>(lValue) > get<double>(rValue);
+        } else if(holds_alternative<int>(lValue) && holds_alternative<int>(rValue)) {
+            return get<int>(lValue) > get<int>(rValue);
+        }
+
+        throw runtime_error("Operands must be numbers.");
+
     } else if(relational == GREATER_EQUAL) {
-        return visit(
-            [](const auto& left, const auto& right) -> bool {
-                if constexpr (is_same_v<decltype(left), double> && is_same_v<decltype(right), double>) {
-                    return left >= right;
-                }  else if constexpr (is_same_v<decltype(left), int> && is_same_v<decltype(right), int>) {
-                    return left >= right;
-                }
 
-                throw runtime_error("Operands must be numbers.");
-            },
-        lValue, rValue);
+        if(holds_alternative<double>(lValue) && holds_alternative<double>(rValue)) {
+            return get<double>(lValue) >= get<double>(rValue);
+        } else if(holds_alternative<int>(lValue) && holds_alternative<int>(rValue)) {
+            return get<int>(lValue) >= get<int>(rValue);
+        }
+
+        throw runtime_error("Operands must be numbers.");
+
     } else if(relational == LESS) {
-        return visit(
-            [](const auto& left, const auto& right) -> bool {
-                if constexpr (is_same_v<decltype(left), double> && is_same_v<decltype(right), double>) {
-                    return left < right;
-                } else if constexpr (is_same_v<decltype(left), int> && is_same_v<decltype(right), int>) {
-                    return left < right;
-                }
 
-                throw runtime_error("Operands must be numbers.");
-            },
-        lValue, rValue);       
+        if(holds_alternative<double>(lValue) && holds_alternative<double>(rValue)) {
+            return get<double>(lValue) < get<double>(rValue);
+        } else if(holds_alternative<int>(lValue) && holds_alternative<int>(rValue)) {
+            return get<int>(lValue) < get<int>(rValue);
+        }
+
+        throw runtime_error("Operands must be numbers.");  
+
     } else if(relational == LESS_EQUAL) {
-        return visit(
-            [](const auto& left, const auto& right) -> bool {
-                if constexpr (is_same_v<decltype(left), double> && is_same_v<decltype(right), double>) {
-                    return left <= right;
-                }  else if constexpr (is_same_v<decltype(left), int> && is_same_v<decltype(right), int>) {
-                    return left <= right;
-                }
 
-                throw runtime_error("Operands must be numbers.");
-            },
-        lValue, rValue); 
+        if(holds_alternative<double>(lValue) && holds_alternative<double>(rValue)) {
+            return get<double>(lValue) <= get<double>(rValue);
+        } else if(holds_alternative<int>(lValue) && holds_alternative<int>(rValue)) {
+            return get<int>(lValue) <= get<int>(rValue);
+        }
+
+        throw runtime_error("Operands must be numbers.");
+
     } else if(relational == BANG_EQUAL) {
-        return visit(
-            [](const auto& left, const auto& right) -> bool {
-                if constexpr (is_same_v<decltype(left), double> && is_same_v<decltype(right), double>) {
-                    return left != right;
-                }  else if constexpr (is_same_v<decltype(left), int> && is_same_v<decltype(right), int>) {
-                    return left != right;
-                } else if constexpr (is_same_v<decltype(left), bool> && is_same_v<decltype(right), bool>) {
-                    return left != right;
-                } else if constexpr (is_same_v<decltype(left), string> && is_same_v<decltype(right), string>) {
-                    return left != right;
-                }
 
-              throw runtime_error("Operands must be of the same type.");
-            },
-        lValue, rValue);       
+        if(holds_alternative<double>(lValue) && holds_alternative<double>(rValue)) {
+            return get<double>(lValue) != get<double>(rValue);
+        } else if(holds_alternative<int>(lValue) && holds_alternative<int>(rValue)) {
+            return get<int>(lValue) != get<int>(rValue);
+        } else if(holds_alternative<bool>(lValue) && holds_alternative<bool>(rValue)) {
+            return get<bool>(lValue) != get<bool>(rValue);
+        } else if(holds_alternative<string>(lValue) && holds_alternative<string>(rValue)) {
+            return get<string>(lValue) != get<string>(rValue);
+        }
+
+        throw runtime_error("Operands must be numbers.");      
+
     } else if(relational == EQUAL_EQUAL) {
-        return visit(
-            [](const auto& left, const auto& right) -> bool {
-                if constexpr (is_same_v<decltype(left), double> && is_same_v<decltype(right), double>) {
-                    return left == right;
-                } else if constexpr (is_same_v<decltype(left), int> && is_same_v<decltype(right), int>) {
-                    return left == right;
-                } else if constexpr (is_same_v<decltype(left), bool> && is_same_v<decltype(right), bool>) {
-                    return left == right;
-                } else if constexpr (is_same_v<decltype(left), string> && is_same_v<decltype(right), string>) {
-                    return left == right;
-                }
+        if(holds_alternative<double>(lValue) && holds_alternative<double>(rValue)) {
+            return get<double>(lValue) == get<double>(rValue);
+        } else if(holds_alternative<int>(lValue) && holds_alternative<int>(rValue)) {
+            return get<int>(lValue) == get<int>(rValue);
+        } else if(holds_alternative<bool>(lValue) && holds_alternative<bool>(rValue)) {
+            return get<bool>(lValue) == get<bool>(rValue);
+        } else if(holds_alternative<string>(lValue) && holds_alternative<string>(rValue)) {
+            return get<string>(lValue) == get<string>(rValue);
+        }
 
-                throw runtime_error("Operands must be of the same type.");
-            },
-        lValue, rValue);
+        throw runtime_error("Operands must be numbers.");     
     }
 
     return false;
