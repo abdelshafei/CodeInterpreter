@@ -5,6 +5,7 @@
 #include <iostream>
 #include "Expr.hpp"
 #include <iomanip>
+#include "../Env/Stmt.hpp"
 
 class Parser {
     public:
@@ -34,7 +35,13 @@ class Parser {
         Expr* factor();
         Expr* unary();
         Expr* primary();
-        Expr* parse();
+        Expr* parseExpr(); // Used for evaluation
+
+        // Statement Collectors
+        Stmt* expressionStmt();
+        Stmt* printStmt();
+        Stmt* statement();
+        vector<Stmt*> parseStmt(); // Used for when running the program
 
         // Syntax Error Catcher
         Token* consume(TokenType type, string msg);
@@ -44,6 +51,8 @@ class Parser {
     private:
         vector<Token*> tokens;
         vector<Expr*> expressions; // to free them at the end after printing
+        vector<Stmt*>* Statements; // to free them at the end of the program
+
         int current = 0;
 };
 

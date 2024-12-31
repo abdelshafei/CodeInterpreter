@@ -7,6 +7,10 @@ Parser::~Parser() {
     for(Expr* expr : expressions) {
         delete expr;
     }
+
+    for(Stmt* statement : *Statements) {
+        delete statement;
+    }
 }
 
 /******************** Method Helpers ********************/
@@ -240,7 +244,7 @@ Expr* Parser::expression() { // For readabiliity
 }
 
 
-Expr* Parser::parse() {
+Expr* Parser::parseExpr() {
     try {
         return expression();
     } catch (const runtime_error& e) {
@@ -248,3 +252,34 @@ Expr* Parser::parse() {
     }
 }
 /***************************************************************/
+
+/******************** Statement Collecters *******************/
+Stmt* Parser::expressionStmt() {
+    Expr* expr = expression();
+    consume(SEMICOLON, "Except ';' after value");
+    return new Expression(expr);
+}
+
+Stmt* Parser::printStmt() {
+    Expr* expr = expression();
+    consume(SEMICOLON, "Except ';' after value");
+    return new Print(expr);
+}
+
+Stmt* Parser::statement() {
+    if(match(PRINT)) return printStmt();
+
+    return expressionStmt();
+}
+
+vector<Stmt*> Parser::parseStmt() {
+    vector<Stmt*> statements;
+    while(!isAtEnd()) {
+        statements.push_back(statement());
+    }
+
+    Statements = &statements;
+
+    return statements;
+}
+/*************************************************************/

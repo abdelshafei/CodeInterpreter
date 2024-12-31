@@ -254,6 +254,19 @@ void Scanner::scanToken() {
       case '+': addToken(PLUS); break;
       case ';': addToken(SEMICOLON); break;
       case '*': addToken(STAR); break; 
+      case '"': addToken(STRING, getStringLiteral()); break;
+      case '&': if(src.size() != current && src.at(current) == '&') addToken(AND);
+                else {
+                    cerr << "[line " << line << "]" << " Error: unterminated logical operator: " << c << endl; 
+                    isError = true;
+                }                                              
+                break;
+      case '|': if(src.size() != current && src.at(current) == '|') addToken(AND);
+                else {
+                    cerr << "[line " << line << "]" << " Error: unterminated logical operator: " << c << endl; 
+                    isError = true;
+                }                                              
+                break;
       case '=': if(src.size() != current && src.at(current) == '=') addToken(EQUAL_EQUAL);
                 else                                                addToken(EQUAL);
                 break;
@@ -266,11 +279,10 @@ void Scanner::scanToken() {
       case '>': if(src.size() != current && src.at(current) == '=') addToken(GREATER_EQUAL);
                 else                                                addToken(GREATER);
                 break;
-      case '/': if(src.size() != current && src.at(current) == '/') current = skipCommentIndex();
+      case '/': if(src.size() != current && src.at(current) == '/')      current = skipCommentIndex();
                 else if(src.size() != current && src.at(current) == '*') current = skipCommentBlock();
-                else                                                addToken(SLASH); 
+                else                                                     addToken(SLASH); 
                 break;
-      case '"': addToken(STRING, getStringLiteral()); break;
       default:  
         if(isDigit(c)) {
             addToken(NUMBER, getNumberLiteral()); 

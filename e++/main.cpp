@@ -19,7 +19,12 @@ int main(int argc, char *argv[]) {
     cerr << unitbuf;
 
     if (argc < 3) {
-        cerr << "Usage: ./your_program (tokenize || parse || evaluate || run) <filename>" << endl;
+        cerr << "Usage: ./your_program <command> <filename>\n"
+        << "    choose one of the available commands:\n"
+        << "        1- tokenize\n"
+        << "        2- parse\n"
+        << "        3- evaluate\n"
+        << "        4- run (beta)" << endl;
         return 1;
     }
 
@@ -57,7 +62,7 @@ int main(int argc, char *argv[]) {
         Parser parser(scanner.getTokens());
         AstPrinter printer;
         try {
-            cout << printer.print(parser.parse()) << endl;
+            cout << printer.print(parser.parseExpr()) << endl;
         } catch (runtime_error& err) {
             cerr << err.what();
             return 65;
@@ -81,17 +86,9 @@ int main(int argc, char *argv[]) {
 
         Parser parser(scanner.getTokens());
         Interpreter interpret;
-        Expr* expressions;
 
         try {
-            expressions = parser.parse();
-        } catch (runtime_error& err) { 
-            cerr << err.what();
-            return 70;
-        }
-
-        try {
-            string eval = interpret.to_string(interpret.evaluate(*expressions));
+            string eval = interpret.to_string(interpret.evaluate(*parser.parseExpr()));
             cout << eval << endl;
         } catch (runtime_error& err) {
             cerr << err.what();
