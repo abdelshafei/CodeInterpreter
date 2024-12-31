@@ -95,7 +95,7 @@ int main(int argc, char *argv[]) {
             return 70;
         }
     } else if(command == "run") {
-                string file_contents = read_file_contents(argv[2]);
+        string file_contents = read_file_contents(argv[2]);
 
         try { // checks for any unterminated comment blocks
             Scanner scan(file_contents);
