@@ -85,10 +85,10 @@ int main(int argc, char *argv[]) {
             return 65;
 
         Parser parser(scanner.getTokens());
-        Interpreter interpret;
+        Interpreter interpreter;
 
         try {
-            string eval = interpret.to_string(interpret.evaluate(*parser.parseExpr()));
+            string eval = interpreter.to_string(interpreter.evaluate(*parser.parseExpr()));
             cout << eval << endl;
         } catch (runtime_error& err) {
             cerr << err.what();
@@ -109,10 +109,10 @@ int main(int argc, char *argv[]) {
             return 65;
 
         Parser parser(scanner.getTokens());
-        Interpreter interpret;
+        Interpreter interpreter;
 
         try {
-            interpret.interpret(parser.parseStmt());
+            interpreter.interpret(parser.parseStmt());
         } catch (runtime_error& err) {
             cerr << err.what();
             return 70;
