@@ -8,8 +8,10 @@ Parser::~Parser() {
         delete expr;
     }
 
-    for(Stmt* statement : *Statements) {
-        delete statement;
+    if(Statements != nullptr) {
+        for(Stmt* statement : *Statements) {
+            delete statement;
+        }
     }
 }
 
