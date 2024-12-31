@@ -3,6 +3,7 @@
 
 #include "../Parser/Expr.hpp"
 #include "../Env/Stmt.hpp"
+#include <vector>
 
 using Value = variant<bool, double, string>;
 
