@@ -296,12 +296,14 @@ void Interpreter::visitExpressionStmt(const Expression& stmt) {
     return;
 }
 
-void Interpreter::interpret(vector<Stmt*> statements) {
-
+void Interpreter::excute(const Stmt& statement) {
+    statement.accept(*this);
 }
 
-void Interpreter::excute(const Stmt& statement) {
-
+void Interpreter::interpret(vector<Stmt*> statements) {
+    for(Stmt* statement : statements) {
+        excute(*statement);
+    }
 }
 
 
