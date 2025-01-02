@@ -12,6 +12,8 @@ Parser::~Parser() {
         for(Stmt* statement : *Statements) {
             delete statement;
         }
+
+        delete Statements;
     }
 }
 
@@ -298,13 +300,13 @@ Stmt* Parser::declaration() {
 }
 
 vector<Stmt*> Parser::parseStmt() {
-    vector<Stmt*> statements;
+    vector<Stmt*>* statements = new vector<Stmt*>;
     while(!isAtEnd()) {
-        statements.push_back(declaration());
+        statements->push_back(declaration());
     }
 
-    Statements = &statements;
+    Statements = statements;
 
-    return statements;
+    return *statements;
 }
 /*************************************************************/
