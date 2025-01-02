@@ -283,6 +283,10 @@ T Interpreter::evalBinaryExpr(const Binary& expr) {
     }
 }
 
+T Interpreter::evalVariableExpr(const Variable& expr) {
+    return enviroment->fetch(expr.name);
+}
+
 //-----------------------------------------------------------------------------------------------------
 
 void Interpreter::visitPrintStmt(const Print& stmt) {
@@ -293,6 +297,15 @@ void Interpreter::visitPrintStmt(const Print& stmt) {
 
 void Interpreter::visitExpressionStmt(const Expression& stmt) {
     evaluate(*stmt.value);
+    return;
+}
+
+void Interpreter::visitVarStmt(const Var& stmt) {
+    T value = nullptr;
+    if(stmt.intitializer != nullptr) 
+        value = evaluate(*stmt.intitializer);
+
+    enviroment->insert(stmt.name->lexeme, value);
     return;
 }
 

@@ -66,6 +66,14 @@ string AstPrinter::visitUnaryExpr(const Unary& expr) const {
     return parenthesize(expr.oprator->lexeme, expr.right);
 }
 
+string AstPrinter::visitAssignExpr(const class Assign& expr) const {
+    return parenthesize(expr.name->lexeme, expr.value);
+}
+
+string AstPrinter::visitVariableExpr(const class Variable& expr) const {
+    return expr.name->literal;
+}
+
 template<typename... Expr>
 string AstPrinter::parenthesize(const string& name, Expr*... exprs) const {
     string strBuilder;

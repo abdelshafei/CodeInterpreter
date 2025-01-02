@@ -8,17 +8,17 @@ class Expr {
         class Visitor { // string Interface
             public:
                 virtual string visitLiteralExpr(const class Literal& expr) const = 0;
+                virtual string visitAssignExpr(const class Assign& expr) const = 0;
                 virtual string visitBinaryExpr(const class Binary& expr) const = 0;
                 virtual string visitGroupingExpr(const class Grouping& expr) const = 0;
                 virtual string visitUnaryExpr(const class Unary& expr) const = 0;
-                // virtual string visitAssignExpr(const class Assign& expr) const = 0;
+                virtual string visitVariableExpr(const class Variable& expr) const = 0;
                 // virtual string visitCallExpr(const class Call& expr) const = 0;
                 // virtual string visitGetExpr(const class Get& expr) const = 0;
                 // virtual string visitLogicalExpr(const class Logical& expr) const = 0;
                 // virtual string visitSetExpr(const class Set& expr) const = 0;
                 // virtual string visitSuperExpr(const class Super& expr) const = 0;
                 // virtual string visitThisExpr(const class This& expr) const = 0;
-                // virtual string visitVariableExpr(const class Variable& expr) const = 0;
                 virtual ~Visitor() = default; 
         };
 
@@ -82,6 +82,34 @@ class Unary : public Expr {
 
         Token* oprator;
         Expr* right;
+};
+
+class Variable : public Expr {
+    public:
+        Variable(Token* name)
+            : name(name) {}
+        ~Variable() override = default;
+
+        string accept(const Visitor& visitor) const override {
+            return visitor.visitVariableExpr(*this);
+        }
+
+        Token* name;
+
+};
+
+class Assign : public Expr {
+    public:
+        Assign(Token* name, Expr* value) 
+            : name(name), value(value) {} 
+        ~Assign() = default;
+
+        string accept(const Visitor& visitor) const override {
+            return visitor.visitAssignExpr(*this);
+        }
+
+        Token* name;
+        Expr* value;
 };
 
 #endif

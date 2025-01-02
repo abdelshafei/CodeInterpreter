@@ -151,6 +151,9 @@ Expr* Parser::primary() {
         }
         expressions.push_back(expr);
         return expr;
+    } else if(match(IDENTIFIER)) {
+        expr = new Variable(previous());
+        expressions.push_back(expr);
     } else if(match(LEFT_PAREN)) {
         expr = expression(); // recursively calls all of the exprs in between the parenthesis
         consume(RIGHT_PAREN, "Expects ')' after expression");
@@ -274,10 +277,30 @@ Stmt* Parser::statement() {
     return expressionStmt();
 }
 
+Stmt* Parser::varDeclaration() {
+    Token* name = consume(IDENTIFIER, "Expect variable name.");
+
+    Expr* initializer = nullptr;
+    if(match(EQUAL)) initializer = expression();
+
+    consume(SEMICOLON, "Expect ';' after variable declaration.");
+    return new Var(name, initializer);
+}
+
+Stmt* Parser::declaration() {
+    try {
+        if(match(VAR)) return varDeclaration();
+        return statement();
+    } catch (runtime_error& e) {
+        synchronize();
+        return nullptr;
+    }
+}
+
 vector<Stmt*> Parser::parseStmt() {
     vector<Stmt*> statements;
     while(!isAtEnd()) {
-        statements.push_back(statement());
+        statements.push_back(declaration());
     }
 
     Statements = &statements;

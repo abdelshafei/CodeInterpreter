@@ -1,7 +1,7 @@
 #ifndef STMT_H
 #define STMT_H
 
-#include "../Parser/Expr.hpp"
+#include "Expr.hpp"
 
 
 class Stmt {
@@ -10,6 +10,7 @@ class Stmt {
             public:
                 virtual void visitPrintStmt(const class Print& stmt) = 0;
                 virtual void visitExpressionStmt(const class Expression& stmt) = 0;
+                virtual void visitVarStmt(const class Var& stmt) = 0;
                 virtual ~Visitor() = default; 
         };
 
@@ -25,6 +26,7 @@ class Print : public Stmt {
     public: 
         Print(Expr* value)
             : value(value) {}
+        virtual ~Print() = default;
 
         void accept(Visitor& visitor) const override {
             return visitor.visitPrintStmt(*this);
@@ -37,12 +39,28 @@ class Expression : public Stmt {
     public:
         Expression(Expr* value)
             : value(value) {}
+        virtual ~Expression() = default;
 
         void accept(Visitor& visitor) const override {
             return visitor.visitExpressionStmt(*this);
         }
 
         Expr* value;
+};
+
+class Var : public Stmt {
+    public:
+        Var(Token* name, Expr* intitializer)
+            : name(name), intitializer(intitializer) {}
+        ~Var() = default;
+
+        void accept(Visitor& visitor) const override {
+            return visitor.visitVarStmt(*this);
+        }
+
+        Token* name;
+        Expr* intitializer;
+
 };
 
 #endif

@@ -10,6 +10,8 @@ class AstPrinter : public Expr::Visitor {
         string visitGroupingExpr(const Grouping& expr) const override;
         string visitLiteralExpr(const Literal& expr) const override;
         string visitUnaryExpr(const Unary& expr) const override;
+        string visitAssignExpr(const class Assign& expr) const override;
+        string visitVariableExpr(const class Variable& expr) const override;
         template<typename... Expr>
         string parenthesize(const string& name, Expr*... exprs) const;
 

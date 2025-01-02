@@ -5,7 +5,7 @@
 #include <iostream>
 #include "Expr.hpp"
 #include <iomanip>
-#include "../Env/Stmt.hpp"
+#include "Stmt.hpp"
 
 class Parser {
     public:
@@ -41,6 +41,8 @@ class Parser {
         Stmt* expressionStmt();
         Stmt* printStmt();
         Stmt* statement();
+        Stmt* varDeclaration();
+        Stmt* declaration();
         vector<Stmt*> parseStmt(); // Used for when running the program
 
         // Syntax Error Catcher
