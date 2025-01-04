@@ -1,4 +1,9 @@
 #include "Interpreter.hpp"
+Interpreter::~Interpreter() {
+    delete enviroment;
+}
+
+
 bool Interpreter::isTruthy(T value) const {
     return visit([](const auto& val) -> bool {
         if constexpr (is_same_v<decay_t<decltype(val)>, bool>) {

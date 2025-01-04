@@ -8,6 +8,7 @@
 
 class Interpreter : public Stmt::Visitor {
     public:
+        ~Interpreter();
         void visitPrintStmt(const Print& stmt) override;
         void visitExpressionStmt(const Expression& stmt) override;
         void visitVarStmt(const Var& stmt) override;
