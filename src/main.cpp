@@ -115,7 +115,7 @@ int main(int argc, char *argv[]) {
             interpreter.interpret(parser.parseStmt());
         } catch (runtime_error& err) {
             cerr << err.what();
-            return 70;
+            return 65;
         }
     } else {
         cerr << "Unknown command: " << command << endl;
